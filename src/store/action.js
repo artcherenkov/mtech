@@ -4,6 +4,8 @@ export const ActionType = {
   // state
   TOGGLE_POPUP: `TOGGLE_POPUP`,
   SET_RECORD_TO_DELETE: `SET_RECORD_TO_DELETE`,
+  // user
+  AUTHENTICATE: `AUTHENTICATE`,
 };
 
 export const deleteRecord = (recordId) => ({
@@ -18,4 +20,9 @@ export const togglePopup = () => ({
 export const setRecordToDelete = (recordId) => ({
   type: ActionType.SET_RECORD_TO_DELETE,
   payload: recordId,
+});
+
+export const authenticate = (credentials) => ({
+  type: ActionType.AUTHENTICATE,
+  payload: credentials,
 });

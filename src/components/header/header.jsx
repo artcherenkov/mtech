@@ -1,14 +1,51 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getUsername, getIsAuth } from "../../store/reducers/app-user/selectors";
+import { authenticate } from "../../store/action";
 
-const Header = () => {
+const Header = ({
+  username,
+  isAuth,
+  handleAuthBtnClick,
+}) => {
   return (
     <header className="header">
       <div className="header__inner">
         <h1 className="header__title">MTECH</h1>
-        <button className="header__auth-button">Войти</button>
+        {isAuth
+          ? <div className="header__user-wrapper">
+            <p className="header__user-name">{username}</p>
+            <button className="header__rollup-btn"/>
+          </div>
+          : <button
+            className="header__auth-button"
+            onClick={handleAuthBtnClick.bind(this, { username: `Артем Черенков` })}
+          >
+            Войти
+          </button>
+        }
       </div>
     </header>
   );
 };
 
-export default Header;
+Header.propTypes = {
+  username: PropTypes.string.isRequired,
+  isAuth: PropTypes.bool.isRequired,
+  handleAuthBtnClick: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  username: getUsername(state),
+  isAuth: getIsAuth(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  handleAuthBtnClick(credentials) {
+    dispatch(authenticate(credentials));
+  },
+});
+
+export { Header };
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -6,12 +6,16 @@ import Table from '../table/table';
 import Header from '../header/header';
 import Popup from "../popup/popup";
 import { getIsPopupShown } from "../../store/reducers/app-state/selectors";
+import { getIsAuth } from "../../store/reducers/app-user/selectors";
+import Lock from "../lock/lock";
 
-const App = ({ isPopupShown }) => {
+const App = ({ isPopupShown, isAuth }) => {
   return (
     <>
       <Header />
-      <Table />
+      {isAuth
+        ? <Table/>
+        : <Lock />}
       {isPopupShown && <Popup />}
     </>
   );
@@ -19,10 +23,12 @@ const App = ({ isPopupShown }) => {
 
 App.propTypes = {
   isPopupShown: PropTypes.bool.isRequired,
+  isAuth: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   isPopupShown: getIsPopupShown(state),
+  isAuth: getIsAuth(state),
 });
 
 export { App };
