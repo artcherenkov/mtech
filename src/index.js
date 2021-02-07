@@ -8,6 +8,9 @@ import thunk from 'redux-thunk';
 import App from "./components/app/app";
 import rootReducer from './store/reducers/root-reducer';
 import { createAPI } from './services/api';
+import { generateRecords } from "./mocks/record";
+
+console.log(generateRecords());
 
 const api = createAPI();
 const store = createStore(

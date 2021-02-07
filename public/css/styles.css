@@ -1,0 +1,131 @@
+* {
+  box-sizing: border-box;
+  font-family: Helvetica, sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  background-color: #f1f1f1;
+}
+
+.header {
+  background-color: #e3e3e3;
+  width: 100%;
+  padding: 24px 20px;
+}
+
+.header__inner {
+  margin: 0 auto;
+  max-width: 800px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__title {
+  margin: 0;
+}
+
+.header__auth-button {
+  cursor: pointer;
+  border: 2px solid #727272;
+  border-radius: 5px;
+  padding: 5px 8px;
+  background-color: transparent;
+  margin: 0;
+}
+
+.header__auth-button:hover {
+  opacity: .6;
+}
+
+.header__auth-button:active {
+  opacity: .3;
+}
+
+.table-section {
+  width: 100%;
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table__wrapper {
+  overflow: auto;
+  max-height: 600px;
+  width: 100%;
+  max-width: 800px;
+  padding-bottom: 10px;
+  border-radius: 5px;
+}
+
+.table {
+  font-family: "Helvetica", sans-serif;
+  margin: 0;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table__head {
+  font-size: 14px;
+  font-weight: bold;
+  min-height: 30px;
+}
+
+.table__row {
+  border-bottom: 1px solid #104673;
+}
+.table__row:nth-child(2n) {
+  background-color: #f3f3f3;
+}
+
+.table__cell {
+  margin: 0;
+  font-size: 12px;
+  padding: 10px 15px;
+}
+.table__cell_header {
+  background-color: #e3e3e3;
+  position: sticky;
+  top: 0;
+}
+
+.table__controls {
+  display: flex;
+  justify-content: space-between;
+  width: 40px;
+}
+
+.table__button {
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  border: none;
+  background-size: cover;
+  background-color: transparent;
+}
+
+.table__button:hover {
+  opacity: .6;
+}
+
+.table__button:active {
+  opacity: .3;
+}
+
+.table__button_type_delete {
+  background-image: url("../img/icon-delete.svg");
+}
+
+.table__button_type_edit {
+  background-image: url("../img/icon-edit.svg");
+}
