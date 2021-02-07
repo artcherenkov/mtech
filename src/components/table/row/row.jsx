@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-const Row = ({ record }) => {
+import { setRecordToDelete, togglePopup } from "../../../store/action";
+
+const Row = ({ record, handleDeleteBtnClick }) => {
   return (
     <tr className="table__row">
       <td className="table__cell">{record.id}</td>
@@ -13,15 +16,24 @@ const Row = ({ record }) => {
       <td className="table__cell table__cell_controls">
         <div className="table__controls">
           <button className="table__button table__button_type_edit" />
-          <button className="table__button table__button_type_delete" />
+          <button className="table__button table__button_type_delete" onClick={handleDeleteBtnClick.bind(this, record.id)} />
         </div>
       </td>
     </tr>
   );
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  handleDeleteBtnClick(id) {
+    dispatch(setRecordToDelete(id));
+    dispatch(togglePopup());
+  },
+});
+
 Row.propTypes = {
   record: PropTypes.object.isRequired,
+  handleDeleteBtnClick: PropTypes.func.isRequired,
 };
 
-export default Row;
+export { Row };
+export default connect(null, mapDispatchToProps)(Row);
