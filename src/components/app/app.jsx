@@ -10,18 +10,18 @@ import { getIsAuth } from "../../store/reducers/app-user/selectors";
 import Lock from "../lock/lock";
 import AuthForm from "../auth-form/auth-form";
 import Record from "../record/record";
+import { getRecords } from "../../store/reducers/app-store/selectors";
+import ControlsStrip from "../controls-strip/controls-strip";
 
-const App = ({
-  isPopupShown,
-  isRecordPopupShown,
-  isAuthFormShown,
-  isAuth,
-}) => {
+const App = ({ isPopupShown, isRecordPopupShown, isAuthFormShown, isAuth }) => {
   return (
     <>
       <Header/>
       {isAuth
-        ? <Table/>
+        ? <>
+            <ControlsStrip />
+            <Table/>
+          </>
         : <Lock/>}
       {isRecordPopupShown && <Record/>}
       {isPopupShown && <Popup/>}
@@ -35,6 +35,7 @@ App.propTypes = {
   isRecordPopupShown: PropTypes.bool.isRequired,
   isAuthFormShown: PropTypes.bool.isRequired,
   isAuth: PropTypes.bool.isRequired,
+  records: PropTypes.array,
 };
 
 const mapStateToProps = (state) => ({
@@ -42,6 +43,7 @@ const mapStateToProps = (state) => ({
   isRecordPopupShown: getIsRecordShownShown(state),
   isAuthFormShown: getIsAuthFormShown(state),
   isAuth: getIsAuth(state),
+  records: getRecords(state),
 });
 
 export { App };

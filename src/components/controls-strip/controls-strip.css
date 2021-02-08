@@ -1,0 +1,38 @@
+.controls-strip {
+  margin: 30px auto 0;
+  padding: 10px 20px;
+  width: 100%;
+  max-width: 800px;
+  background-color: #e3e3e3;
+  border-radius: 5px;
+}
+
+.controls-strip__search-form {
+  display: flex;
+  align-items: center;
+}
+
+.controls-strip__input {
+  border: 1px solid #a7a7a7;
+  border-radius: 5px;
+  height: 25px;
+  margin-right: 5px;
+}
+
+.controls-strip__submit-btn {
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  background: white url("./img/icon-search.svg") no-repeat center;
+  border: 1px solid #a7a7a7;
+  border-radius: 5px;
+  background-size: 80%;
+}
+
+.controls-strip__submit-btn:hover {
+  opacity: .6;
+}
+
+.controls-strip__submit-btn:active {
+  opacity: .3;
+}

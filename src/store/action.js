@@ -8,6 +8,7 @@ export const ActionType = {
   TOGGLE_RECORD_POPUP: `TOGGLE_RECORD_POPUP`,
   TOGGLE_AUTH_FORM: `TOGGLE_AUTH_FORM`,
   SET_RECORD_TO_DELETE: `SET_RECORD_TO_DELETE`,
+  SET_SEARCH_VALUE: `SET_SEARCH_VALUE`,
   // user
   AUTHENTICATE: `AUTHENTICATE`,
   LOGOUT: `LOGOUT`,
@@ -51,4 +52,9 @@ export const authenticate = (credentials) => ({
 
 export const logout = () => ({
   type: ActionType.LOGOUT,
+});
+
+export const setSearchValue = (searchValue) => ({
+  type: ActionType.SET_SEARCH_VALUE,
+  payload: searchValue,
 });

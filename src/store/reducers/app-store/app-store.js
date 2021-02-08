@@ -3,6 +3,7 @@ import { ActionType } from "../../action";
 
 const initialState = {
   records: generateRecords(50),
+  filteredRecords: [],
   recordToDelete: -1,
   activeRecordId: -1,
 };

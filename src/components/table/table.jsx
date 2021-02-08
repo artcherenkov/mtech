@@ -7,9 +7,13 @@ import { getRecords } from "../../store/reducers/app-store/selectors";
 import { openRecord, toggleRecordPopup } from "../../store/action";
 
 import './table.css';
+import { getSearchValue } from "../../store/reducers/app-state/selectors";
 
-const Table = ({ records, handleRecordClick }) => {
+const Table = ({ records, searchValue, handleRecordClick }) => {
   const isRecordsEmpty = !records || !records.length;
+
+  const filteredRecords = records.filter((record) => record.clientName.toLowerCase().includes(searchValue.toLowerCase()));
+
   return (
     <section className="table-section">
       {!isRecordsEmpty
@@ -27,7 +31,7 @@ const Table = ({ records, handleRecordClick }) => {
             </tr>
             </thead>
             <tbody className="table__body">
-            {records.map((record) => (
+            {filteredRecords.map((record) => (
               <Row
                 key={`record-${record.id}`}
                 record={record}
@@ -43,12 +47,14 @@ const Table = ({ records, handleRecordClick }) => {
 };
 
 Table.propTypes = {
-  records: PropTypes.array,
+  records: PropTypes.array.isRequired,
+  searchValue: PropTypes.string,
   handleRecordClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   records: getRecords(state),
+  searchValue: getSearchValue(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

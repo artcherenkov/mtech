@@ -4,6 +4,7 @@ const initialState = {
   isPopupShown: false,
   isAuthFormShown: false,
   isRecordShown: false,
+  searchValue: ``,
 };
 
 const appState = (state = initialState, action) => {
@@ -16,6 +17,9 @@ const appState = (state = initialState, action) => {
     }
     case ActionType.TOGGLE_AUTH_FORM: {
       return { ...state, isAuthFormShown: !state.isAuthFormShown };
+    }
+    case ActionType.SET_SEARCH_VALUE: {
+      return { ...state, searchValue: action.payload };
     }
     default:
       return state;
