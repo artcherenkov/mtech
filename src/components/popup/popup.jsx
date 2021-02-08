@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { deleteRecord, togglePopup } from "../../store/action";
+import './popup.css';
 
 const Popup = ({ handleRecordDelete, handleCancelBtnClick }) => (
   <div className="popup">

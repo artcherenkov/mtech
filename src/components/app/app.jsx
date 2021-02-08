@@ -11,16 +11,21 @@ import Lock from "../lock/lock";
 import AuthForm from "../auth-form/auth-form";
 import Record from "../record/record";
 
-const App = ({ isPopupShown, isRecordPopupShown, isAuthFormShown, isAuth }) => {
+const App = ({
+  isPopupShown,
+  isRecordPopupShown,
+  isAuthFormShown,
+  isAuth,
+}) => {
   return (
     <>
-      <Header />
+      <Header/>
       {isAuth
         ? <Table/>
-        : <Lock />}
+        : <Lock/>}
       {isRecordPopupShown && <Record/>}
-      {isPopupShown && <Popup />}
-      {isAuthFormShown && <AuthForm />}
+      {isPopupShown && <Popup/>}
+      {isAuthFormShown && <AuthForm/>}
     </>
   );
 };

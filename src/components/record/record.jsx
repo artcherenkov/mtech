@@ -6,6 +6,8 @@ import RecordFields from "./components/record-fields/record-fields";
 import { getActiveRecordId, getRecords } from "../../store/reducers/app-store/selectors";
 import { closeRecord, toggleRecordPopup } from "../../store/action";
 
+import './record.css';
+
 export const RecordField = {
   CLIENT_NAME: `Имя заказчика`,
   DATE: `Дата`,

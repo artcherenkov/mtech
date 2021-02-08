@@ -1,0 +1,21 @@
+.record__content {
+  max-width: 500px;
+}
+
+.record__title {
+  text-align: center;
+  margin: 0 0 30px;
+}
+
+.record__fields {
+  display: grid;
+  gap: 25px;
+}
+
+.record__item-title {
+  margin: 0 0 15px;
+}
+
+.record__item-content {
+  margin: 0;
+}

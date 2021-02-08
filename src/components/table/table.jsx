@@ -6,6 +6,8 @@ import Row from './row/row';
 import { getRecords } from "../../store/reducers/app-store/selectors";
 import { openRecord, toggleRecordPopup } from "../../store/action";
 
+import './table.css';
+
 const Table = ({ records, handleRecordClick }) => {
   const isRecordsEmpty = !records || !records.length;
   return (

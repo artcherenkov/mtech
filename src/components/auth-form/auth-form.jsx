@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { authenticate, toggleAuthForm } from "../../store/action";
 
+import './auth-form.css';
+
 const AuthForm = ({ handleCloseBtnClick, handleAuthBtnClick }) => {
   const mockCredentials = {
     token: `sometoken`,

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './assets/css/lock.css';
+
 const Lock = () => (
   <div className="lock">
     <div className="lock__content">

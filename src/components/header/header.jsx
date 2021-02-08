@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { getUsername, getIsAuth } from "../../store/reducers/app-user/selectors";
 import { logout, toggleAuthForm } from "../../store/action";
 
+import './header.css';
+
 const Header = ({
   username,
   isAuth,
