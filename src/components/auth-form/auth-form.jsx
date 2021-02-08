@@ -11,8 +11,8 @@ const AuthForm = ({ handleCloseBtnClick, handleAuthBtnClick }) => {
   return (
     <div className="popup">
       <div className="popup__content auth-form">
-        <button className="auth-form__close-btn" onClick={handleCloseBtnClick} />
-        <h2 className="auth-form__title">Войдите в учетную запись</h2>
+        <button className="popup__close-btn" onClick={handleCloseBtnClick} />
+        <h2 className="auth-form__title">Вход в учетную запись</h2>
         <form className="auth-form__form" onSubmit={handleAuthBtnClick(mockCredentials)}>
           <div className="auth-form__input-wrapper">
             <label htmlFor="login">Логин</label>

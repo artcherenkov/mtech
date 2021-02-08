@@ -171,6 +171,7 @@ body {
   background-color: white;
   border-radius: 10px;
   padding: 50px;
+  position: relative;
 }
 
 .popup__header {
@@ -238,7 +239,7 @@ body {
 
 .lock__text {
   text-align: center;
-  max-width: 400px;
+  max-width: 450px;
   margin: 20px;
   line-height: 1.15;
   opacity: .4;
@@ -248,7 +249,7 @@ body {
   position: relative;
 }
 
-.auth-form__close-btn {
+.popup__close-btn {
   position: absolute;
   cursor: pointer;
   width: 25px;
@@ -261,14 +262,13 @@ body {
   background-size: 50%;
 }
 
-.auth-form__close-btn:hover {
+.popup__close-btn:hover {
   opacity: .6;
 }
 
-.auth-form__close-btn:active {
+.popup__close-btn:active {
   opacity: .3;
 }
-
 
 .auth-form__form {
   display: flex;
@@ -319,4 +319,26 @@ body {
   margin-top: 20px;
   display: flex;
   justify-content: center;
+}
+
+.record__content {
+  max-width: 50%;
+}
+
+.record__title {
+  text-align: center;
+  margin: 0 0 30px;
+}
+
+.record__fields {
+  display: grid;
+  gap: 25px;
+}
+
+.record__item-title {
+  margin: 0 0 15px;
+}
+
+.record__item-content {
+  margin: 0;
 }

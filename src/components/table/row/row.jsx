@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 
 import { setRecordToDelete, togglePopup } from "../../../store/action";
 
-const Row = ({ record, handleDeleteBtnClick }) => {
+const Row = ({ record, handleDeleteBtnClick, onClick }) => {
   return (
-    <tr className="table__row">
+    <tr className="table__row" onClick={onClick}>
       <td className="table__cell">{record.id}</td>
       <td className="table__cell">{record.clientName}</td>
       <td className="table__cell">{record.percentDiff}</td>
@@ -32,6 +32,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 Row.propTypes = {
   record: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired,
   handleDeleteBtnClick: PropTypes.func.isRequired,
 };
 

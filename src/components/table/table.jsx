@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 
 import Row from './row/row';
 import { getRecords } from "../../store/reducers/app-store/selectors";
+import { openRecord, toggleRecordPopup } from "../../store/action";
 
-const Table = ({ records }) => {
+const Table = ({ records, handleRecordClick }) => {
   const isRecordsEmpty = !records || !records.length;
   return (
     <section className="table-section">
@@ -25,7 +26,11 @@ const Table = ({ records }) => {
             </thead>
             <tbody className="table__body">
             {records.map((record) => (
-              <Row key={`record-${record.id}`} record={record}/>
+              <Row
+                key={`record-${record.id}`}
+                record={record}
+                onClick={handleRecordClick.bind(this, record.id)}
+              />
             ))}
             </tbody>
           </table>
@@ -37,11 +42,21 @@ const Table = ({ records }) => {
 
 Table.propTypes = {
   records: PropTypes.array,
+  handleRecordClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   records: getRecords(state),
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  handleRecordClick(id, evt) {
+    if (evt.target.tagName.toLowerCase() !== `button`) {
+      dispatch(openRecord(id));
+      dispatch(toggleRecordPopup());
+    }
+  },
+});
+
 export { Table };
-export default connect(mapStateToProps, null)(Table);
+export default connect(mapStateToProps, mapDispatchToProps)(Table);

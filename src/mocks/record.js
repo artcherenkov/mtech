@@ -307,16 +307,40 @@ export const Status = {
   IN_PROGRESS: `Выполняется`,
   PENDING: `Ожидает`,
 };
+const SERVICES = [
+  `Голова (женщина)`,
+  `Подмышка (женщина)`,
+  `Грудь (женщина)`,
+  `Бикини (женщина)`,
+  `Ягодицы (женщина)`,
+  `Нога полностью (женщина)`,
+  `Живот (женщина)`,
+  `Рука полностью (женщина)`,
+  `Бикини (женщина)`,
+  `Голова (мужчина)`,
+  `Подмышка (мужчина)`,
+  `Грудь (мужчина)`,
+  `Бикини (мужчина)`,
+  `Ягодицы (мужчина)`,
+  `Нога полностью (мужчина)`,
+  `Живот (мужчина)`,
+  `Рука полностью (мужчина)`,
+  `Бикини (мужчина)`,
+];
 
 const generateName = () => `${getRandomArrayItem(NAMES)} ${getRandomArrayItem(SURNAMES)}`;
 
-const generateRecord = (i) => ({
+export const generateRecord = (i = 1) => ({
   id: i + 1,
   clientName: generateName(),
   date: getRandomDate().format(`DD.MM.YYYY`),
   percentDiff: getRandomInt(0, 80),
   staffName: generateName(),
   status: getRandomObjectItem(Status),
+  mtechServices: range(getRandomInt(1, 5)).reduce((acc) => {
+    acc = [...acc, getRandomArrayItem(SERVICES)];
+    return acc;
+  }, []),
 });
 
 export const generateRecords = (count = 30) => range(count).reduce((acc, i) => {
