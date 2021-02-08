@@ -35,6 +35,7 @@ body {
 .header__user-wrapper {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .header__user-name {
@@ -42,6 +43,7 @@ body {
 }
 
 .header__rollup-btn {
+  cursor: pointer;
   margin: 0;
   border: none;
   width: 16px;
@@ -49,6 +51,40 @@ body {
   padding: 5px;
   background: transparent url("../img/icon-rollup.svg") no-repeat 3px 4px ;
   background-size: 10px 10px;
+}
+
+.header__rollup-btn:hover {
+  opacity: .6;
+}
+
+.header__rollup-btn:hover {
+  opacity: .3;
+}
+
+.header__user-menu {
+  width: 100%;
+  position: absolute;
+  top: 30px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.header__logout {
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  text-align: center;
+  padding: 5px 8px;
+  color: red;
+  background: transparent;
+}
+
+.header__logout:hover {
+  opacity: .6;
+}
+
+.header__logout:active {
+  opacity: .3;
 }
 
 .header__auth-button {
@@ -322,7 +358,7 @@ body {
 }
 
 .record__content {
-  max-width: 50%;
+  max-width: 500px;
 }
 
 .record__title {

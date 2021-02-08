@@ -10,6 +10,7 @@ export const ActionType = {
   SET_RECORD_TO_DELETE: `SET_RECORD_TO_DELETE`,
   // user
   AUTHENTICATE: `AUTHENTICATE`,
+  LOGOUT: `LOGOUT`,
 };
 
 export const deleteRecord = (recordId) => ({
@@ -46,4 +47,8 @@ export const closeRecord = () => ({
 export const authenticate = (credentials) => ({
   type: ActionType.AUTHENTICATE,
   payload: credentials,
+});
+
+export const logout = () => ({
+  type: ActionType.LOGOUT,
 });

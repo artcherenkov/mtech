@@ -12,6 +12,9 @@ const appUser = (state = initialState, action) => {
       const { username, token } = action.payload;
       return { ...state, username, token, isAuth: true };
     }
+    case ActionType.LOGOUT: {
+      return { ...state, username: ``, token: ``, isAuth: false };
+    }
     default:
       return state;
   }
