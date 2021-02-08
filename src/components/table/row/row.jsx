@@ -3,10 +3,19 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { setRecordToDelete, togglePopup } from "../../../store/action";
+import { Status } from "../../../mocks/record";
+
+const getRowStyles = (status) => {
+  const styles = [`table__row`];
+  if (status === Status.DONE) {
+    styles.push(`table__row_done`);
+  }
+  return styles.join(` `);
+};
 
 const Row = ({ record, handleDeleteBtnClick, onClick }) => {
   return (
-    <tr className="table__row" onClick={onClick}>
+    <tr className={getRowStyles(record.status)} onClick={onClick}>
       <td className="table__cell">{record.id}</td>
       <td className="table__cell">{record.clientName}</td>
       <td className="table__cell">{record.percentDiff}</td>

@@ -32,8 +32,8 @@
   border-bottom: 1px solid #104673;
 }
 
-.table__row:nth-child(2n) {
-  background-color: #f3f3f3;
+.table__row_done {
+  background-color: #a4de8e;
 }
 
 .table__row:hover {

@@ -304,7 +304,6 @@ export const SURNAMES = [
 ];
 export const Status = {
   DONE: `Выполнено`,
-  IN_PROGRESS: `Выполняется`,
   PENDING: `Ожидает`,
 };
 const SERVICES = [
