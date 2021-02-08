@@ -5,11 +5,12 @@ import { connect } from 'react-redux';
 import Table from '../table/table';
 import Header from '../header/header';
 import Popup from "../popup/popup";
-import { getIsPopupShown } from "../../store/reducers/app-state/selectors";
+import { getIsAuthFormShown, getIsPopupShown } from "../../store/reducers/app-state/selectors";
 import { getIsAuth } from "../../store/reducers/app-user/selectors";
 import Lock from "../lock/lock";
+import AuthForm from "../auth-form/auth-form";
 
-const App = ({ isPopupShown, isAuth }) => {
+const App = ({ isPopupShown, isAuthFormShown, isAuth }) => {
   return (
     <>
       <Header />
@@ -17,17 +18,20 @@ const App = ({ isPopupShown, isAuth }) => {
         ? <Table/>
         : <Lock />}
       {isPopupShown && <Popup />}
+      {isAuthFormShown && <AuthForm />}
     </>
   );
 };
 
 App.propTypes = {
   isPopupShown: PropTypes.bool.isRequired,
+  isAuthFormShown: PropTypes.bool.isRequired,
   isAuth: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   isPopupShown: getIsPopupShown(state),
+  isAuthFormShown: getIsAuthFormShown(state),
   isAuth: getIsAuth(state),
 });
 

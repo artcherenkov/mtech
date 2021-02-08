@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getUsername, getIsAuth } from "../../store/reducers/app-user/selectors";
-import { authenticate } from "../../store/action";
+import { toggleAuthForm } from "../../store/action";
 
 const Header = ({
   username,
@@ -18,10 +18,7 @@ const Header = ({
             <p className="header__user-name">{username}</p>
             <button className="header__rollup-btn"/>
           </div>
-          : <button
-            className="header__auth-button"
-            onClick={handleAuthBtnClick.bind(this, { username: `Артем Черенков` })}
-          >
+          : <button className="header__auth-button" onClick={handleAuthBtnClick}>
             Войти
           </button>
         }
@@ -42,8 +39,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleAuthBtnClick(credentials) {
-    dispatch(authenticate(credentials));
+  handleAuthBtnClick() {
+    dispatch(toggleAuthForm());
   },
 });
 

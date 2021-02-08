@@ -168,7 +168,6 @@ body {
 .popup__content {
   width: 80%;
   max-width: 500px;
-  border: 1px solid black;
   background-color: white;
   border-radius: 10px;
   padding: 50px;
@@ -217,12 +216,11 @@ body {
   width: 100%;
   max-width: 800px;
   padding: 0 40px;
-  margin: 50px auto 0;
+  margin: 70px auto 0;
   flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  /*align-items: center;*/
 }
 
 .lock__content {
@@ -243,4 +241,82 @@ body {
   max-width: 400px;
   margin: 20px;
   line-height: 1.15;
+  opacity: .4;
+}
+
+.auth-form {
+  position: relative;
+}
+
+.auth-form__close-btn {
+  position: absolute;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  border: none;
+  top: -25px;
+  right: -25px;
+  background: white url("../img/icon-close.svg") no-repeat center;
+  background-size: 50%;
+}
+
+.auth-form__close-btn:hover {
+  opacity: .6;
+}
+
+.auth-form__close-btn:active {
+  opacity: .3;
+}
+
+
+.auth-form__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-form__title {
+  margin: 0 0 20px;
+  text-align: center;
+}
+
+.auth-form__input-wrapper {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  align-items: center;
+}
+
+.auth-form__input-wrapper:not(:last-of-type) {
+  margin-bottom: 15px;
+}
+
+.auth-form__button {
+  cursor: pointer;
+  padding: 5px 8px;
+  background-color: transparent;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.auth-form__button:hover {
+  opacity: .6;
+}
+
+.auth-form__button:active {
+  opacity: .3;
+}
+
+.auth-form__button:not(:last-of-type) {
+  margin-right: 20px;
+}
+
+.auth-form__button_type_reset {
+  color: red;
+  border-color: red;
+}
+
+.auth-form__controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
