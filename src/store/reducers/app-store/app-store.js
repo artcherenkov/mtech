@@ -19,6 +19,17 @@ const appStore = (state = initialState, action) => {
     case ActionType.CLOSE_RECORD: {
       return { ...state, activeRecordId: -1 };
     }
+    case ActionType.EDIT_RECORD: {
+      const records = state.records;
+      const updatedRecord = action.payload;
+      const recordToUpdateIndex = records.findIndex((record) => record.id === updatedRecord.id);
+      const updatedRecords = [
+        ...records.slice(0, recordToUpdateIndex),
+        updatedRecord,
+        ...records.slice(recordToUpdateIndex + 1),
+      ];
+      return { ...state, records: updatedRecords };
+    }
     case ActionType.DELETE_RECORD: {
       if (state.recordToDelete !== -1) {
         const updatedRecords = state.records

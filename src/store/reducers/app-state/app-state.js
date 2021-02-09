@@ -4,6 +4,7 @@ const initialState = {
   isPopupShown: false,
   isAuthFormShown: false,
   isRecordShown: false,
+  isRecordEditing: false,
   searchValue: ``,
 };
 
@@ -13,7 +14,15 @@ const appState = (state = initialState, action) => {
       return { ...state, isPopupShown: !state.isPopupShown };
     }
     case ActionType.TOGGLE_RECORD_POPUP: {
-      return { ...state, isRecordShown: !state.isRecordShown };
+      let isRecordEditing = state.isRecordEditing;
+      const isRecordShown = !state.isRecordShown;
+      if (!isRecordShown) {
+        isRecordEditing = false;
+      }
+      return { ...state, isRecordShown, isRecordEditing };
+    }
+    case ActionType.TOGGLE_RECORD_EDIT_MODE: {
+      return { ...state, isRecordEditing: !state.isRecordEditing };
     }
     case ActionType.TOGGLE_AUTH_FORM: {
       return { ...state, isAuthFormShown: !state.isAuthFormShown };

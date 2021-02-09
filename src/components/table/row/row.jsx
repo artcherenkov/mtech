@@ -2,7 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { setRecordToDelete, togglePopup } from "../../../store/action";
+import {
+  openRecord,
+  setRecordToDelete,
+  togglePopup,
+  toggleRecordEditMode, toggleRecordPopup,
+} from "../../../store/action";
 import { Status } from "../../../mocks/record";
 
 const getRowStyles = (status) => {
@@ -13,7 +18,7 @@ const getRowStyles = (status) => {
   return styles.join(` `);
 };
 
-const Row = ({ record, handleDeleteBtnClick, onClick }) => {
+const Row = ({ record, handleDeleteBtnClick, handleEditBtnClick, onClick }) => {
   return (
     <tr className={getRowStyles(record.status)} onClick={onClick}>
       <td className="table__cell">{record.id}</td>
@@ -24,7 +29,7 @@ const Row = ({ record, handleDeleteBtnClick, onClick }) => {
       <td className="table__cell">{record.status}</td>
       <td className="table__cell table__cell_controls">
         <div className="table__controls">
-          <button className="table__button table__button_type_edit" />
+          <button className="table__button table__button_type_edit" onClick={handleEditBtnClick.bind(this, record.id)} />
           <button className="table__button table__button_type_delete" onClick={handleDeleteBtnClick.bind(this, record.id)} />
         </div>
       </td>
@@ -37,12 +42,18 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(setRecordToDelete(id));
     dispatch(togglePopup());
   },
+  handleEditBtnClick(id) {
+    dispatch(toggleRecordEditMode());
+    dispatch(openRecord(id));
+    dispatch(toggleRecordPopup());
+  },
 });
 
 Row.propTypes = {
   record: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
   handleDeleteBtnClick: PropTypes.func.isRequired,
+  handleEditBtnClick: PropTypes.func.isRequired,
 };
 
 export { Row };

@@ -35,7 +35,7 @@
 .record__controls {
   position: absolute;
   top: -35px;
-  right: -25px;
+  right: -35px;
   display: flex;
   align-items: center;
 }
