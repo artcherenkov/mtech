@@ -8,11 +8,20 @@ import { setSearchValue } from "../../store/action";
 const ControlsStrip = ({ handleSearchSubmit, handleInputBlur }) => {
   const [search, setSearch] = useState(``);
 
+  const handleSearchChange = (evt) => setSearch(evt.target.value);
+
   return (
     <div className="controls-strip">
       <form className="controls-strip__search-form" onSubmit={handleSearchSubmit.bind(this, search)}>
-        <input className="controls-strip__input" type="text" value={search} onChange={(evt) => setSearch(evt.target.value)} onBlur={handleInputBlur.bind(this, search)}/>
-        <button className="controls-strip__submit-btn" type="submit" />
+        <input
+          className="controls-strip__input"
+          type="text"
+          value={search}
+          placeholder="Введите имя клиента"
+          onChange={handleSearchChange}
+          onBlur={handleInputBlur.bind(this, search)}
+        />
+        <button className="controls-strip__submit-btn" type="submit"/>
       </form>
     </div>
   );
@@ -32,7 +41,7 @@ const mapDispatchToProps = (dispatch) => ({
     if (!searchValue) {
       dispatch(setSearchValue(``));
     }
-  }
+  },
 });
 
 export { ControlsStrip };

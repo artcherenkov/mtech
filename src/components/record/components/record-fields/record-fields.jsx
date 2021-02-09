@@ -15,9 +15,9 @@ const RecordFields = ({ record }) => {
             <h3 className="record__item-title">{fieldTitle}</h3>
             {isInlineValue
               ? <p className="record__item-content">{value}</p>
-              : <ul>
+              : <ul className="record__services-list">
                 {value.map((item, i) => (
-                  <li key={`item-${i}`}>
+                  <li key={`item-${i}`} className="record__services-item">
                     <p className="record__item-content">{item}</p>
                   </li>
                 ))}

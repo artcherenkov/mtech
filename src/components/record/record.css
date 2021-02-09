@@ -1,5 +1,13 @@
+.record__content-wrapper {
+  max-width: 600px;
+  max-height: 800px;
+  display: flex;
+  flex-direction: column;
+}
+
 .record__content {
-  max-width: 500px;
+  flex-grow: 1;
+  overflow: scroll;
 }
 
 .record__title {
@@ -18,4 +26,57 @@
 
 .record__item-content {
   margin: 0;
+}
+
+.record__services-item {
+  margin-bottom: 5px;
+}
+
+.record__controls {
+  position: absolute;
+  top: -35px;
+  right: -25px;
+  display: flex;
+  align-items: center;
+}
+
+.record__button {
+  margin: 0;
+  padding: 5px 8px;
+  cursor: pointer;
+  background: white;
+  border-radius: 5px;
+  border: 2px solid white;
+}
+
+.record__button:not(:last-of-type) {
+  margin-right: 10px;
+}
+
+.record__button:hover {
+  opacity: .6;
+}
+
+.record__button:active {
+  opacity: .3;
+}
+
+.record__button_type_close {
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  background: white url("./img/icon-close.svg") no-repeat center;
+  background-size: 50%;
+}
+
+.record__button_type_delete {
+  color: #ff0000;
+  border-color: red;
+}
+
+.record__button_type_delete:hover {
+  color: white;
+  background-color: red;
+  border-color: red;
+  opacity: 1;
 }

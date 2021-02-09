@@ -1,9 +1,9 @@
 import { ActionType } from "../../action";
 
 const initialState = {
-  username: ``,
+  username: `Fuck you Tony`,
   token: ``,
-  isAuth: false,
+  isAuth: true,
 };
 
 const appUser = (state = initialState, action) => {

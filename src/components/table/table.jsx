@@ -23,7 +23,7 @@ const Table = ({ records, searchValue, handleRecordClick }) => {
             <tr className="table__row">
               <th className="table__cell table__cell_header">№</th>
               <th className="table__cell table__cell_header">Имя клиента</th>
-              <th className="table__cell table__cell_header">Процент</th>
+              <th className="table__cell table__cell_header">Процент отклонения</th>
               <th className="table__cell table__cell_header">Имя сотрудника</th>
               <th className="table__cell table__cell_header">Дата</th>
               <th className="table__cell table__cell_header">Статус</th>
