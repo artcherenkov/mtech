@@ -2,7 +2,7 @@ import { ActionType } from "../../action";
 
 const initialState = {
   isPopupShown: false,
-  isAuthFormShown: false,
+  isAuthFormShown: true,
   isRecordShown: false,
   isRecordEditing: false,
   searchValue: ``,

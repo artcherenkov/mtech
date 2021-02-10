@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getUsername, getIsAuth } from "../../store/reducers/app-user/selectors";
+import { getLogin, getIsAuth } from "../../store/reducers/app-user/selectors";
 import { logout, toggleAuthForm } from "../../store/action";
 
 import './header.css';
 
 const Header = ({
-  username,
+  login,
   isAuth,
   handleAuthBtnClick,
   handleLogoutBtnClick,
@@ -23,7 +23,7 @@ const Header = ({
         <h1 className="header__title">MTECH</h1>
         {isAuth
           ? <div className="header__user-wrapper">
-              <p className="header__user-name">{username}</p>
+              <p className="header__user-name">{login}</p>
               <button className="header__rollup-btn" onClick={handleMenuToggle}/>
               {isMenuShown && <div className="header__user-menu">
                 <button className="header__logout" onClick={handleLogoutBtnClick}>Выйти</button>
@@ -38,14 +38,14 @@ const Header = ({
 };
 
 Header.propTypes = {
-  username: PropTypes.string.isRequired,
+  login: PropTypes.string.isRequired,
   isAuth: PropTypes.bool.isRequired,
   handleAuthBtnClick: PropTypes.func.isRequired,
   handleLogoutBtnClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  username: getUsername(state),
+  login: getLogin(state),
   isAuth: getIsAuth(state),
 });
 

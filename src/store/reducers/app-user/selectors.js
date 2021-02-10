@@ -1,2 +1,2 @@
-export const getUsername = (state) => state.USER.username;
+export const getLogin = (state) => state.USER.login;
 export const getIsAuth = (state) => state.USER.isAuth;
