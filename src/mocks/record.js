@@ -336,7 +336,7 @@ export const generateRecord = (i = 1) => ({
   id: i + 1,
   clientName: generateName(),
   date: getRandomDate().format(`DD.MM.YYYY`),
-  percentDiff: Math.random() > 0.1 ? getRandomInt(1, 15) * 5 : OUT_OF_SCHEDULE,
+  percentDiff: Math.random() > 0.1 ? `${getRandomInt(1, 15) * 5}%` : OUT_OF_SCHEDULE,
   staffName: generateName(),
   status: getRandomObjectItem(Status),
   mtechServices: range(getRandomInt(1, 5)).reduce((acc) => {

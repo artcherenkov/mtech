@@ -21,24 +21,67 @@ export const RecordField = {
   STAFF_NAME: `Имя сотрудника`,
   STATUS: `Статус`,
   MTECH_SERVICES: `Список услуг`,
-  PERCENT_DIFF: `Процент`,
+  PERCENT_DIFF: `Расхождение`,
 };
 
 const Record = ({ records, isRecordEditing, activeRecordId, handleCloseBtnClick, handleDeleteBtnClick, handleEditBtnClick, handleSaveBtnClick }) => {
   const record = records.find((record) => record.id === activeRecordId);
   const [updatingRecord, setUpdatingRecord] = useState(record);
+  const [isTooltipShown, setIsTooltipShown] = useState(false);
+  const getTooltipStyles = (isTooltipShown) => {
+    const style = [`record__tooltip`];
+    if (isTooltipShown) {
+      style.push(`record__tooltip_shown`);
+    }
+    return style.join(` `);
+  };
   return (
     <div className="popup record">
       {updatingRecord && <div className="popup__content record__content-wrapper">
         <div className="record__controls">
-          <button className="record__button record__button_type_delete" onClick={handleDeleteBtnClick.bind(this, updatingRecord.id)}>Удалить</button>
-          {!isRecordEditing && <button className="record__button record__button_type_edit" onClick={handleEditBtnClick}>Редактировать</button>}
-          {isRecordEditing && <button className="record__button record__button_type_edit" onClick={handleSaveBtnClick.bind(this, updatingRecord)}>Сохранить</button>}
+          <span
+            className="record__info"
+            onMouseOver={setIsTooltipShown.bind(this, true)}
+            onMouseLeave={setIsTooltipShown.bind(this, false)}
+          />
+          <button
+            className="record__button record__button_type_delete"
+            onClick={handleDeleteBtnClick.bind(this, updatingRecord.id)}
+          >
+            Удалить
+          </button>
+          {!isRecordEditing && (
+            <button
+              className="record__button record__button_type_edit"
+              onClick={handleEditBtnClick}
+            >
+              Редактировать
+            </button>
+          )}
+          {isRecordEditing && (
+            <button
+              className="record__button record__button_type_edit"
+              onClick={handleSaveBtnClick.bind(this, updatingRecord)}
+            >
+              Сохранить
+            </button>
+          )}
           <button className="record__button record__button_type_close" onClick={handleCloseBtnClick}/>
         </div>
         <div className="record__content">
-          <h2 className="record__title">{isRecordEditing ? `Редактирование` : `Просмотр`} заявки №{updatingRecord.id}</h2>
+          <h2 className="record__title">
+            {isRecordEditing ? `Редактирование` : `Просмотр`} заявки №{updatingRecord.id}
+          </h2>
           <RecordFields record={updatingRecord} isRecordEditing={isRecordEditing} setUpdatingRecord={setUpdatingRecord}/>
+        </div>
+        <div className={getTooltipStyles(isTooltipShown)}>
+          <h2 className="record__tooltip-title">Внимание</h2>
+          <p className="record__tooltip-content">Удаляйте запись только в следующих случаях:</p>
+          <ul className="record__tooltip-list">
+            <li className="record__tooltip-item">в записи нет ошибок</li>
+            <li className="record__tooltip-item">запись попала в список случайно</li>
+            <li className="record__tooltip-item">расхождение является результатом внештатной ситуации, когда косметолог не виноват</li>
+          </ul>
         </div>
       </div>}
     </div>

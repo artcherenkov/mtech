@@ -80,3 +80,56 @@
   border-color: red;
   opacity: 1;
 }
+
+.record__info {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: white url("./img/info.svg") no-repeat center;
+  background-size: cover;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.record__info:hover {
+  opacity: .6;
+}
+
+.record__tooltip {
+  width: 300px;
+  padding: 15px;
+  opacity: 0;
+  border-radius: 15px;
+  border: 2px solid #ff0000;
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.25);
+  background-color: white;
+  position: absolute;
+  z-index: -2;
+  top: 15px;
+  transition: all 100ms linear;
+}
+
+.record__tooltip_shown {
+  opacity: 1;
+  z-index: 200;
+  transition: all 100ms linear;
+}
+
+.record__tooltip-title {
+  margin: 0;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.record__tooltip-content {
+  margin: 0 0 10px;
+}
+
+.record__tooltip-list {
+  margin: 0;
+  padding: 0 0 0 20px;
+}
+
+.record__tooltip-item:not(:last-child) {
+  margin-bottom: 10px;
+}
