@@ -33,7 +33,7 @@
 }
 
 .table__row_done {
-  background-color: #a4de8e;
+  background-color: #b7f3aa;
 }
 
 .table__row:hover {
@@ -45,6 +45,10 @@
   margin: 0;
   font-size: 12px;
   padding: 10px 15px;
+}
+
+.table__cell_name_diff {
+  text-align: center;
 }
 
 .table__cell_header {
@@ -84,4 +88,10 @@
 
 .table__button_type_edit {
   background-image: url("./img/icon-edit.svg");
+}
+
+.table__out-of-schedule {
+  border: 2px solid red;
+  padding: 3px;
+  border-radius: 3px;
 }

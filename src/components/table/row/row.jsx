@@ -8,11 +8,11 @@ import {
   togglePopup,
   toggleRecordEditMode, toggleRecordPopup,
 } from "../../../store/action";
-import { Status } from "../../../mocks/record";
+import { OUT_OF_SCHEDULE, Status } from "../../../mocks/record";
 
 const getRowStyles = (status) => {
   const styles = [`table__row`];
-  if (status === Status.DONE) {
+  if (status === Status.RESOLVED) {
     styles.push(`table__row_done`);
   }
   return styles.join(` `);
@@ -23,7 +23,12 @@ const Row = ({ record, handleDeleteBtnClick, handleEditBtnClick, onClick }) => {
     <tr className={getRowStyles(record.status)} onClick={onClick}>
       <td className="table__cell">{record.id}</td>
       <td className="table__cell">{record.clientName}</td>
-      <td className="table__cell">{record.percentDiff}</td>
+      <td className="table__cell table__cell_name_diff">
+        {record.percentDiff === OUT_OF_SCHEDULE
+          ? <span className="table__out-of-schedule">{record.percentDiff}</span>
+          : record.percentDiff
+        }
+      </td>
       <td className="table__cell">{record.staffName}</td>
       <td className="table__cell">{record.date}</td>
       <td className="table__cell">{record.status}</td>
