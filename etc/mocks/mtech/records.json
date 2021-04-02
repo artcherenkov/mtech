@@ -2,7 +2,7 @@
   "predicates": [
     {
       "matches": {
-        "path": "/api/v1/cc_errors/"
+        "path": "/api/v1/cc_errors"
       }
     }
   ],

@@ -1,0 +1,35 @@
+{
+  "predicates": [
+    {
+      "matches": {
+        "path": "/api/v1/cc_errors/1"
+      }
+    }
+  ],
+  "responses": [
+    {
+      "is": {
+        "headers": {
+          "Access-Control-Allow-Headers": "authorization",
+          "Access-Control-Allow-Methods": "GET,POST,DELETE,PUT,PATCH",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Expose-Headers": "Location"
+        },
+        "body": {
+          "date": "2021-04-02T12:00:36.384Z",
+          "resource_url": "https://google.com",
+          "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices elementum justo. Proin euismod, arcu non lobortis tristique, nisl odio.",
+          "is_favorite": true,
+          "is_resolved": true,
+          "is_activated": true,
+          "company_id": 0,
+          "resource_id": 1,
+          "client_id": 124,
+          "abonement_id": 3,
+          "abonement_number": 228,
+          "id": 1
+        }
+      }
+    }
+  ]
+}
