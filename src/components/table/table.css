@@ -1,9 +1,9 @@
 .table-section {
   width: 100%;
   display: flex;
-  margin-top: 30px;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .table__wrapper {
@@ -55,6 +55,7 @@
   background-color: #e3e3e3;
   position: sticky;
   top: 0;
+  text-align: left;
 }
 
 .table__cell_controls {
