@@ -85,7 +85,7 @@
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: white url("./img/info.svg") no-repeat center;
+  background: white url("img/icon-info.svg") no-repeat center;
   background-size: cover;
   margin-right: 10px;
   cursor: pointer;

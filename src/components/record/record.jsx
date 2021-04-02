@@ -24,17 +24,29 @@ export const RecordField = {
   PERCENT_DIFF: `Расхождение`,
 };
 
-const Record = ({ records, isRecordEditing, activeRecordId, handleCloseBtnClick, handleDeleteBtnClick, handleEditBtnClick, handleSaveBtnClick }) => {
+const getTooltipStyles = (isTooltipShown) => {
+  const style = [`record__tooltip`];
+  if (isTooltipShown) {
+    style.push(`record__tooltip_shown`);
+  }
+  return style.join(` `);
+};
+
+const Record = (props) => {
+  const {
+    records,
+    isRecordEditing,
+    activeRecordId,
+    handleCloseBtnClick,
+    handleDeleteBtnClick,
+    handleEditBtnClick,
+    handleSaveBtnClick,
+  } = props;
+
   const record = records.find((record) => record.id === activeRecordId);
   const [updatingRecord, setUpdatingRecord] = useState(record);
   const [isTooltipShown, setIsTooltipShown] = useState(false);
-  const getTooltipStyles = (isTooltipShown) => {
-    const style = [`record__tooltip`];
-    if (isTooltipShown) {
-      style.push(`record__tooltip_shown`);
-    }
-    return style.join(` `);
-  };
+
   return (
     <div className="popup record">
       {updatingRecord && <div className="popup__content record__content-wrapper">
