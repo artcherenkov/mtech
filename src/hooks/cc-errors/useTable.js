@@ -1,10 +1,8 @@
 import React from "react";
 import NewTable from "../../components/new-table/new-table";
 import { useDispatch } from "react-redux";
-import {
-  editRecord,
-  deleteRecord,
-} from "../../store/reducers/cc-errors/actions";
+import { editRecord } from "../../store/reducers/cc-errors/actions";
+import { setRecordToDelete } from "../../store/reducers/cc-errors/actions";
 
 const TABLE_HEADERS = ["ID", "ID записи", "Дата", ""];
 
@@ -43,7 +41,7 @@ export const useTable = (records) => {
             />
             <button
               className="table__button table__button_type_delete"
-              onClick={() => dispatch(deleteRecord(item.id))}
+              onClick={() => dispatch(setRecordToDelete(item.id))}
             />
           </div>
         </td>

@@ -5,6 +5,8 @@ const initialState = {
   records: null,
   isLoading: false,
   error: null,
+  recordToDeleteId: -1,
+  isDeletePopupShown: false,
 };
 
 const CCErrors = (state = initialState, action) => {
@@ -62,6 +64,23 @@ const CCErrors = (state = initialState, action) => {
         .slice()
         .filter((r) => r.id !== deletedRecordId);
       return { ...state, records };
+    }
+    case ActionType.SET_RECORD_TO_DELETE: {
+      const recordToDeleteId = action.payload;
+
+      if (recordToDeleteId === -1) {
+        return {
+          ...state,
+          recordToDeleteId,
+          isDeletePopupShown: false,
+        };
+      }
+
+      return {
+        ...state,
+        recordToDeleteId: action.payload,
+        isDeletePopupShown: true,
+      };
     }
     default:
       return state;
