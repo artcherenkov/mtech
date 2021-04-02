@@ -27,7 +27,7 @@ export const useTable = (records) => {
     return (
       <tr className="table__row" key={`content-row-${idx}`}>
         <td className="table__cell">{item.id}</td>
-        <td className="table__cell">{item.recordId}</td>
+        <td className="table__cell">{item.resourceId}</td>
         <td className="table__cell">{item.date}</td>
         <td className="table__cell table__cell_controls">
           <div className="table__controls">

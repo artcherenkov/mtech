@@ -45,14 +45,16 @@ export const range = (number) => {
   return res;
 };
 
-export const convertSnakeToCamel = (str) =>
-  str.replace(/_(.)/g, (g) => g[1].toUpperCase());
-export const convertCamelToSnake = (str) =>
-  str
+export const convertSnakeToCamel = (str) => {
+  return str.replace(/_(.)/g, (g) => g[1].toUpperCase());
+};
+export const convertCamelToSnake = (str) => {
+  return str
     .replace(/([A-Z])/g, ` $1`)
     .split(` `)
     .join(`_`)
     .toLowerCase();
+};
 
 export const renameKeysSnakeToCamel = (obj) => {
   const processVal = (val) => {
@@ -61,6 +63,9 @@ export const renameKeysSnakeToCamel = (obj) => {
     }
 
     if (Array.isArray(val)) {
+      if (val.every((item) => typeof item === `string`)) {
+        return val;
+      }
       return val.map(renameKeysSnakeToCamel);
     }
 
@@ -80,6 +85,9 @@ export const renameKeysCamelToSnake = (obj) => {
     }
 
     if (Array.isArray(val)) {
+      if (val.every((item) => typeof item === `string`)) {
+        return val;
+      }
       return val.map(renameKeysCamelToSnake);
     }
 
