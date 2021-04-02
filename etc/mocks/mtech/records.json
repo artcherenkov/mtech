@@ -18,17 +18,45 @@
         "body": [
           {
             "date": "2021-04-02T12:00:36.384Z",
-            "resource_url": "string",
-            "comment": "string",
+            "resource_url": "https://google.com",
+            "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices elementum justo. Proin euismod, arcu non lobortis tristique, nisl odio.",
             "is_favorite": true,
             "is_resolved": true,
             "is_activated": true,
             "company_id": 0,
-            "resource_id": 0,
-            "client_id": 0,
-            "abonement_id": 0,
-            "abonement_number": 0,
-            "id": 0
+            "resource_id": 1345543,
+            "client_id": 124,
+            "abonement_id": 3,
+            "abonement_number": 228,
+            "id": 1
+          },
+          {
+            "date": "2021-04-02T12:00:36.384Z",
+            "resource_url": "https://google.com",
+            "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus ante at ante tempor, gravida sagittis augue lacinia. Fusce et.",
+            "is_favorite": true,
+            "is_resolved": true,
+            "is_activated": true,
+            "company_id": 0,
+            "resource_id": 3467657,
+            "client_id": 314,
+            "abonement_id": 2,
+            "abonement_number": 1345,
+            "id": 23
+          },
+          {
+            "date": "2021-04-02T12:00:36.384Z",
+            "resource_url": "https://google.com",
+            "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare faucibus leo, vel efficitur magna commodo sit amet. Mauris sit.",
+            "is_favorite": true,
+            "is_resolved": true,
+            "is_activated": true,
+            "company_id": 0,
+            "resource_id": 6572453,
+            "client_id": 234,
+            "abonement_id": 314,
+            "abonement_number": 3536,
+            "id": 45
           }
         ]
       }
