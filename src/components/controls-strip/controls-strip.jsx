@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-import './controls-strip.css';
+import "./controls-strip.css";
 import { setSearchValue } from "../../store/action";
 
 const ControlsStrip = ({ handleSearchSubmit, handleInputBlur }) => {
@@ -12,7 +12,10 @@ const ControlsStrip = ({ handleSearchSubmit, handleInputBlur }) => {
 
   return (
     <div className="controls-strip">
-      <form className="controls-strip__search-form" onSubmit={handleSearchSubmit.bind(this, search)}>
+      <form
+        className="controls-strip__search-form"
+        onSubmit={handleSearchSubmit.bind(this, search)}
+      >
         <input
           className="controls-strip__input"
           type="text"
@@ -21,7 +24,7 @@ const ControlsStrip = ({ handleSearchSubmit, handleInputBlur }) => {
           onChange={handleSearchChange}
           onBlur={handleInputBlur.bind(this, search)}
         />
-        <button className="controls-strip__submit-btn" type="submit"/>
+        <button className="controls-strip__submit-btn" type="submit" />
       </form>
     </div>
   );

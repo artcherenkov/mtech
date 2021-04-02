@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { getLogin, getIsAuth } from "../../store/reducers/app-user/selectors";
 import { logout, toggleAuthForm } from "../../store/action";
 
-import './header.css';
+import "./header.css";
 
 const Header = ({
   login,
@@ -21,17 +21,26 @@ const Header = ({
     <header className="header">
       <div className="header__inner">
         <h1 className="header__title">MTECH</h1>
-        {isAuth
-          ? <div className="header__user-wrapper">
-              <p className="header__user-name">{login}</p>
-              <button className="header__rollup-btn" onClick={handleMenuToggle}/>
-              {isMenuShown && <div className="header__user-menu">
-                <button className="header__logout" onClick={handleLogoutBtnClick}>Выйти</button>
-              </div>}
-            </div>
-          : <button className="header__auth-button" onClick={handleAuthBtnClick}>
-              Войти
-            </button>}
+        {isAuth ? (
+          <div className="header__user-wrapper">
+            <p className="header__user-name">{login}</p>
+            <button className="header__rollup-btn" onClick={handleMenuToggle} />
+            {isMenuShown && (
+              <div className="header__user-menu">
+                <button
+                  className="header__logout"
+                  onClick={handleLogoutBtnClick}
+                >
+                  Выйти
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <button className="header__auth-button" onClick={handleAuthBtnClick}>
+            Войти
+          </button>
+        )}
       </div>
     </header>
   );

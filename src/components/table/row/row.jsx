@@ -1,12 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 import {
   openRecord,
   setRecordToDelete,
   togglePopup,
-  toggleRecordEditMode, toggleRecordPopup,
+  toggleRecordEditMode,
+  toggleRecordPopup,
 } from "../../../store/action";
 import { OUT_OF_SCHEDULE, Status } from "../../../mocks/record";
 
@@ -24,18 +25,25 @@ const Row = ({ record, handleDeleteBtnClick, handleEditBtnClick, onClick }) => {
       <td className="table__cell">{record.id}</td>
       <td className="table__cell">{record.clientName}</td>
       <td className="table__cell table__cell_name_diff">
-        {record.percentDiff === OUT_OF_SCHEDULE
-          ? <span className="table__out-of-schedule">{record.percentDiff}</span>
-          : record.percentDiff
-        }
+        {record.percentDiff === OUT_OF_SCHEDULE ? (
+          <span className="table__out-of-schedule">{record.percentDiff}</span>
+        ) : (
+          record.percentDiff
+        )}
       </td>
       <td className="table__cell">{record.staffName}</td>
       <td className="table__cell">{record.date}</td>
       <td className="table__cell">{record.status}</td>
       <td className="table__cell table__cell_controls">
         <div className="table__controls">
-          <button className="table__button table__button_type_edit" onClick={handleEditBtnClick.bind(this, record.id)} />
-          <button className="table__button table__button_type_delete" onClick={handleDeleteBtnClick.bind(this, record.id)} />
+          <button
+            className="table__button table__button_type_edit"
+            onClick={handleEditBtnClick.bind(this, record.id)}
+          />
+          <button
+            className="table__button table__button_type_delete"
+            onClick={handleDeleteBtnClick.bind(this, record.id)}
+          />
         </div>
       </td>
     </tr>

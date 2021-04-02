@@ -30,9 +30,9 @@
 }
 
 .controls-strip__submit-btn:hover {
-  opacity: .6;
+  opacity: 0.6;
 }
 
 .controls-strip__submit-btn:active {
-  opacity: .3;
+  opacity: 0.3;
 }

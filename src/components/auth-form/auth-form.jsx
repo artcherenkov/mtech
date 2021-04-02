@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 
 import { authenticate, toggleAuthForm } from "../../store/action";
 
-import './auth-form.css';
+import "./auth-form.css";
 
 const AuthForm = ({ handleCloseBtnClick, handleAuthBtnClick }) => {
   const { register, handleSubmit, errors, setError, clearErrors } = useForm();
@@ -23,7 +23,8 @@ const AuthForm = ({ handleCloseBtnClick, handleAuthBtnClick }) => {
   const loginValidationConfig = {
     required: `Заполните обязательное поле`,
     pattern: {
-      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: `Введите валидный email`,
+      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      message: `Введите валидный email`,
     },
   };
 
@@ -34,9 +35,12 @@ const AuthForm = ({ handleCloseBtnClick, handleAuthBtnClick }) => {
   return (
     <div className="popup">
       <div className="popup__content auth-form">
-        <button className="popup__control-btn" onClick={handleCloseBtnClick}/>
+        <button className="popup__control-btn" onClick={handleCloseBtnClick} />
         <h2 className="auth-form__title">Вход в учетную запись</h2>
-        <form className="auth-form__form" onSubmit={handleSubmit(handleAuthBtnClick.bind(this, setError))}>
+        <form
+          className="auth-form__form"
+          onSubmit={handleSubmit(handleAuthBtnClick.bind(this, setError))}
+        >
           <div className="auth-form__input-wrapper">
             <label htmlFor="login">Логин</label>
             <input
@@ -46,7 +50,9 @@ const AuthForm = ({ handleCloseBtnClick, handleAuthBtnClick }) => {
               name="login"
               ref={register(loginValidationConfig)}
             />
-            {errors.login && <p className="auth-form__error">{errors.login.message}</p>}
+            {errors.login && (
+              <p className="auth-form__error">{errors.login.message}</p>
+            )}
           </div>
           <div className="auth-form__input-wrapper">
             <label htmlFor="password">Пароль</label>
@@ -57,7 +63,9 @@ const AuthForm = ({ handleCloseBtnClick, handleAuthBtnClick }) => {
               name="password"
               ref={register(passwordValidationConfig)}
             />
-            {errors.password && <p className="auth-form__error">{errors.password.message}</p>}
+            {errors.password && (
+              <p className="auth-form__error">{errors.password.message}</p>
+            )}
           </div>
           <div className="auth-form__controls">
             <button

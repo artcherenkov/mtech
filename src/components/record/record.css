@@ -54,11 +54,11 @@
 }
 
 .record__button:hover {
-  opacity: .6;
+  opacity: 0.6;
 }
 
 .record__button:active {
-  opacity: .3;
+  opacity: 0.3;
 }
 
 .record__button_type_close {
@@ -92,7 +92,7 @@
 }
 
 .record__info:hover {
-  opacity: .6;
+  opacity: 0.6;
 }
 
 .record__tooltip {

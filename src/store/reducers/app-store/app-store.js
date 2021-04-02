@@ -22,7 +22,9 @@ const appStore = (state = initialState, action) => {
     case ActionType.EDIT_RECORD: {
       const records = state.records;
       const updatedRecord = action.payload;
-      const recordToUpdateIndex = records.findIndex((record) => record.id === updatedRecord.id);
+      const recordToUpdateIndex = records.findIndex(
+        (record) => record.id === updatedRecord.id
+      );
       const updatedRecords = [
         ...records.slice(0, recordToUpdateIndex),
         updatedRecord,
@@ -35,9 +37,16 @@ const appStore = (state = initialState, action) => {
         const updatedRecords = state.records
           .slice()
           .filter((item) => item.id !== state.recordToDelete);
-        return { ...state, records: updatedRecords, recordToDelete: -1, activeRecordId: -1 };
+        return {
+          ...state,
+          records: updatedRecords,
+          recordToDelete: -1,
+          activeRecordId: -1,
+        };
       }
-      console.error(`Ошибка при удалении записи. Возможно, в хранилище отсутствует ID для удаления`);
+      console.error(
+        `Ошибка при удалении записи. Возможно, в хранилище отсутствует ID для удаления`
+      );
       return state;
     }
     default:

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 const BACKEND_URL = ``;
 const REQUEST_TIMEOUT = 10000;

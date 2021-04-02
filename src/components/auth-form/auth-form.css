@@ -42,11 +42,11 @@
 }
 
 .auth-form__button:hover {
-  opacity: .6;
+  opacity: 0.6;
 }
 
 .auth-form__button:active {
-  opacity: .3;
+  opacity: 0.3;
 }
 
 .auth-form__button:not(:last-of-type) {

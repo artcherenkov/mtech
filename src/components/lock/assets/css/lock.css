@@ -19,7 +19,7 @@
 .lock__image {
   display: block;
   width: 200px;
-  opacity: .3;
+  opacity: 0.3;
 }
 
 .lock__text {
@@ -27,5 +27,5 @@
   max-width: 450px;
   margin: 20px;
   line-height: 1.15;
-  opacity: .4;
+  opacity: 0.4;
 }

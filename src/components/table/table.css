@@ -75,11 +75,11 @@
 }
 
 .table__button:hover {
-  opacity: .6;
+  opacity: 0.6;
 }
 
 .table__button:active {
-  opacity: .3;
+  opacity: 0.3;
 }
 
 .table__button_type_delete {
