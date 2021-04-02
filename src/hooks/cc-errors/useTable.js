@@ -39,6 +39,10 @@ export const useTable = (records) => {
     );
   };
 
+  if (!records || !records.length) {
+    return <h1>No data</h1>;
+  }
+
   return (
     <NewTable
       tableHead={renderTableHead()}

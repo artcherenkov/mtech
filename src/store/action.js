@@ -11,9 +11,6 @@ export const ActionType = {
   TOGGLE_RECORD_EDIT_MODE: `TOGGLE_RECORD_EDIT_MODE`,
   SET_RECORD_TO_DELETE: `SET_RECORD_TO_DELETE`,
   SET_SEARCH_VALUE: `SET_SEARCH_VALUE`,
-  // user
-  AUTHENTICATE: `AUTHENTICATE`,
-  LOGOUT: `LOGOUT`,
 };
 
 export const deleteRecord = (recordId) => ({
@@ -49,15 +46,6 @@ export const openRecord = (recordId) => ({
 
 export const closeRecord = () => ({
   type: ActionType.CLOSE_RECORD,
-});
-
-export const authenticate = (credentials) => ({
-  type: ActionType.AUTHENTICATE,
-  payload: credentials,
-});
-
-export const logout = () => ({
-  type: ActionType.LOGOUT,
 });
 
 export const setSearchValue = (searchValue) => ({

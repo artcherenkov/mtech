@@ -5,15 +5,19 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 
-import App from "./app/app";
 import rootReducer from "./store/reducers/root-reducer";
 import { createAPI } from "./services/api";
+
+import App from "./app/app";
+import { fetchRecords } from "./store/reducers/cc-errors/actions";
 
 const api = createAPI();
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api)))
 );
+
+store.dispatch(fetchRecords());
 
 ReactDOM.render(
   <Provider store={store}>

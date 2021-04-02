@@ -1,10 +1,10 @@
 import { ActionType } from "../../action";
 
-const { login } = JSON.parse(localStorage.getItem(`auth`)) || {};
+const { name } = JSON.parse(localStorage.getItem(`auth`)) || {};
 
 const initialState = {
   isPopupShown: false,
-  isAuthFormShown: !login,
+  isAuthFormShown: !name,
   isRecordShown: false,
   isRecordEditing: false,
   searchValue: ``,

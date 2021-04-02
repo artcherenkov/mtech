@@ -48,6 +48,7 @@
 
 .header__user-menu {
   width: 100%;
+  min-width: 100px;
   position: absolute;
   top: 30px;
   background-color: white;

@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getLogin, getIsAuth } from "../../store/reducers/app-user/selectors";
-import { logout, toggleAuthForm } from "../../store/action";
+import { toggleAuthForm } from "../../store/action";
+import { logout } from "../../store/reducers/app-user/actions";
 
 import "./header.css";
 import AuthForm from "../auth-form/auth-form";
 import { getIsAuthFormShown } from "../../store/reducers/app-state/selectors";
 
 const Header = ({
-  login,
+  name,
   isAuth,
   isAuthFormShown,
   handleAuthBtnClick,
@@ -27,7 +28,7 @@ const Header = ({
           <h1 className="header__title">MTECH</h1>
           {isAuth ? (
             <div className="header__user-wrapper">
-              <p className="header__user-name">{login}</p>
+              <p className="header__user-name">{name}</p>
               <button
                 className="header__rollup-btn"
                 onClick={handleMenuToggle}
@@ -59,7 +60,7 @@ const Header = ({
 };
 
 Header.propTypes = {
-  login: PropTypes.string.isRequired,
+  name: PropTypes.string,
   isAuth: PropTypes.bool.isRequired,
   isAuthFormShown: PropTypes.bool.isRequired,
   handleAuthBtnClick: PropTypes.func.isRequired,
@@ -67,7 +68,7 @@ Header.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  login: getLogin(state),
+  name: getLogin(state),
   isAuth: getIsAuth(state),
   isAuthFormShown: getIsAuthFormShown(state),
 });

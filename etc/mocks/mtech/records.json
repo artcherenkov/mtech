@@ -1,0 +1,37 @@
+{
+  "predicates": [
+    {
+      "matches": {
+        "path": "/api/v1/cc_errors/"
+      }
+    }
+  ],
+  "responses": [
+    {
+      "is": {
+        "headers": {
+          "Access-Control-Allow-Headers": "authorization",
+          "Access-Control-Allow-Methods": "GET,POST,DELETE,PUT,PATCH",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Expose-Headers": "Location"
+        },
+        "body": [
+          {
+            "date": "2021-04-02T12:00:36.384Z",
+            "resource_url": "string",
+            "comment": "string",
+            "is_favorite": true,
+            "is_resolved": true,
+            "is_activated": true,
+            "company_id": 0,
+            "resource_id": 0,
+            "client_id": 0,
+            "abonement_id": 0,
+            "abonement_number": 0,
+            "id": 0
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 
-import { authenticate, toggleAuthForm } from "../../store/action";
+import { authenticate } from "../../store/reducers/app-user/actions";
+import { toggleAuthForm } from "../../store/action";
 
 import "./auth-form.css";
 
@@ -22,16 +23,8 @@ const AuthForm = ({ handleCloseBtnClick, handleAuthBtnClick }) => {
   const passwordValidationConfig = { required: `Заполните обязательное поле` };
   const loginValidationConfig = {
     required: `Заполните обязательное поле`,
-    pattern: {
-      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-      message: `Введите валидный email`,
-    },
   };
 
-  // const mockCredentials = {
-  //   token: `sometoken`,
-  //   username: `Василий`,
-  // };
   return (
     <div className="popup">
       <div className="popup__content auth-form">
@@ -42,12 +35,12 @@ const AuthForm = ({ handleCloseBtnClick, handleAuthBtnClick }) => {
           onSubmit={handleSubmit(handleAuthBtnClick.bind(this, setError))}
         >
           <div className="auth-form__input-wrapper">
-            <label htmlFor="login">Логин</label>
+            <label htmlFor="name">Логин</label>
             <input
               className={getInputStyles(errors.login)}
               type="text"
-              id="login"
-              name="login"
+              id="name"
+              name="name"
               ref={register(loginValidationConfig)}
             />
             {errors.login && (
@@ -98,8 +91,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(toggleAuthForm());
   },
   handleAuthBtnClick(credentials, data, setError) {
-    dispatch(authenticate(data));
-    dispatch(toggleAuthForm());
+    dispatch(authenticate(data)).then(() => dispatch(toggleAuthForm()));
   },
 });
 
