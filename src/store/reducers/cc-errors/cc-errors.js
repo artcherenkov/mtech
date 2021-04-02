@@ -21,6 +21,27 @@ const CCErrors = (state = initialState, action) => {
     case ActionType.FETCH_RECORDS_ERROR: {
       return { ...state, isLoading: false, error: action.payload };
     }
+
+    case ActionType.EDIT_RECORD_START: {
+      return { ...state, isLoading: true, error: null };
+    }
+    case ActionType.EDIT_RECORD_SUCCESS: {
+      return { ...state, isLoading: false, error: null };
+    }
+    case ActionType.EDIT_RECORD_ERROR: {
+      return { ...state, isLoading: false, error: action.payload };
+    }
+
+    case ActionType.DELETE_RECORD_START: {
+      return { ...state, isLoading: true, error: null };
+    }
+    case ActionType.DELETE_RECORD_SUCCESS: {
+      return { ...state, isLoading: false, error: null };
+    }
+    case ActionType.DELETE_RECORD_ERROR: {
+      return { ...state, isLoading: false, error: action.payload };
+    }
+
     case ActionType.LOAD_RECORD: {
       const recordToLoad = adaptRecordToClient(action.payload);
       const records = state.records.slice();
@@ -33,6 +54,13 @@ const CCErrors = (state = initialState, action) => {
       }
 
       records[foundRecordIndex] = recordToLoad;
+      return { ...state, records };
+    }
+    case ActionType.REMOVE_RECORD: {
+      const deletedRecordId = action.payload;
+      const records = state.records
+        .slice()
+        .filter((r) => r.id !== deletedRecordId);
       return { ...state, records };
     }
     default:

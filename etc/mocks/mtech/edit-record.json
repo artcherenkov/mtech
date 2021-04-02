@@ -11,7 +11,7 @@
       "is": {
         "headers": {
           "Access-Control-Allow-Headers": "authorization",
-          "Access-Control-Allow-Methods": "GET,POST,DELETE,PUT,PATCH",
+          "Access-Control-Allow-Methods": "PUT",
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Expose-Headers": "Location"
         },
