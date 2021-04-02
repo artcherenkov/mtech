@@ -9,17 +9,31 @@ const initialState = {
 
 const CCErrors = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.LOAD_RECORDS: {
+    case ActionType.FETCH_RECORDS_START: {
       return { ...state, isLoading: true, error: null };
     }
-    case ActionType.LOAD_RECORDS_SUCCESS: {
+    case ActionType.FETCH_RECORDS_SUCCESS: {
       const records = action.payload.map((record) =>
         adaptRecordToClient(record)
       );
       return { ...state, isLoading: false, error: null, records };
     }
-    case ActionType.LOAD_RECORDS_ERROR: {
+    case ActionType.FETCH_RECORDS_ERROR: {
       return { ...state, isLoading: false, error: action.payload };
+    }
+    case ActionType.LOAD_RECORD: {
+      const recordToLoad = adaptRecordToClient(action.payload);
+      const records = state.records.slice();
+      const foundRecordIndex = records.findIndex(
+        (r) => r.id === recordToLoad.id
+      );
+
+      if (foundRecordIndex === -1) {
+        return { ...state, records: [...records, recordToLoad] };
+      }
+
+      records[foundRecordIndex] = recordToLoad;
+      return { ...state, records };
     }
     default:
       return state;

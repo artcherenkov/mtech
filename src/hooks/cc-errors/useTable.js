@@ -1,9 +1,12 @@
 import React from "react";
 import NewTable from "../../components/new-table/new-table";
+import { useDispatch } from "react-redux";
+import { editRecord } from "../../store/reducers/cc-errors/actions";
 
 const TABLE_HEADERS = ["ID", "ID записи", "Дата", ""];
 
 export const useTable = (records) => {
+  const dispatch = useDispatch();
   const renderTableHead = () => {
     return (
       <thead className="table__head">
@@ -31,7 +34,10 @@ export const useTable = (records) => {
         <td className="table__cell">{item.date}</td>
         <td className="table__cell table__cell_controls">
           <div className="table__controls">
-            <button className="table__button table__button_type_edit" />
+            <button
+              className="table__button table__button_type_edit"
+              onClick={() => dispatch(editRecord(item))}
+            />
             <button className="table__button table__button_type_delete" />
           </div>
         </td>
