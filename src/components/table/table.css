@@ -57,6 +57,10 @@
   top: 0;
 }
 
+.table__cell_controls {
+  width: 40px;
+}
+
 .table__controls {
   display: flex;
   justify-content: space-between;

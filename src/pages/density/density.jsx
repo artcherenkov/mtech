@@ -17,7 +17,7 @@ import {
 import { getIsAuth } from "../../store/reducers/app-user/selectors";
 
 const DensityPage = (props) => {
-  const { isPopupShown, isRecordPopupShown, isAuthFormShown, isAuth } = props;
+  const { isPopupShown, isRecordPopupShown, isAuth } = props;
   return (
     <>
       <Header />
@@ -31,7 +31,6 @@ const DensityPage = (props) => {
       )}
       {isRecordPopupShown && <Record />}
       {isPopupShown && <Popup />}
-      {isAuthFormShown && <AuthForm />}
     </>
   );
 };

@@ -9,7 +9,8 @@ import { openRecord, toggleRecordPopup } from "../../store/action";
 import "./table.css";
 import { getSearchValue } from "../../store/reducers/app-state/selectors";
 
-const Table = ({ records, searchValue, handleRecordClick }) => {
+const Table = (props) => {
+  const { records, searchValue, handleRecordClick } = props;
   const isRecordsEmpty = !records || !records.length;
 
   const filteredRecords = records.filter((record) =>
