@@ -1,7 +1,10 @@
 import React from "react";
 import NewTable from "../../components/new-table/new-table";
 import { useDispatch } from "react-redux";
-import { setActiveRecordId } from "../../store/reducers/cc-errors/actions";
+import {
+  setActiveRecordId,
+  setEditMode,
+} from "../../store/reducers/cc-errors/actions";
 import { setRecordToDelete } from "../../store/reducers/cc-errors/actions";
 
 const TABLE_HEADERS = ["ID", "ID записи", "Дата", ""];
@@ -10,10 +13,17 @@ export const useTable = (records) => {
   const dispatch = useDispatch();
 
   const onEditButtonClick = (id) => {
-    return () => dispatch(setActiveRecordId(id));
+    return () => {
+      dispatch(setActiveRecordId(id));
+      dispatch(setEditMode());
+    };
   };
   const onRowClick = (id) => {
-    return () => dispatch(setActiveRecordId(id));
+    return (evt) => {
+      if (evt.target.tagName.toLowerCase() !== "button") {
+        dispatch(setActiveRecordId(id));
+      }
+    };
   };
 
   const renderTableHead = () => {

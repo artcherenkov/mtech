@@ -5,10 +5,12 @@ const initialState = {
   records: null,
   isLoading: false,
   error: null,
+
   recordToDeleteId: -1,
   activeRecordId: -1,
   isDeletePopupShown: false,
   isRecordPopupShown: false,
+  isEditMode: false,
 };
 
 const CCErrors = (state = initialState, action) => {
@@ -75,6 +77,7 @@ const CCErrors = (state = initialState, action) => {
           ...state,
           recordToDeleteId,
           isDeletePopupShown: false,
+          isEditMode: false,
         };
       }
 
@@ -92,6 +95,7 @@ const CCErrors = (state = initialState, action) => {
           ...state,
           activeRecordId,
           isRecordPopupShown: false,
+          isEditMode: false,
         };
       }
 
@@ -100,6 +104,9 @@ const CCErrors = (state = initialState, action) => {
         activeRecordId,
         isRecordPopupShown: true,
       };
+    }
+    case ActionType.SET_EDIT_MODE: {
+      return { ...state, isEditMode: true };
     }
 
     default:

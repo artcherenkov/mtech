@@ -40,10 +40,7 @@ const CCErrorsPage = (props) => {
     <>
       <Header />
       {props.isAuth ? (
-        <section className="table-section">
-          <ControlsStrip />
-          {table}
-        </section>
+        <section className="table-section">{table}</section>
       ) : (
         <Lock />
       )}
@@ -58,7 +55,7 @@ const CCErrorsPage = (props) => {
   );
 };
 
-DensityPage.propTypes = {
+CCErrorsPage.propTypes = {
   isAuth: PropTypes.bool.isRequired,
 };
 

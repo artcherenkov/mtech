@@ -17,6 +17,7 @@ export const ActionType = {
   REMOVE_RECORD: "cc-errors/remove_record",
   SET_RECORD_TO_DELETE: "cc-errors/set_record_to_delete",
   SET_ACTIVE_RECORD_ID: "cc-errors/set_active_record_id",
+  SET_EDIT_MODE: "cc-errors/set_edit_mode",
 };
 
 export const fetchRecords = () => (dispatch, getState, api) => {
@@ -102,4 +103,7 @@ export const setRecordToDelete = (payload) => ({
 export const setActiveRecordId = (payload) => ({
   type: ActionType.SET_ACTIVE_RECORD_ID,
   payload,
+});
+export const setEditMode = () => ({
+  type: ActionType.SET_EDIT_MODE,
 });

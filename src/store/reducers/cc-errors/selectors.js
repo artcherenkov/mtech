@@ -13,3 +13,6 @@ export const getActiveRecordId = (state) => {
 export const getIsRecordPopupShown = (state) => {
   return state.CCErrors.isRecordPopupShown;
 };
+export const getIsEditMode = (state) => {
+  return state.CCErrors.isEditMode;
+};
