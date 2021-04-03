@@ -18,6 +18,7 @@ import {
   deleteRecord,
   setRecordToDelete,
 } from "../../store/reducers/cc-errors/actions";
+import { useRecordPopup } from "../../hooks/cc-errors/useRecordPopup";
 
 const CCErrorsPage = (props) => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const CCErrorsPage = (props) => {
   const isDeletePopupShown = useSelector(getIsDeletePopupShown, shallowEqual);
 
   const table = useTable(records);
+  const recordPopup = useRecordPopup();
 
   const handleRecordDelete = () => dispatch(deleteRecord(recordToDeleteId));
   const handleCancelBtnClick = () => dispatch(setRecordToDelete(-1));
@@ -48,6 +50,7 @@ const CCErrorsPage = (props) => {
           handleCancelBtnClick={handleCancelBtnClick}
         />
       )}
+      {recordPopup}
     </>
   );
 };
