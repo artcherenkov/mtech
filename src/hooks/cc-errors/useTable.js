@@ -6,6 +6,7 @@ import {
   setEditMode,
 } from "../../store/reducers/cc-errors/actions";
 import { setRecordToDelete } from "../../store/reducers/cc-errors/actions";
+import moment from "moment";
 
 const TABLE_HEADERS = ["ID", "ID записи", "Дата", ""];
 
@@ -54,7 +55,9 @@ export const useTable = (records) => {
       >
         <td className="table__cell">{item.id}</td>
         <td className="table__cell">{item.resourceId}</td>
-        <td className="table__cell">{item.date}</td>
+        <td className="table__cell">
+          {moment(item.date).format("DD.MM.YYYY kk:mm")}
+        </td>
         <td className="table__cell table__cell_controls">
           <div className="table__controls">
             <button
