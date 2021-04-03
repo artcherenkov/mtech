@@ -17,11 +17,11 @@
         },
         "body": [
           {
-            "date": "2021-04-02T12:00:36.384Z",
+            "date": "2021-04-03T10:00:36.384Z",
             "resource_url": "https://google.com",
             "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices elementum justo. Proin euismod, arcu non lobortis tristique, nisl odio.",
             "is_favorite": true,
-            "is_resolved": true,
+            "is_resolved": false,
             "is_activated": true,
             "company_id": 0,
             "resource_id": 1345543,
@@ -31,7 +31,7 @@
             "id": 1
           },
           {
-            "date": "2021-04-02T12:00:36.384Z",
+            "date": "2021-03-30T14:00:36.384Z",
             "resource_url": "https://google.com",
             "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam cursus ante at ante tempor, gravida sagittis augue lacinia. Fusce et.",
             "is_favorite": true,
@@ -49,7 +49,7 @@
             "resource_url": "https://google.com",
             "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare faucibus leo, vel efficitur magna commodo sit amet. Mauris sit.",
             "is_favorite": true,
-            "is_resolved": true,
+            "is_resolved": false,
             "is_activated": true,
             "company_id": 0,
             "resource_id": 6572453,
