@@ -67,7 +67,13 @@ const CCErrors = (state = initialState, action) => {
       const records = state.records
         .slice()
         .filter((r) => r.id !== deletedRecordId);
-      return { ...state, records };
+      return {
+        ...state,
+        records,
+        isEditMode: false,
+        activeRecordId: -1,
+        isRecordPopupShown: false,
+      };
     }
     case ActionType.SET_RECORD_TO_DELETE: {
       const recordToDeleteId = action.payload;
@@ -77,7 +83,6 @@ const CCErrors = (state = initialState, action) => {
           ...state,
           recordToDeleteId,
           isDeletePopupShown: false,
-          isEditMode: false,
         };
       }
 

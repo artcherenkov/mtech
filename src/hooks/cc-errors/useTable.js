@@ -7,6 +7,7 @@ import {
 } from "../../store/reducers/cc-errors/actions";
 import { setRecordToDelete } from "../../store/reducers/cc-errors/actions";
 import moment from "moment";
+import classnames from "classnames";
 
 const TABLE_HEADERS = ["ID", "ID записи", "Дата", ""];
 
@@ -49,7 +50,9 @@ export const useTable = (records) => {
   const renderTableRow = (item, idx) => {
     return (
       <tr
-        className="table__row"
+        className={classnames("table__row", {
+          table__row_done: item.isResolved,
+        })}
         key={`content-row-${idx}`}
         onClick={onRowClick(item.id)}
       >

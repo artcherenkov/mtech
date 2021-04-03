@@ -11,6 +11,10 @@
   z-index: 10;
 }
 
+.popup_type_delete {
+  z-index: 20;
+}
+
 .popup__content {
   width: 80%;
   max-width: 500px;
@@ -37,6 +41,8 @@
   background-color: white;
   border-radius: 5px;
   cursor: pointer;
+
+  transition: all 200ms ease;
 }
 
 .popup__button:hover {
@@ -47,15 +53,38 @@
   opacity: 0.3;
 }
 
+.popup__button:disabled,
+.popup__button:disabled:hover,
+.popup__button:disabled:active {
+  opacity: .3;
+  color: black;
+  background-color: white;
+  border-color: black;
+  cursor: not-allowed;
+}
+
 .popup__button:not(:last-of-type) {
   margin-right: 20px;
 }
 
+.popup__button_action_save {
+  border-color: #0055ff;
+  color: #0055ff;
+}
+.popup__button_action_save:hover {
+  background-color: #0055ff;
+  color: white;
+  opacity: 1;
+}
 .popup__button_danger {
   background-color: white;
   color: red;
   border-color: red;
-  font-size: 18px;
+}
+.popup__button_danger:hover {
+  background-color: red;
+  color: white;
+  opacity: 1;
 }
 .popup__button_close {
   position: absolute;
@@ -100,4 +129,47 @@
 
 .popup__resource-link:hover {
   opacity: .6;
+}
+
+.popup__form-controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.popup__checkbox-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.popup__checkbox-label {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  position: relative;
+}
+
+.popup__checkbox-text {
+  padding-left: 10px;
+  user-select: none;
+}
+
+.popup__checkbox-replacement {
+  width: 30px;
+  height: 30px;
+  background: url("../../assets/img/star.svg");
+  background-size: cover;
+  left: 0;
+}
+.popup__checkbox-input:disabled + .popup__checkbox-replacement {
+
+}
+.popup__checkbox-input:checked + .popup__checkbox-replacement {
+  background: url("../../assets/img/star-filled.svg");
+}
+.popup__checkbox-input:focus + .popup__checkbox-replacement {
+
 }

@@ -5,7 +5,7 @@ import { connect, shallowEqual, useSelector } from "react-redux";
 import Header from "../../components/header/header";
 import Lock from "../../components/lock/lock";
 import { getIsAuth } from "../../store/reducers/app-user/selectors";
-import { useRecordsSelector } from "../../hooks/cc-errors/useRecordsSelector";
+import { useRecordsSelector } from "../../hooks/cc-errors/selectors/useRecordsSelector";
 import { useTable } from "../../hooks/cc-errors/useTable";
 import {
   getIsDeletePopupShown,

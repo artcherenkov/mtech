@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./popup.css";
+import "../new-popup/popup.css";
 
 const Popup = ({ handleRecordDelete, handleCancelBtnClick }) => (
   <div className="popup">

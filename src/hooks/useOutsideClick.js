@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
-const useOutsideClick = (ref, callback) => {
+const useOutsideClick = (ref, callback, isActionBlocked) => {
   const handleClick = (e) => {
-    if (ref.current && !ref.current.contains(e.target)) {
+    if (ref.current && !ref.current.contains(e.target) && !isActionBlocked) {
       callback();
     }
   };

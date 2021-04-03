@@ -15,7 +15,7 @@ export const useDeleteRecordPopup = () => {
   const onClosePopup = () => dispatch(setRecordToDelete(-1));
 
   return (
-    <NewPopup onOutsideClick={onClosePopup}>
+    <NewPopup type="delete" onOutsideClick={onClosePopup}>
       <div className="popup__controls">
         <button className="popup__button_close" onClick={onClosePopup} />
       </div>
