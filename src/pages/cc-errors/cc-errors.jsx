@@ -3,10 +3,8 @@ import PropTypes from "prop-types";
 import { connect, shallowEqual, useDispatch, useSelector } from "react-redux";
 
 import Header from "../../components/header/header";
-import ControlsStrip from "../../components/controls-strip/controls-strip";
 import Lock from "../../components/lock/lock";
 import { getIsAuth } from "../../store/reducers/app-user/selectors";
-import { DensityPage } from "../density/density";
 import { useRecordsSelector } from "../../hooks/cc-errors/useRecordsSelector";
 import { useTable } from "../../hooks/cc-errors/useTable";
 import Popup from "../../components/popup/popup";
