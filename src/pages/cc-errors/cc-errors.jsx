@@ -5,10 +5,6 @@ import { connect, shallowEqual, useDispatch, useSelector } from "react-redux";
 import Header from "../../components/header/header";
 import ControlsStrip from "../../components/controls-strip/controls-strip";
 import Lock from "../../components/lock/lock";
-import {
-  getIsAuthFormShown,
-  getIsRecordShown,
-} from "../../store/reducers/app-state/selectors";
 import { getIsAuth } from "../../store/reducers/app-user/selectors";
 import { DensityPage } from "../density/density";
 import { useRecordsSelector } from "../../hooks/cc-errors/useRecordsSelector";
@@ -57,14 +53,10 @@ const CCErrorsPage = (props) => {
 };
 
 DensityPage.propTypes = {
-  isRecordPopupShown: PropTypes.bool.isRequired,
-  isAuthFormShown: PropTypes.bool.isRequired,
   isAuth: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  isRecordPopupShown: getIsRecordShown(state),
-  isAuthFormShown: getIsAuthFormShown(state),
   isAuth: getIsAuth(state),
 });
 
