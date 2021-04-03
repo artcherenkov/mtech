@@ -77,6 +77,19 @@ export const useRecordPopup = () => {
   return (
     <NewPopup onOutsideClick={onClosePopup}>
       <div className="popup__controls">
+        <div className="popup__favorite-button">
+          <label className="popup__checkbox-label" htmlFor="isFavorite">
+            <input
+              className="popup__checkbox-input"
+              type="checkbox"
+              id="isFavorite"
+              name="isFavorite"
+              checked={record.isFavorite}
+              onChange={onCheckboxChange}
+            />
+            <span className="popup__checkbox-replacement" />
+          </label>
+        </div>
         <button className="popup__button_close" onClick={onClosePopup} />
       </div>
       <h2 className="popup__header">
@@ -91,20 +104,6 @@ export const useRecordPopup = () => {
         Перейти к записи в YClients
       </a>
       <form onSubmit={onSubmit}>
-        <div className="popup__checkbox-wrapper">
-          <label className="popup__checkbox-label" htmlFor="isFavorite">
-            <input
-              className="popup__checkbox-input"
-              type="checkbox"
-              id="isFavorite"
-              name="isFavorite"
-              checked={record.isFavorite}
-              onChange={onCheckboxChange}
-            />
-            <span className="popup__checkbox-replacement" />
-            <span className="popup__checkbox-text">Добавить в избранное</span>
-          </label>
-        </div>
         <textarea
           className="popup__textarea"
           name="comment"
