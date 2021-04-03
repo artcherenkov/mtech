@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getLogin, getIsAuth } from "../../store/reducers/app-user/selectors";
@@ -8,26 +8,31 @@ import { logout } from "../../store/reducers/app-user/actions";
 import "./header.css";
 import AuthForm from "../auth-form/auth-form";
 import { getIsAuthFormShown } from "../../store/reducers/app-state/selectors";
+import useOutsideClick from "../../hooks/useOutsideClick";
 
-const Header = ({
-  name,
-  isAuth,
-  isAuthFormShown,
-  handleAuthBtnClick,
-  handleLogoutBtnClick,
-}) => {
+const Header = (props) => {
+  const {
+    name,
+    isAuth,
+    isAuthFormShown,
+    handleAuthBtnClick,
+    handleLogoutBtnClick,
+  } = props;
+
   const [isMenuShown, setIsMenuShown] = useState(false);
+
+  const userMenuRef = useRef();
+  useOutsideClick(userMenuRef, () => setIsMenuShown(false));
+
   const handleMenuToggle = () => setIsMenuShown((prevState) => !prevState);
-  useEffect(() => {
-    setIsMenuShown(false);
-  }, [isAuth]);
+
   return (
     <>
       <header className="header">
         <div className="header__inner">
           <h1 className="header__title">MTECH</h1>
           {isAuth ? (
-            <div className="header__user-wrapper">
+            <div className="header__user-wrapper" ref={userMenuRef}>
               <p className="header__user-name">{name}</p>
               <button
                 className="header__rollup-btn"
