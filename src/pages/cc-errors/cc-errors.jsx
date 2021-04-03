@@ -12,6 +12,7 @@ import { useTable } from "../../hooks/cc-errors/useTable";
 import Popup from "../../components/popup/popup";
 import {
   getIsDeletePopupShown,
+  getIsRecordPopupShown,
   getRecordToDeleteId,
 } from "../../store/reducers/cc-errors/selectors";
 import {
@@ -24,8 +25,10 @@ const CCErrorsPage = (props) => {
   const dispatch = useDispatch();
 
   const records = useRecordsSelector();
+
   const recordToDeleteId = useSelector(getRecordToDeleteId, shallowEqual);
   const isDeletePopupShown = useSelector(getIsDeletePopupShown, shallowEqual);
+  const isRecordPopupShown = useSelector(getIsRecordPopupShown, shallowEqual);
 
   const table = useTable(records);
   const recordPopup = useRecordPopup();
@@ -50,7 +53,7 @@ const CCErrorsPage = (props) => {
           handleCancelBtnClick={handleCancelBtnClick}
         />
       )}
-      {recordPopup}
+      {isRecordPopupShown && recordPopup}
     </>
   );
 };

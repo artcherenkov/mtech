@@ -7,3 +7,9 @@ export const getRecordToDeleteId = (state) => {
 export const getIsDeletePopupShown = (state) => {
   return state.CCErrors.isDeletePopupShown;
 };
+export const getActiveRecordId = (state) => {
+  return state.CCErrors.activeRecordId;
+};
+export const getIsRecordPopupShown = (state) => {
+  return state.CCErrors.isRecordPopupShown;
+};

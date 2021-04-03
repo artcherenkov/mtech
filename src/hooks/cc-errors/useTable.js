@@ -1,13 +1,21 @@
 import React from "react";
 import NewTable from "../../components/new-table/new-table";
 import { useDispatch } from "react-redux";
-import { editRecord } from "../../store/reducers/cc-errors/actions";
+import { setActiveRecordId } from "../../store/reducers/cc-errors/actions";
 import { setRecordToDelete } from "../../store/reducers/cc-errors/actions";
 
 const TABLE_HEADERS = ["ID", "ID записи", "Дата", ""];
 
 export const useTable = (records) => {
   const dispatch = useDispatch();
+
+  const onEditButtonClick = (id) => {
+    return () => dispatch(setActiveRecordId(id));
+  };
+  const onRowClick = (id) => {
+    return () => dispatch(setActiveRecordId(id));
+  };
+
   const renderTableHead = () => {
     return (
       <thead className="table__head">
@@ -29,7 +37,11 @@ export const useTable = (records) => {
   };
   const renderTableRow = (item, idx) => {
     return (
-      <tr className="table__row" key={`content-row-${idx}`}>
+      <tr
+        className="table__row"
+        key={`content-row-${idx}`}
+        onClick={onRowClick(item.id)}
+      >
         <td className="table__cell">{item.id}</td>
         <td className="table__cell">{item.resourceId}</td>
         <td className="table__cell">{item.date}</td>
@@ -37,7 +49,7 @@ export const useTable = (records) => {
           <div className="table__controls">
             <button
               className="table__button table__button_type_edit"
-              onClick={() => dispatch(editRecord(item))}
+              onClick={onEditButtonClick(item.id)}
             />
             <button
               className="table__button table__button_type_delete"

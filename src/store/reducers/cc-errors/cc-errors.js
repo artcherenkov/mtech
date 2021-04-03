@@ -6,7 +6,9 @@ const initialState = {
   isLoading: false,
   error: null,
   recordToDeleteId: -1,
+  activeRecordId: -1,
   isDeletePopupShown: false,
+  isRecordPopupShown: false,
 };
 
 const CCErrors = (state = initialState, action) => {
@@ -78,10 +80,28 @@ const CCErrors = (state = initialState, action) => {
 
       return {
         ...state,
-        recordToDeleteId: action.payload,
+        recordToDeleteId,
         isDeletePopupShown: true,
       };
     }
+    case ActionType.SET_ACTIVE_RECORD_ID: {
+      const activeRecordId = action.payload;
+
+      if (activeRecordId === -1) {
+        return {
+          ...state,
+          activeRecordId,
+          isRecordPopupShown: false,
+        };
+      }
+
+      return {
+        ...state,
+        activeRecordId,
+        isRecordPopupShown: true,
+      };
+    }
+
     default:
       return state;
   }

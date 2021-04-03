@@ -16,6 +16,7 @@ export const ActionType = {
   LOAD_RECORD: "cc-errors/load_record",
   REMOVE_RECORD: "cc-errors/remove_record",
   SET_RECORD_TO_DELETE: "cc-errors/set_record_to_delete",
+  SET_ACTIVE_RECORD_ID: "cc-errors/set_active_record_id",
 };
 
 export const fetchRecords = () => (dispatch, getState, api) => {
@@ -96,5 +97,9 @@ export const removeRecord = (payload) => ({
 });
 export const setRecordToDelete = (payload) => ({
   type: ActionType.SET_RECORD_TO_DELETE,
+  payload,
+});
+export const setActiveRecordId = (payload) => ({
+  type: ActionType.SET_ACTIVE_RECORD_ID,
   payload,
 });
