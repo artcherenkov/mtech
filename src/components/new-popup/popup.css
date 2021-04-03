@@ -27,7 +27,6 @@
 
 .popup__controls {
   display: flex;
-  margin-top: 40px;
   justify-content: center;
 }
 
@@ -77,4 +76,28 @@
 
 .popup__control-btn:active {
   opacity: 0.3;
+}
+
+.popup__textarea {
+  margin-top: 30px;
+  width: 100%;
+  resize: none;
+  padding: 5px;
+}
+
+.popup__textarea:read-only {
+  border: none;
+}
+
+.popup__resource-link {
+  display: block;
+  margin-top: 10px;
+  font-size: 16px;
+  text-align: center;
+  color: #0072ff;
+  transition: all 300ms ease;
+}
+
+.popup__resource-link:hover {
+  opacity: .6;
 }
