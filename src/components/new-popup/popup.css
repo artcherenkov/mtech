@@ -10,7 +10,6 @@
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 10;
 }
-
 .popup_type_delete {
   z-index: 20;
 }
@@ -34,7 +33,11 @@
   justify-content: center;
   position: absolute;
   top: -40px;
-  right: -25px;
+  right: -35px;
+}
+.popup__controls_pos_bottom {
+  margin-top: 40px;
+  position: initial;
 }
 
 .popup__button {
@@ -47,15 +50,12 @@
 
   transition: all 200ms ease;
 }
-
 .popup__button:hover {
   opacity: 0.6;
 }
-
 .popup__button:active {
   opacity: 0.3;
 }
-
 .popup__button:disabled,
 .popup__button:disabled:hover,
 .popup__button:disabled:active {
@@ -65,11 +65,19 @@
   border-color: black;
   cursor: not-allowed;
 }
-
 .popup__button:not(:last-of-type) {
   margin-right: 20px;
 }
 
+.popup__button_action_close {
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  border-radius: 5px;
+  border: none;
+  background: white url("./img/icon-close.svg") no-repeat center;
+  background-size: 50%;
+}
 .popup__button_action_save {
   border-color: #0055ff;
   color: #0055ff;
@@ -78,6 +86,15 @@
   background-color: #0055ff;
   color: white;
   opacity: 1;
+}
+.popup__button_action_favorite {
+  width: 35px;
+  height: 35px;
+  border: none;
+  padding: 0;
+  background-color: white;
+  border-radius: 5px;
+  margin-right: 10px;
 }
 .popup__button_danger {
   background-color: white;
@@ -89,33 +106,6 @@
   color: white;
   opacity: 1;
 }
-.popup__button_close {
-  cursor: pointer;
-  width: 35px;
-  height: 35px;
-  border-radius: 5px;
-  border: none;
-  top: -25px;
-  right: -25px;
-  background: white url("./img/icon-close.svg") no-repeat center;
-  background-size: 50%;
-}
-
-.popup__favorite-button {
-  width: 35px;
-  height: 35px;
-  background-color: white;
-  border-radius: 5px;
-  margin-right: 10px;
-}
-
-.popup__control-btn:hover {
-  opacity: 0.6;
-}
-
-.popup__control-btn:active {
-  opacity: 0.3;
-}
 
 .popup__textarea {
   margin-top: 30px;
@@ -123,7 +113,6 @@
   resize: none;
   padding: 5px;
 }
-
 .popup__textarea:read-only {
   border: none;
 }
@@ -136,15 +125,8 @@
   color: #0072ff;
   transition: all 300ms ease;
 }
-
 .popup__resource-link:hover {
   opacity: .6;
-}
-
-.popup__form-controls {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
 }
 
 .popup__checkbox-input {
@@ -154,7 +136,6 @@
   overflow: hidden;
   clip: rect(0 0 0 0);
 }
-
 .popup__checkbox-text {
   padding-left: 10px;
   user-select: none;
@@ -171,13 +152,7 @@
   transition: all 200ms ease;
   cursor: pointer;
 }
-.popup__checkbox-input:disabled + .popup__checkbox-replacement {
-
-}
 .popup__checkbox-input:checked + .popup__checkbox-replacement {
   background: url("../../assets/img/star-filled.svg") no-repeat center;
   background-size: 80%;
-}
-.popup__checkbox-input:focus + .popup__checkbox-replacement {
-
 }

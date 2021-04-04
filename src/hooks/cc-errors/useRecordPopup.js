@@ -77,20 +77,24 @@ export const useRecordPopup = () => {
   return (
     <NewPopup onOutsideClick={onClosePopup}>
       <div className="popup__controls">
-        <div className="popup__favorite-button">
-          <label className="popup__checkbox-label" htmlFor="isFavorite">
-            <input
-              className="popup__checkbox-input"
-              type="checkbox"
-              id="isFavorite"
-              name="isFavorite"
-              checked={record.isFavorite}
-              onChange={onCheckboxChange}
-            />
-            <span className="popup__checkbox-replacement" />
-          </label>
-        </div>
-        <button className="popup__button_close" onClick={onClosePopup} />
+        <label
+          className="popup__button popup__button_action_favorite"
+          htmlFor="isFavorite"
+        >
+          <input
+            className="popup__checkbox-input"
+            type="checkbox"
+            id="isFavorite"
+            name="isFavorite"
+            checked={record.isFavorite}
+            onChange={onCheckboxChange}
+          />
+          <span className="popup__checkbox-replacement" />
+        </label>
+        <button
+          className="popup__button popup__button_action_close"
+          onClick={onClosePopup}
+        />
       </div>
       <h2 className="popup__header">
         {isEditMode ? "Редактирование" : "Просмотр"} записи №{record.id}
@@ -115,7 +119,7 @@ export const useRecordPopup = () => {
           {record.comment}
         </textarea>
         {isEditMode && (
-          <div className="popup__form-controls">
+          <div className="popup__controls popup__controls_pos_bottom">
             <button
               className="popup__button popup__button_action_save"
               type="submit"

@@ -17,10 +17,13 @@ export const useDeleteRecordPopup = () => {
   return (
     <NewPopup type="delete" onOutsideClick={onClosePopup}>
       <div className="popup__controls">
-        <button className="popup__button_close" onClick={onClosePopup} />
+        <button
+          className="popup__button popup__button_action_close"
+          onClick={onClosePopup}
+        />
       </div>
       <h2 className="popup__header">Вы уверены, что хотите удалить запись?</h2>
-      <div className="popup__controls">
+      <div className="popup__controls popup__controls_pos_bottom">
         <button
           className="popup__button popup__button_danger"
           onClick={handleRecordDelete}
