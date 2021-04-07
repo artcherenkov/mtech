@@ -1,6 +1,6 @@
 import React from "react";
 import NewTable from "../../components/new-table/new-table";
-import { useDispatch } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import {
   setActiveRecordId,
   setEditMode,
@@ -9,11 +9,18 @@ import { setRecordToDelete } from "../../store/reducers/cc-errors/actions";
 import moment from "moment";
 import classnames from "classnames";
 import FavoriteButton from "../../components/favorite-button/favorite-button";
+import {
+  getIsAnyPopupShown,
+  getIsLoading,
+} from "../../store/reducers/cc-errors/selectors";
+import LoadingSpinner from "../../components/loading-spinner/loading-spinner";
 
 const TABLE_HEADERS = ["", "ID", "ID записи", "Дата", ""];
 
 export const useTable = (records) => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(getIsLoading, shallowEqual);
+  const isAnyPopupShown = useSelector(getIsAnyPopupShown, shallowEqual);
 
   const onEditButtonClick = (id) => {
     return () => {
@@ -85,6 +92,14 @@ export const useTable = (records) => {
       </tr>
     );
   };
+
+  if (isLoading && !isAnyPopupShown) {
+    return (
+      <div style={{ marginTop: 50 }}>
+        <LoadingSpinner size={50} strokeWidth={5} />
+      </div>
+    );
+  }
 
   if (!records || !records.length) {
     return <h1>No data</h1>;

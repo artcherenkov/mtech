@@ -1,15 +1,20 @@
 import React from "react";
 import NewPopup from "../../components/new-popup/new-popup";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { getRecordToDeleteId } from "../../store/reducers/cc-errors/selectors";
+import {
+  getIsLoading,
+  getRecordToDeleteId,
+} from "../../store/reducers/cc-errors/selectors";
 import {
   deleteRecord,
   setRecordToDelete,
 } from "../../store/reducers/cc-errors/actions";
+import LoadingSpinner from "../../components/loading-spinner/loading-spinner";
 
 export const useDeleteRecordPopup = () => {
   const dispatch = useDispatch();
   const recordToDeleteId = useSelector(getRecordToDeleteId, shallowEqual);
+  const isLoading = useSelector(getIsLoading, shallowEqual);
 
   const handleRecordDelete = () => dispatch(deleteRecord(recordToDeleteId));
   const onClosePopup = () => dispatch(setRecordToDelete(-1));
@@ -27,10 +32,15 @@ export const useDeleteRecordPopup = () => {
         <button
           className="popup__button popup__button_danger"
           onClick={handleRecordDelete}
+          disabled={isLoading}
         >
-          Удалить
+          {isLoading ? <LoadingSpinner size={20} strokeWidth={4} /> : "Удалить"}
         </button>
-        <button className="popup__button" onClick={onClosePopup}>
+        <button
+          className="popup__button"
+          onClick={onClosePopup}
+          disabled={isLoading}
+        >
           Отмена
         </button>
       </div>

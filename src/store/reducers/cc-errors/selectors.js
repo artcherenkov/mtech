@@ -23,3 +23,9 @@ export const getIsRecordPopupShown = (state) => {
 export const getIsEditMode = (state) => {
   return state.CCErrors.isEditMode;
 };
+export const getIsLoading = (state) => {
+  return state.CCErrors.isLoading;
+};
+export const getIsAnyPopupShown = (state) => {
+  return state.CCErrors.isDeletePopupShown || state.CCErrors.isRecordPopupShown;
+};
