@@ -48,6 +48,10 @@
   padding: 10px 15px;
 }
 
+.table__cell_name_favorite {
+  width: 40px;
+}
+
 .table__cell_name_diff {
   text-align: center;
 }

@@ -8,8 +8,9 @@ import {
 import { setRecordToDelete } from "../../store/reducers/cc-errors/actions";
 import moment from "moment";
 import classnames from "classnames";
+import FavoriteButton from "../../components/favorite-button/favorite-button";
 
-const TABLE_HEADERS = ["ID", "ID записи", "Дата", ""];
+const TABLE_HEADERS = ["", "ID", "ID записи", "Дата", ""];
 
 export const useTable = (records) => {
   const dispatch = useDispatch();
@@ -22,7 +23,12 @@ export const useTable = (records) => {
   };
   const onRowClick = (id) => {
     return (evt) => {
-      if (evt.target.tagName.toLowerCase() !== "button") {
+      if (
+        evt.target.tagName.toLowerCase() !== "button" &&
+        !evt.target.classList.contains("popup__checkbox-replacement") &&
+        !evt.target.classList.contains("popup__checkbox-input")
+      ) {
+        console.log(evt.target.classList);
         dispatch(setActiveRecordId(id));
       }
     };
@@ -56,6 +62,9 @@ export const useTable = (records) => {
         key={`content-row-${idx}`}
         onClick={onRowClick(item.id)}
       >
+        <td className="table__cell table__cell_name_favorite">
+          <FavoriteButton recordId={item.id} />
+        </td>
         <td className="table__cell">{item.id}</td>
         <td className="table__cell">{item.resourceId}</td>
         <td className="table__cell">
