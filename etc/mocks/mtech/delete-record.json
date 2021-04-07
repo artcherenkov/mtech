@@ -16,7 +16,10 @@
           "Access-Control-Expose-Headers": "Location"
         },
         "body": 23
-      }
+      },
+      "behaviors": [
+        { "wait": 500 }
+      ]
     }
   ]
 }

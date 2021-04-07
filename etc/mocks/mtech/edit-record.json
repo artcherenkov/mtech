@@ -29,7 +29,10 @@
           "abonement_number": 228,
           "id": 1
         }
-      }
+      },
+      "behaviors": [
+        { "wait": 500 }
+      ]
     }
   ]
 }
