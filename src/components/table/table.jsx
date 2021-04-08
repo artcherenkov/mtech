@@ -1,77 +1,99 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import moment from "moment";
+import { makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import { Box } from "@material-ui/core";
+import { useRecordsSelector } from "../../hooks/cc-errors/selectors/useRecordsSelector";
+import FavoriteButton from "../favorite-button/favorite-button";
+import { Alert } from "@material-ui/lab";
+import { green } from "@material-ui/core/colors";
+import { Comparator } from "../../utils/const";
+import TableControls from "./components/controls/controls";
+import THead, { headCells } from "./components/head/head";
 
-import Row from "./row/row";
-import { getRecords } from "../../store/reducers/app-store/selectors";
-import { openRecord, toggleRecordPopup } from "../../store/action";
-
-import "./table.css";
-import { getSearchValue } from "../../store/reducers/app-state/selectors";
-
-const Table = (props) => {
-  const { records, searchValue, handleRecordClick } = props;
-  const isRecordsEmpty = !records || !records.length;
-
-  const filteredRecords = records.filter((record) =>
-    record.clientName.toLowerCase().includes(searchValue.toLowerCase())
-  );
-
-  return (
-    <section className="table-section">
-      {!isRecordsEmpty ? (
-        <div className="table__wrapper">
-          <table className="table">
-            <thead className="table__head">
-              <tr className="table__row">
-                <th className="table__cell table__cell_header">№</th>
-                <th className="table__cell table__cell_header">Имя клиента</th>
-                <th className="table__cell table__cell_header">Отклонение</th>
-                <th className="table__cell table__cell_header">
-                  Имя сотрудника
-                </th>
-                <th className="table__cell table__cell_header">Дата</th>
-                <th className="table__cell table__cell_header">Статус</th>
-                <th className="table__cell table__cell_header" />
-              </tr>
-            </thead>
-            <tbody className="table__body">
-              {filteredRecords.map((record) => (
-                <Row
-                  key={`record-${record.id}`}
-                  record={record}
-                  onClick={handleRecordClick.bind(this, record.id)}
-                />
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ) : (
-        <h2>Список записей пуст</h2>
-      )}
-    </section>
-  );
-};
-
-Table.propTypes = {
-  records: PropTypes.array.isRequired,
-  searchValue: PropTypes.string,
-  handleRecordClick: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  records: getRecords(state),
-  searchValue: getSearchValue(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  handleRecordClick(id, evt) {
-    if (evt.target.tagName.toLowerCase() !== `button`) {
-      dispatch(openRecord(id));
-      dispatch(toggleRecordPopup());
-    }
+const useStyles = makeStyles({
+  container: {
+    width: "100%",
+  },
+  table: {
+    width: "100%",
   },
 });
 
-export { Table };
-export default connect(mapStateToProps, mapDispatchToProps)(Table);
+const getComparator = (order, orderBy) => {
+  const comparatorType = getComparatorType(orderBy);
+  const comparator = Comparator[comparatorType];
+  return order === "desc"
+    ? (a, b) => comparator(a[orderBy], b[orderBy])
+    : (a, b) => -comparator(a[orderBy], b[orderBy]);
+};
+const getComparatorType = (orderBy) => {
+  const headCell = headCells.find((h) => h.id === orderBy);
+  return headCell?.comparatorType;
+};
+
+const RecordsTable = () => {
+  const classes = useStyles();
+  const records = useRecordsSelector();
+
+  const [order, setOrder] = React.useState("desc");
+  const [orderBy, setOrderBy] = React.useState("date");
+
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
+    setOrderBy(property);
+  };
+
+  if (!records) {
+    return <Alert severity="warning">There is no data!</Alert>;
+  }
+
+  return (
+    <Box className={classes.container} p={1}>
+      <TableContainer component={Paper}>
+        <Table className={classes.table} aria-label="simple table">
+          <THead
+            order={order}
+            orderBy={orderBy}
+            onRequestSort={handleRequestSort}
+          />
+          <TableBody>
+            {records.sort(getComparator(order, orderBy)).map((record) => (
+              <TableRow
+                key={record.id}
+                hover
+                bgcolor={record.isResolved ? green[50] : "white"}
+              >
+                <TableCell size="small" width={100}>
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <FavoriteButton recordId={record.id} />
+                    {record.id}
+                  </Box>
+                </TableCell>
+                <TableCell>{record.resourceId}</TableCell>
+                <TableCell>
+                  {moment(record.date).format("DD.MM.YYYY kk:mm")}
+                </TableCell>
+                <TableCell align="right">
+                  <TableControls record={record} />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
+  );
+};
+
+export default RecordsTable;
