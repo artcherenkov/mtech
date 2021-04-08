@@ -6,11 +6,14 @@ import {
   getIsEditMode,
 } from "../../store/reducers/cc-errors/selectors";
 import {
+  disableEditMode,
   loadRecord,
   setActiveRecordId,
+  setEditMode,
   setRecordToDelete,
 } from "../../store/reducers/cc-errors/actions";
 import { useRecordByIdSelector } from "./selectors/useRecordByIdSelector";
+import IconCheck from "../../components/icon-check/icon-check";
 
 const areObjectsEqual = (obj1, obj2) => {
   return Object.keys(obj1).every((key) => obj1[key] === obj2[key]);
@@ -52,12 +55,16 @@ export const useRecordPopup = () => {
   const onChange = (evt) => {
     setFormState({ ...formState, [evt.target.name]: evt.target.value });
   };
-  const onCheckboxChange = () => {
+  const onIsFavoriteChange = () => {
     dispatch(loadRecord({ ...record, isFavorite: !record.isFavorite }));
+  };
+  const onIsActivatedChange = () => {
+    dispatch(loadRecord({ ...record, isActivated: !record.isActivated }));
   };
   const onSubmit = (evt) => {
     evt.preventDefault();
     dispatch(loadRecord({ ...record, ...formState }));
+    dispatch(disableEditMode());
   };
   const onResetForm = () => {
     setFormState(formInitialData.current);
@@ -69,6 +76,9 @@ export const useRecordPopup = () => {
   const onClosePopup = () => {
     dispatch(setActiveRecordId(-1));
   };
+  const onSetEditMode = () => {
+    dispatch(setEditMode());
+  };
 
   if (!record) {
     return <p>No data</p>;
@@ -77,6 +87,24 @@ export const useRecordPopup = () => {
   return (
     <NewPopup onOutsideClick={onClosePopup}>
       <div className="popup__controls">
+        <button className="popup__button" onClick={onIsActivatedChange}>
+          {record.isActivated ? (
+            <>
+              <IconCheck size={20} /> Клубная карта активирована
+            </>
+          ) : (
+            "Активировать клубную карту"
+          )}
+        </button>
+        <button
+          className="popup__button popup__button_action_edit"
+          onClick={onSetEditMode}
+          disabled={isEditMode}
+        />
+        <button
+          className="popup__button popup__button_action_delete"
+          onClick={onDelete}
+        />
         <label
           className="popup__button popup__button_action_favorite"
           htmlFor="isFavorite"
@@ -87,7 +115,7 @@ export const useRecordPopup = () => {
             id="isFavorite"
             name="isFavorite"
             checked={record.isFavorite}
-            onChange={onCheckboxChange}
+            onChange={onIsFavoriteChange}
           />
           <span className="popup__checkbox-replacement" />
         </label>
@@ -134,13 +162,6 @@ export const useRecordPopup = () => {
               onClick={onResetForm}
             >
               Сброс
-            </button>
-            <button
-              className="popup__button popup__button_danger"
-              type="button"
-              onClick={onDelete}
-            >
-              Удалить
             </button>
           </div>
         )}

@@ -113,6 +113,9 @@ const CCErrors = (state = initialState, action) => {
     case ActionType.SET_EDIT_MODE: {
       return { ...state, isEditMode: true };
     }
+    case ActionType.DISABLE_EDIT_MODE: {
+      return { ...state, isEditMode: false };
+    }
 
     default:
       return state;

@@ -93,11 +93,11 @@
 }
 
 .table__button_type_delete {
-  background-image: url("./img/icon-delete.svg");
+  background-image: url("../../assets/img/icon-delete.svg");
 }
 
 .table__button_type_edit {
-  background-image: url("./img/icon-edit.svg");
+  background-image: url("../../assets/img/icon-edit.svg");
 }
 
 .table__out-of-schedule {

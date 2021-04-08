@@ -35,7 +35,6 @@ export const useTable = (records) => {
         !evt.target.classList.contains("popup__checkbox-replacement") &&
         !evt.target.classList.contains("popup__checkbox-input")
       ) {
-        console.log(evt.target.classList);
         dispatch(setActiveRecordId(id));
       }
     };
