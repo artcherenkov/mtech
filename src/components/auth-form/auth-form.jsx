@@ -2,23 +2,28 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
+import styled from "styled-components";
 
 import { authenticate } from "../../store/reducers/app-user/actions";
 import { toggleAuthForm } from "../../store/action";
 
 import "./auth-form.css";
+import Box from "@material-ui/core/Box";
+import { Button, Paper, TextField, Typography } from "@material-ui/core";
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  padding: 20px;
+
+  & > *:not(:last-child) {
+    margin-bottom: 20px;
+  }
+`;
 
 const AuthForm = ({ handleCloseBtnClick, handleAuthBtnClick }) => {
   const { register, handleSubmit, errors, setError, clearErrors } = useForm();
-
-  const getInputStyles = (isValid) => {
-    const styles = [`auth-form__input`];
-    if (isValid) {
-      styles.push(`auth-form__input_invalid`);
-    }
-
-    return styles.join(` `);
-  };
 
   const passwordValidationConfig = { required: `Заполните обязательное поле` };
   const loginValidationConfig = {
@@ -26,58 +31,42 @@ const AuthForm = ({ handleCloseBtnClick, handleAuthBtnClick }) => {
   };
 
   return (
-    <div className="popup">
-      <div className="popup__content auth-form">
-        <button className="popup__control-btn" onClick={handleCloseBtnClick} />
-        <h2 className="auth-form__title">Вход в учетную запись</h2>
-        <form
-          className="auth-form__form"
-          onSubmit={handleSubmit(handleAuthBtnClick.bind(this, setError))}
-        >
-          <div className="auth-form__input-wrapper">
-            <label htmlFor="name">Логин</label>
-            <input
-              className={getInputStyles(errors.login)}
-              type="text"
+    <Box p={5} maxWidth={700} width="100%" margin="0 auto">
+      <Paper>
+        <Box p={5}>
+          <Typography variant="h4" align="center">
+            Войдите в аккаунт
+          </Typography>
+          <Form
+            noValidate
+            autoComplete="off"
+            onSubmit={handleSubmit(handleAuthBtnClick.bind(this, setError))}
+          >
+            <TextField
               id="name"
+              label="Логин"
               name="name"
-              ref={register(loginValidationConfig)}
+              variant="outlined"
+              inputProps={{ ref: register(loginValidationConfig) }}
+              error={errors.name}
+              helperText={errors.name?.message}
             />
-            {errors.login && (
-              <p className="auth-form__error">{errors.login.message}</p>
-            )}
-          </div>
-          <div className="auth-form__input-wrapper">
-            <label htmlFor="password">Пароль</label>
-            <input
-              className={getInputStyles(errors.password)}
-              type="password"
+            <TextField
               id="password"
+              label="Пароль"
               name="password"
-              ref={register(passwordValidationConfig)}
+              variant="outlined"
+              inputProps={{ ref: register(passwordValidationConfig) }}
+              error={errors.password}
+              helperText={errors.password?.message}
             />
-            {errors.password && (
-              <p className="auth-form__error">{errors.password.message}</p>
-            )}
-          </div>
-          <div className="auth-form__controls">
-            <button
-              className="auth-form__button auth-form__button_type_submit"
-              type="submit"
-            >
+            <Button type="submit" variant="contained" color="primary">
               Войти
-            </button>
-            <button
-              className="auth-form__button auth-form__button_type_reset"
-              type="reset"
-              onClick={() => clearErrors()}
-            >
-              Сбросить
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+            </Button>
+          </Form>
+        </Box>
+      </Paper>
+    </Box>
   );
 };
 
