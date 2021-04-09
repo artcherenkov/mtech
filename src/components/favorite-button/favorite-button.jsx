@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useRecordByIdSelector } from "../../hooks/cc-errors/selectors/useRecordByIdSelector";
 import { loadRecord } from "../../store/reducers/cc-errors/actions";
-import classes from "./styles.module.css";
+import "./styles.css";
 
 const FavoriteButton = ({ recordId }) => {
   const dispatch = useDispatch();
@@ -12,16 +12,16 @@ const FavoriteButton = ({ recordId }) => {
   };
 
   return (
-    <label className={classes.favoriteBtn} htmlFor={`isFavorite-${recordId}`}>
+    <label className={"favoriteBtn"} htmlFor={`isFavorite-${recordId}`}>
       <input
-        className="popup__checkbox-input"
+        className={"popup__checkboxInput"}
         type="checkbox"
         id={`isFavorite-${recordId}`}
         name="isFavorite"
         checked={record.isFavorite}
         onChange={onChange}
       />
-      <span className="popup__checkbox-replacement" />
+      <span className={"popup__checkboxReplacement"} />
     </label>
   );
 };

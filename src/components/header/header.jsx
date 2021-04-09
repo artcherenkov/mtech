@@ -30,7 +30,7 @@ const Header = (props) => {
     <>
       <header className="header">
         <div className="header__inner">
-          <h1 className="header__title">MTECH</h1>
+          <h1 className="header__title">CC</h1>
           {isAuth ? (
             <div className="header__user-wrapper" ref={userMenuRef}>
               <p className="header__user-name">{name}</p>

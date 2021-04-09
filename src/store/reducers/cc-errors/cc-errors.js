@@ -100,14 +100,12 @@ const CCErrors = (state = initialState, action) => {
           ...state,
           activeRecordId,
           isRecordPopupShown: false,
-          isEditMode: false,
         };
       }
 
       return {
         ...state,
         activeRecordId,
-        isRecordPopupShown: true,
       };
     }
     case ActionType.SET_EDIT_MODE: {

@@ -6,6 +6,7 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import TableHead from "@material-ui/core/TableHead";
 
 export const headCells = [
+  { id: "collapse" },
   {
     id: "id",
     shouldSort: true,
