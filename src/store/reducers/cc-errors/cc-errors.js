@@ -74,6 +74,7 @@ const CCErrors = (state = initialState, action) => {
         isEditMode: false,
         activeRecordId: -1,
         isRecordPopupShown: false,
+        recordToDeleteId: -1,
       };
     }
     case ActionType.SET_RECORD_TO_DELETE: {

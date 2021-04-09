@@ -75,10 +75,9 @@ export const deleteRecord = (deletedRecordId) => (dispatch, getState, api) => {
     .delete(`${APIRoute.RECORDS}/${deletedRecordId}`, {
       headers: { Authorization: `Bearer ${getState().USER.token}` },
     })
-    .then(({ data }) => {
+    .then(() => {
       dispatch(deleteRecordSuccess());
-      dispatch(setRecordToDelete(-1));
-      dispatch(removeRecord(data));
+      dispatch(removeRecord(deletedRecordId));
     })
     .catch((err) => dispatch(deleteRecordError(err.message)));
 };
