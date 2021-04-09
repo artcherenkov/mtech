@@ -5,6 +5,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import React from "react";
 import {
+  activateCard,
   disableEditMode,
   loadRecord,
   setActiveRecordId,
@@ -20,7 +21,8 @@ const TableControls = (props) => {
   const activeRecordId = useSelector(getActiveRecordId, shallowEqual);
 
   const handleActivateClick = (id) => () => {
-    dispatch(loadRecord({ ...record, isActivated: !record.isActivated }));
+    const updatedRecord = { ...record, isActivated: !record.isActivated };
+    dispatch(activateCard(updatedRecord));
   };
   const handleEditClick = (id) => () => {
     if (activeRecordId === -1) {

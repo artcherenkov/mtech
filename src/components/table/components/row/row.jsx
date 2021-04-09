@@ -23,10 +23,12 @@ import {
 } from "../../../../store/reducers/cc-errors/selectors";
 import {
   disableEditMode,
+  editRecord,
   loadRecord,
   setActiveRecordId,
 } from "../../../../store/reducers/cc-errors/actions";
 import AlertPopover from "../popover/popover";
+import { adaptRecordToServer } from "../../../../core/adapter/record";
 
 const Textarea = styled.textarea`
   width: 100%;
@@ -73,8 +75,8 @@ const Row = (props) => {
     if (comment === record.comment) {
       setIsCollapseOpen(!isCollapseOpen);
       setTimeout(() => {
+        dispatch(setActiveRecordId(-1));
         if (isEditMode) {
-          dispatch(setActiveRecordId(-1));
           dispatch(disableEditMode());
         }
       }, 300);
@@ -89,7 +91,8 @@ const Row = (props) => {
     setComment(record.comment);
   };
   const onSaveBtnClick = () => {
-    dispatch(loadRecord({ ...record, comment }));
+    const updatedRecord = { ...record, comment };
+    dispatch(editRecord(adaptRecordToServer(updatedRecord)));
     dispatch(disableEditMode());
   };
   const handlePopoverClose = () => {

@@ -13,6 +13,10 @@ export const ActionType = {
   DELETE_RECORD_SUCCESS: "cc-errors/delete_record_success",
   DELETE_RECORD_ERROR: "cc-errors/delete_record_error",
 
+  ACTIVATE_RECORD_START: "cc-errors/activate_record_start",
+  ACTIVATE_RECORD_SUCCESS: "cc-errors/activate_record_success",
+  ACTIVATE_RECORD_ERROR: "cc-errors/activate_record_error",
+
   LOAD_RECORD: "cc-errors/load_record",
   REMOVE_RECORD: "cc-errors/remove_record",
   SET_RECORD_TO_DELETE: "cc-errors/set_record_to_delete",
@@ -24,7 +28,7 @@ export const ActionType = {
 export const fetchRecords = () => (dispatch, getState, api) => {
   dispatch(fetchRecordsStart());
   return api
-    .get(APIRoute.RECORDS, {
+    .get(`${APIRoute.RECORDS}/`, {
       headers: { Authorization: `Bearer ${getState().USER.token}` },
     })
     .then(({ data }) => dispatch(fetchRecordsSuccess(data)))
@@ -45,7 +49,7 @@ export const fetchRecordsError = (payload) => ({
 export const editRecord = (updatedRecord) => (dispatch, getState, api) => {
   dispatch(editRecordStart());
   return api
-    .put(`${APIRoute.RECORDS}/${updatedRecord.id}`, {
+    .put(`${APIRoute.RECORDS}/${updatedRecord.id}`, updatedRecord, {
       headers: { Authorization: `Bearer ${getState().USER.token}` },
     })
     .then(({ data }) => {
@@ -85,6 +89,29 @@ export const deleteRecordSuccess = () => ({
   type: ActionType.DELETE_RECORD_SUCCESS,
 });
 export const deleteRecordError = (payload) => ({
+  type: ActionType.DELETE_RECORD_ERROR,
+  payload,
+});
+
+export const activateCard = (updatedRecord) => (dispatch, getState, api) => {
+  dispatch(activateCardStart());
+  return api
+    .post(`${APIRoute.ACTIVATE}?_id=${updatedRecord.id}`, null, {
+      headers: { Authorization: `Bearer ${getState().USER.token}` },
+    })
+    .then(() => {
+      dispatch(activateCardSuccess());
+      dispatch(loadRecord(updatedRecord));
+    })
+    .catch((err) => dispatch(activateCardError(err.message)));
+};
+export const activateCardStart = () => ({
+  type: ActionType.DELETE_RECORD_START,
+});
+export const activateCardSuccess = () => ({
+  type: ActionType.DELETE_RECORD_SUCCESS,
+});
+export const activateCardError = (payload) => ({
   type: ActionType.DELETE_RECORD_ERROR,
   payload,
 });
