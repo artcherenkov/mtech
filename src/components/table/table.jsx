@@ -8,7 +8,7 @@ import Alert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { Comparator } from "../../utils/const";
-import THead, { headCells } from "./components/head/head";
+import TableHead, { headCells } from "./components/head/head";
 import Row from "./components/row/row";
 import { useRecordsSelector } from "../../hooks/cc-errors/selectors/useRecordsSelector";
 
@@ -51,22 +51,24 @@ const RecordsTable = () => {
   }
 
   return (
-    <Box className={classes.container} p={1}>
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <THead
-            order={order}
-            orderBy={orderBy}
-            onRequestSort={handleRequestSort}
-          />
-          <TableBody>
-            {records.sort(getComparator(order, orderBy)).map((record) => (
-              <Row key={record.id} record={record} />
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Box>
+    <>
+      <Box className={classes.container} p={1}>
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="simple table">
+            <TableHead
+              order={order}
+              orderBy={orderBy}
+              onRequestSort={handleRequestSort}
+            />
+            <TableBody>
+              {records.sort(getComparator(order, orderBy)).map((record) => (
+                <Row key={record.id} record={record} />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
+    </>
   );
 };
 

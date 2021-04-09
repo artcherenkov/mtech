@@ -10,7 +10,6 @@ import {
   Button,
   Collapse,
   IconButton,
-  Popover,
   Typography,
 } from "@material-ui/core";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
@@ -27,7 +26,7 @@ import {
   loadRecord,
   setActiveRecordId,
 } from "../../../../store/reducers/cc-errors/actions";
-import { makeStyles } from "@material-ui/core/styles";
+import AlertPopover from "../popover/popover";
 
 const Textarea = styled.textarea`
   width: 100%;
@@ -56,12 +55,6 @@ const ButtonsContainer = styled.div`
   }
 `;
 
-const useStyles = makeStyles((theme) => ({
-  typography: {
-    padding: theme.spacing(2),
-  },
-}));
-
 const Row = (props) => {
   const { record } = props;
   const dispatch = useDispatch();
@@ -70,13 +63,39 @@ const Row = (props) => {
 
   const [isCollapseOpen, setIsCollapseOpen] = useState(false);
   const [comment, setComment] = useState(record.comment);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   useEffect(() => {
     setIsCollapseOpen(activeRecordId === record.id);
   }, [activeRecordId]);
 
-  const classes = useStyles();
+  const onCollapseBtnClick = (evt) => {
+    if (comment === record.comment) {
+      setIsCollapseOpen(!isCollapseOpen);
+      setTimeout(() => {
+        if (isEditMode) {
+          dispatch(setActiveRecordId(-1));
+          dispatch(disableEditMode());
+        }
+      }, 300);
+    } else {
+      setAnchorEl(evt.currentTarget);
+    }
+  };
+  const onTextareaChange = (evt) => {
+    setComment(evt.target.value);
+  };
+  const onResetBtnClick = () => {
+    setComment(record.comment);
+  };
+  const onSaveBtnClick = () => {
+    dispatch(loadRecord({ ...record, comment }));
+    dispatch(disableEditMode());
+  };
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <>
       <TableRow
@@ -88,19 +107,7 @@ const Row = (props) => {
           <IconButton
             aria-label="expand row"
             size="small"
-            onClick={(evt) => {
-              if (comment === record.comment) {
-                setIsCollapseOpen(!isCollapseOpen);
-                setTimeout(() => {
-                  if (isEditMode) {
-                    dispatch(setActiveRecordId(-1));
-                    dispatch(disableEditMode());
-                  }
-                }, 300);
-              } else {
-                setAnchorEl(evt.currentTarget);
-              }
-            }}
+            onClick={onCollapseBtnClick}
           >
             {isCollapseOpen ? (
               <KeyboardArrowUpIcon />
@@ -127,14 +134,14 @@ const Row = (props) => {
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={isCollapseOpen} timeout="auto" unmountOnExit>
+          <Collapse in={isCollapseOpen} timeout={300} unmountOnExit>
             <Box margin={3}>
               <Typography variant="h6" gutterBottom component="div">
                 Комментарий к записи № {record.id}:
               </Typography>
               <Textarea
                 value={comment}
-                onChange={(evt) => setComment(evt.target.value)}
+                onChange={onTextareaChange}
                 readOnly={!isEditMode}
               />
               {isEditMode && (
@@ -145,7 +152,7 @@ const Row = (props) => {
                     variant="outlined"
                     color="secondary"
                     disabled={record.comment === comment}
-                    onClick={() => setComment(record.comment)}
+                    onClick={onResetBtnClick}
                   >
                     Сброс
                   </Button>
@@ -155,10 +162,7 @@ const Row = (props) => {
                     variant="outlined"
                     color="primary"
                     disabled={record.comment === comment}
-                    onClick={() => {
-                      dispatch(loadRecord({ ...record, comment }));
-                      dispatch(disableEditMode());
-                    }}
+                    onClick={onSaveBtnClick}
                   >
                     Сохранить
                   </Button>
@@ -168,24 +172,11 @@ const Row = (props) => {
           </Collapse>
         </TableCell>
       </TableRow>
-      <Popover
-        id={record.id}
-        open={!!anchorEl}
+      <AlertPopover
         anchorEl={anchorEl}
-        onClose={() => setAnchorEl(null)}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "center",
-        }}
-      >
-        <Typography className={classes.typography}>
-          Сохраните или сбросьте изменения.
-        </Typography>
-      </Popover>
+        onPopoverClose={handlePopoverClose}
+        recordId={record.id}
+      />
     </>
   );
 };
