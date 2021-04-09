@@ -1,5 +1,6 @@
 import { ActionType } from "./actions";
 import { adaptRecordToClient } from "../../../core/adapter/record";
+import { generateErrors } from "../../../mocks/сс-error";
 
 const initialState = {
   records: null,
@@ -19,7 +20,7 @@ const CCErrors = (state = initialState, action) => {
       return { ...state, isLoading: true, error: null };
     }
     case ActionType.FETCH_RECORDS_SUCCESS: {
-      const records = action.payload.map((record) =>
+      const records = [...action.payload].map((record) =>
         adaptRecordToClient(record)
       );
       return { ...state, isLoading: false, error: null, records };
