@@ -107,17 +107,19 @@ const Row = (props) => {
         bgcolor={record.isResolved ? green[50] : "white"}
       >
         <TableCell width={20} style={{ padding: 10, paddingRight: 0 }}>
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={onCollapseBtnClick}
-          >
-            {isCollapseOpen ? (
-              <KeyboardArrowUpIcon />
-            ) : (
-              <KeyboardArrowDownIcon />
-            )}
-          </IconButton>
+          {record.comment && (
+            <IconButton
+              aria-label="expand row"
+              size="small"
+              onClick={onCollapseBtnClick}
+            >
+              {isCollapseOpen ? (
+                <KeyboardArrowUpIcon />
+              ) : (
+                <KeyboardArrowDownIcon />
+              )}
+            </IconButton>
+          )}
         </TableCell>
         <TableCell size="small" width={100}>
           <Box

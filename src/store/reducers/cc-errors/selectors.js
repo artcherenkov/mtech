@@ -23,3 +23,6 @@ export const getIsLoading = (state) => {
 export const getFilters = (state) => {
   return state.CCErrors.filters;
 };
+export const getError = (state) => {
+  return state.CCErrors.error;
+};

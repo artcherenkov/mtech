@@ -120,12 +120,15 @@ const CCErrors = (state = initialState, action) => {
     case ActionType.ADD_FILTER: {
       return { ...state, filters: [...state.filters, action.payload] };
     }
-
     case ActionType.REMOVE_FILTER: {
       return {
         ...state,
         filters: state.filters.filter((f) => f !== action.payload),
       };
+    }
+
+    case ActionType.RESET_ERRORS: {
+      return { ...state, error: null };
     }
 
     default:

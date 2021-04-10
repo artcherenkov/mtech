@@ -26,6 +26,8 @@ export const ActionType = {
 
   ADD_FILTER: "cc-errors/add_filter",
   REMOVE_FILTER: "cc-errors/remove_filter",
+
+  RESET_ERRORS: "cc-errors/reset_errors",
 };
 
 export const fetchRecords = () => (dispatch, getState, api) => {
@@ -146,8 +148,11 @@ export const addFilter = (payload) => ({
   type: ActionType.ADD_FILTER,
   payload,
 });
-
 export const removeFilter = (payload) => ({
   type: ActionType.REMOVE_FILTER,
   payload,
+});
+
+export const resetErrors = () => ({
+  type: ActionType.RESET_ERRORS,
 });

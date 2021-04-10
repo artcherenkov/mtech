@@ -1,15 +1,34 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { connect, shallowEqual, useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
-import { authenticate } from "../../store/reducers/app-user/actions";
+import {
+  authenticate,
+  clearErrors as clearErrorsAction,
+} from "../../store/reducers/app-user/actions";
 import { toggleAuthForm } from "../../store/action";
 
 import "./auth-form.css";
 import Box from "@material-ui/core/Box";
-import { Button, Paper, TextField, Typography } from "@material-ui/core";
+import {
+  Backdrop,
+  Button,
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Paper,
+  TextField,
+  Typography,
+} from "@material-ui/core";
+import {
+  getError,
+  getIsLoading,
+} from "../../store/reducers/app-user/selectors";
 
 const Form = styled.form`
   display: flex;
@@ -24,11 +43,16 @@ const Form = styled.form`
 
 const AuthForm = ({ handleCloseBtnClick, handleAuthBtnClick }) => {
   const { register, handleSubmit, errors, setError, clearErrors } = useForm();
+  const error = useSelector(getError, shallowEqual);
+  const isLoading = useSelector(getIsLoading, shallowEqual);
+  const dispatch = useDispatch();
 
   const passwordValidationConfig = { required: `Заполните обязательное поле` };
   const loginValidationConfig = {
     required: `Заполните обязательное поле`,
   };
+
+  const onDialogClose = () => dispatch(clearErrorsAction());
 
   return (
     <Box p={5} maxWidth={700} width="100%" margin="0 auto">
@@ -48,7 +72,7 @@ const AuthForm = ({ handleCloseBtnClick, handleAuthBtnClick }) => {
               name="name"
               variant="outlined"
               inputProps={{ ref: register(loginValidationConfig) }}
-              error={errors.name}
+              error={!!errors.name}
               helperText={errors.name?.message}
             />
             <TextField
@@ -56,8 +80,11 @@ const AuthForm = ({ handleCloseBtnClick, handleAuthBtnClick }) => {
               label="Пароль"
               name="password"
               variant="outlined"
-              inputProps={{ ref: register(passwordValidationConfig) }}
-              error={errors.password}
+              inputProps={{
+                ref: register(passwordValidationConfig),
+                type: "password",
+              }}
+              error={!!errors.password}
               helperText={errors.password?.message}
             />
             <Button type="submit" variant="contained" color="primary">
@@ -66,6 +93,29 @@ const AuthForm = ({ handleCloseBtnClick, handleAuthBtnClick }) => {
           </Form>
         </Box>
       </Paper>
+      <Backdrop open={isLoading} style={{ zIndex: 10, color: "white" }}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
+      <Dialog
+        open={!!error}
+        onClose={onDialogClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          Ошибка при авторизации
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {error}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={onDialogClose} color="primary">
+            Закрыть
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };
@@ -80,7 +130,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(toggleAuthForm());
   },
   handleAuthBtnClick(credentials, data, setError) {
-    dispatch(authenticate(data)).then(() => dispatch(toggleAuthForm()));
+    dispatch(authenticate(data));
   },
 });
 

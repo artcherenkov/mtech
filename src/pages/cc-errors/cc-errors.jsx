@@ -15,16 +15,22 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@material-ui/core";
-import { getRecordToDeleteId } from "../../store/reducers/cc-errors/selectors";
+import {
+  getError,
+  getRecordToDeleteId,
+} from "../../store/reducers/cc-errors/selectors";
 import {
   deleteRecord,
+  resetErrors,
   setRecordToDelete,
 } from "../../store/reducers/cc-errors/actions";
 import FilterControls from "../../components/filter-controls/filter-controls";
+import Box from "@material-ui/core/Box";
 
 const CCErrorsPage = (props) => {
   const dispatch = useDispatch();
   const recordToDeleteId = useSelector(getRecordToDeleteId, shallowEqual);
+  const error = useSelector(getError, shallowEqual);
 
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
@@ -36,9 +42,12 @@ const CCErrorsPage = (props) => {
     setIsDeleteDialogOpen(false);
     dispatch(setRecordToDelete(-1));
   };
-
   const onDeleteBtnClick = () => {
     dispatch(deleteRecord(recordToDeleteId));
+  };
+
+  const onErrorClose = () => {
+    dispatch(resetErrors());
   };
 
   return (
@@ -72,6 +81,24 @@ const CCErrorsPage = (props) => {
           </Button>
           <Button onClick={onDeleteBtnClick} color="secondary" autoFocus>
             Удалить
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={!!error}
+        onClose={onErrorClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">Возникла ошибка</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {error}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={onErrorClose} color="primary">
+            Закрыть
           </Button>
         </DialogActions>
       </Dialog>
