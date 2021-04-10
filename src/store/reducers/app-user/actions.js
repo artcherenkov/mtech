@@ -17,7 +17,10 @@ export const authenticate = (authData) => (dispatch, getState, api) => {
       dispatch(authenticateSuccess({ ...data, name: authData.name }));
       dispatch(toggleAuthForm());
     })
-    .catch((err) => dispatch(authenticateError(err.message)));
+    .catch((err) => {
+      console.log(err.response);
+      dispatch(authenticateError(err.message));
+    });
 };
 export const authenticateStart = () => ({
   type: ActionType.AUTHENTICATE_START,

@@ -8,7 +8,9 @@ import { getIsAuth } from "../../store/reducers/app-user/selectors";
 
 import Table from "../../components/table/table";
 import {
+  Backdrop,
   Button,
+  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
@@ -17,6 +19,7 @@ import {
 } from "@material-ui/core";
 import {
   getError,
+  getIsLoading,
   getRecordToDeleteId,
 } from "../../store/reducers/cc-errors/selectors";
 import {
@@ -31,6 +34,7 @@ const CCErrorsPage = (props) => {
   const dispatch = useDispatch();
   const recordToDeleteId = useSelector(getRecordToDeleteId, shallowEqual);
   const error = useSelector(getError, shallowEqual);
+  const isLoading = useSelector(getIsLoading, shallowEqual);
 
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
@@ -102,6 +106,9 @@ const CCErrorsPage = (props) => {
           </Button>
         </DialogActions>
       </Dialog>
+      <Backdrop open={isLoading} style={{ zIndex: 10, color: "white" }}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </>
   );
 };

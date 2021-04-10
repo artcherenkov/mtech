@@ -100,7 +100,7 @@ export const deleteRecordError = (payload) => ({
 export const activateCard = (updatedRecord) => (dispatch, getState, api) => {
   dispatch(activateCardStart());
   return api
-    .post(`${APIRoute.ACTIVATE}?_id=${updatedRecord.id}`, null, {
+    .post(`${APIRoute.ACTIVATE}/${updatedRecord.id}`, null, {
       headers: { Authorization: `Bearer ${getState().USER.token}` },
     })
     .then(() => {
