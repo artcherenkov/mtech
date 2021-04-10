@@ -11,7 +11,7 @@ const initialState = {
   isDeletePopupShown: false,
   isRecordPopupShown: false,
   isEditMode: false,
-  filters: ["isFavorite"],
+  filters: [],
 };
 
 const CCErrors = (state = initialState, action) => {

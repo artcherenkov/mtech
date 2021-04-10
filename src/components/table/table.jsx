@@ -10,12 +10,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Comparator } from "../../utils/const";
 import TableHead, { headCells } from "./components/head/head";
 import Row from "./components/row/row";
-import { useRecordsSelector } from "../../hooks/cc-errors/selectors/useRecordsSelector";
 import { IconButton, TableCell, Typography } from "@material-ui/core";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import TableRow from "@material-ui/core/TableRow";
 import { debounce } from "../../utils/debounce";
+import { useFilteredRecordsSelector } from "../../hooks/cc-errors/selectors/useFilteredRecordsSelector";
 
 const useStyles = makeStyles({
   container: {
@@ -40,7 +40,7 @@ const getComparatorType = (orderBy) => {
 
 const RecordsTable = () => {
   const classes = useStyles();
-  const records = useRecordsSelector();
+  const records = useFilteredRecordsSelector();
   const countPerPage = 10;
 
   const [page, setPage] = React.useState(0);

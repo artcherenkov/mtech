@@ -11,23 +11,14 @@ export const getRecordById = (id, state) => {
 export const getRecordToDeleteId = (state) => {
   return state.CCErrors.recordToDeleteId;
 };
-export const getIsDeletePopupShown = (state) => {
-  return state.CCErrors.isDeletePopupShown;
-};
 export const getActiveRecordId = (state) => {
   return state.CCErrors.activeRecordId;
-};
-export const getIsRecordPopupShown = (state) => {
-  return state.CCErrors.isRecordPopupShown;
 };
 export const getIsEditMode = (state) => {
   return state.CCErrors.isEditMode;
 };
 export const getIsLoading = (state) => {
   return state.CCErrors.isLoading;
-};
-export const getIsAnyPopupShown = (state) => {
-  return state.CCErrors.isDeletePopupShown || state.CCErrors.isRecordPopupShown;
 };
 export const getFilters = (state) => {
   return state.CCErrors.filters;

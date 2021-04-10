@@ -7,7 +7,6 @@ import React from "react";
 import {
   activateCard,
   disableEditMode,
-  loadRecord,
   setActiveRecordId,
   setEditMode,
   setRecordToDelete,
@@ -49,7 +48,7 @@ const TableControls = (props) => {
         </Button>
         <Button
           onClick={handleActivateClick(record.id)}
-          variant={record.isActivated ? "outlined" : "contained"}
+          variant={record.isActivated ? "contained" : "outlined"}
         >
           <CreditCardIcon />
         </Button>
