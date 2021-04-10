@@ -29,3 +29,6 @@ export const getIsLoading = (state) => {
 export const getIsAnyPopupShown = (state) => {
   return state.CCErrors.isDeletePopupShown || state.CCErrors.isRecordPopupShown;
 };
+export const getFilters = (state) => {
+  return state.CCErrors.filters;
+};

@@ -1,6 +1,5 @@
 import { ActionType } from "./actions";
 import { adaptRecordToClient } from "../../../core/adapter/record";
-import { generateErrors } from "../../../mocks/сс-error";
 
 const initialState = {
   records: null,
@@ -12,6 +11,7 @@ const initialState = {
   isDeletePopupShown: false,
   isRecordPopupShown: false,
   isEditMode: false,
+  filters: ["isFavorite"],
 };
 
 const CCErrors = (state = initialState, action) => {
@@ -115,6 +115,17 @@ const CCErrors = (state = initialState, action) => {
     }
     case ActionType.DISABLE_EDIT_MODE: {
       return { ...state, isEditMode: false };
+    }
+
+    case ActionType.ADD_FILTER: {
+      return { ...state, filters: [...state.filters, action.payload] };
+    }
+
+    case ActionType.REMOVE_FILTER: {
+      return {
+        ...state,
+        filters: state.filters.filter((f) => f !== action.payload),
+      };
     }
 
     default:

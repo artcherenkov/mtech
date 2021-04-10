@@ -23,6 +23,9 @@ export const ActionType = {
   SET_ACTIVE_RECORD_ID: "cc-errors/set_active_record_id",
   SET_EDIT_MODE: "cc-errors/set_edit_mode",
   DISABLE_EDIT_MODE: "cc-errors/disable_edit_mode",
+
+  ADD_FILTER: "cc-errors/add_filter",
+  REMOVE_FILTER: "cc-errors/remove_filter",
 };
 
 export const fetchRecords = () => (dispatch, getState, api) => {
@@ -137,4 +140,14 @@ export const setEditMode = () => ({
 });
 export const disableEditMode = () => ({
   type: ActionType.DISABLE_EDIT_MODE,
+});
+
+export const addFilter = (payload) => ({
+  type: ActionType.ADD_FILTER,
+  payload,
+});
+
+export const removeFilter = (payload) => ({
+  type: ActionType.REMOVE_FILTER,
+  payload,
 });

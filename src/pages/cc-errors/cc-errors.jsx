@@ -20,6 +20,7 @@ import {
   deleteRecord,
   setRecordToDelete,
 } from "../../store/reducers/cc-errors/actions";
+import FilterControls from "../../components/filter-controls/filter-controls";
 
 const CCErrorsPage = (props) => {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ const CCErrorsPage = (props) => {
       <Header />
       {props.isAuth ? (
         <section style={{ width: "100%", maxWidth: 800, margin: "0 auto" }}>
+          <FilterControls />
           <Table />
         </section>
       ) : (
