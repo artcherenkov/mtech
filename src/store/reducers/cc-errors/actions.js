@@ -37,7 +37,14 @@ export const fetchRecords = () => (dispatch, getState, api) => {
       headers: { Authorization: `Bearer ${getState().USER.token}` },
     })
     .then(({ data }) => dispatch(fetchRecordsSuccess(data)))
-    .catch((err) => dispatch(fetchRecordsError(err.message)));
+    .catch((err) => {
+      if (err.response) {
+        const { detail } = err.response.data;
+        dispatch(editRecordError(Error[detail] || err.message));
+        return;
+      }
+      dispatch(editRecordError("Произошла ошибка соединения."));
+    });
 };
 export const fetchRecordsStart = () => ({
   type: ActionType.FETCH_RECORDS_START,
@@ -61,7 +68,14 @@ export const editRecord = (updatedRecord) => (dispatch, getState, api) => {
       dispatch(editRecordSuccess());
       dispatch(loadRecord(data));
     })
-    .catch((err) => dispatch(editRecordError(err.message)));
+    .catch((err) => {
+      if (err.response) {
+        const { detail } = err.response.data;
+        dispatch(editRecordError(Error[detail] || err.message));
+        return;
+      }
+      dispatch(editRecordError("Произошла ошибка соединения."));
+    });
 };
 export const editRecordStart = () => ({
   type: ActionType.EDIT_RECORD_START,
@@ -84,7 +98,14 @@ export const deleteRecord = (deletedRecordId) => (dispatch, getState, api) => {
       dispatch(deleteRecordSuccess());
       dispatch(removeRecord(deletedRecordId));
     })
-    .catch((err) => dispatch(deleteRecordError(err.message)));
+    .catch((err) => {
+      if (err.response) {
+        const { detail } = err.response.data;
+        dispatch(deleteRecordError(Error[detail] || err.message));
+        return;
+      }
+      dispatch(deleteRecordError("Произошла ошибка соединения."));
+    });
 };
 export const deleteRecordStart = () => ({
   type: ActionType.DELETE_RECORD_START,
@@ -107,7 +128,14 @@ export const activateCard = (updatedRecord) => (dispatch, getState, api) => {
       dispatch(activateCardSuccess());
       dispatch(loadRecord(updatedRecord));
     })
-    .catch((err) => dispatch(activateCardError(err.message)));
+    .catch((err) => {
+      if (err.response) {
+        const { detail } = err.response.data;
+        dispatch(activateCardError(Error[detail] || err.message));
+        return;
+      }
+      dispatch(activateCardError("Произошла ошибка соединения."));
+    });
 };
 export const activateCardStart = () => ({
   type: ActionType.DELETE_RECORD_START,

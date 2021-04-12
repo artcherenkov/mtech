@@ -17,7 +17,9 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api)))
 );
 
-store.dispatch(fetchRecords());
+if (store.getState().USER?.token) {
+  store.dispatch(fetchRecords());
+}
 
 ReactDOM.render(
   <Provider store={store}>

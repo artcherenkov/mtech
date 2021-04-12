@@ -1,5 +1,14 @@
 import { APIRoute } from "../../../utils/const";
 import { toggleAuthForm } from "../../action";
+import { fetchRecords } from "../cc-errors/actions";
+
+const Error = {
+  OBJECT_DOESNT_EXIST: "Объект не найден.",
+  EMAIL_ALREADY_EXISTS:
+    "Пользователь с такой электронной почтой уже зарегистрирован.",
+  INVALID_OR_EXPIRED_TOKEN: "Пожалуйста, авторизуйтесь снова.",
+  WRONG_USERNAME_OR_PASSWORD: "Неверный логин или пароль.",
+};
 
 export const ActionType = {
   AUTHENTICATE_START: "user/authenticate_start",
@@ -15,11 +24,16 @@ export const authenticate = (authData) => (dispatch, getState, api) => {
     .post(APIRoute.LOGIN, authData)
     .then(({ data }) => {
       dispatch(authenticateSuccess({ ...data, name: authData.name }));
+      dispatch(fetchRecords());
       dispatch(toggleAuthForm());
     })
     .catch((err) => {
-      console.log(err.response);
-      dispatch(authenticateError(err.message));
+      if (err.response) {
+        const { detail } = err.response.data;
+        dispatch(authenticateError(Error[detail] || err.message));
+        return;
+      }
+      dispatch(authenticateError("Произошла ошибка соединения."));
     });
 };
 export const authenticateStart = () => ({
