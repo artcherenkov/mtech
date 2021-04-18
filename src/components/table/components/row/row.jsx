@@ -3,7 +3,7 @@ import moment from "moment";
 import styled from "styled-components";
 
 import TableRow from "@material-ui/core/TableRow";
-import { green } from "@material-ui/core/colors";
+import { green, red } from "@material-ui/core/colors";
 import TableCell from "@material-ui/core/TableCell";
 import {
   Box,
@@ -24,7 +24,6 @@ import {
 import {
   disableEditMode,
   editRecord,
-  loadRecord,
   setActiveRecordId,
 } from "../../../../store/reducers/cc-errors/actions";
 import AlertPopover from "../popover/popover";
@@ -99,13 +98,18 @@ const Row = (props) => {
     setAnchorEl(null);
   };
 
+  const getBgColor = () => {
+    if (record.isActivated) {
+      return green[50];
+    }
+    if (record.notNeedActivated) {
+      return red[50];
+    }
+  };
+
   return (
     <>
-      <TableRow
-        key={record.id}
-        hover
-        bgcolor={record.isResolved ? green[50] : "white"}
-      >
+      <TableRow key={record.id} hover bgcolor={getBgColor()}>
         <TableCell width={20} style={{ padding: 10, paddingRight: 0 }}>
           {record.comment && (
             <IconButton

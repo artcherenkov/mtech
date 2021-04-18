@@ -49,6 +49,17 @@ const FilterControls = () => {
             }
             label="Активированные карты"
           />
+          <FormControlLabel
+            control={
+              <Checkbox
+                name="notNeedActivated"
+                color="primary"
+                checked={filters?.includes("notNeedActivated")}
+                onChange={onFilterChange}
+              />
+            }
+            label="Активация не требуется"
+          />
         </Box>
       </Paper>
     </Box>

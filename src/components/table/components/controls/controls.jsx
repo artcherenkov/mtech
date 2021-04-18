@@ -2,17 +2,20 @@ import { Button, ButtonGroup } from "@material-ui/core";
 import LogoYc from "../../../logo-yc";
 import CreditCardIcon from "@material-ui/icons/CreditCard";
 import EditIcon from "@material-ui/icons/Edit";
+import NotInterestedIcon from "@material-ui/icons/NotInterested";
 import DeleteIcon from "@material-ui/icons/Delete";
 import React from "react";
 import {
   activateCard,
   disableEditMode,
+  editRecord,
   setActiveRecordId,
   setEditMode,
   setRecordToDelete,
 } from "../../../../store/reducers/cc-errors/actions";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { getActiveRecordId } from "../../../../store/reducers/cc-errors/selectors";
+import { adaptRecordToServer } from "../../../../core/adapter/record";
 
 const TableControls = (props) => {
   const { record } = props;
@@ -31,6 +34,16 @@ const TableControls = (props) => {
       dispatch(setActiveRecordId(-1));
       setTimeout(() => dispatch(disableEditMode()), 300);
     }
+  };
+  const handleNotNeedActivateClick = () => {
+    dispatch(
+      editRecord(
+        adaptRecordToServer({
+          ...record,
+          notNeedActivated: !record.notNeedActivated,
+        })
+      )
+    );
   };
   const handleDeleteClick = (id) => () => {
     dispatch(setRecordToDelete(id));
@@ -54,9 +67,20 @@ const TableControls = (props) => {
         </Button>
         <Button
           onClick={handleEditClick(record.id)}
-          variant={activeRecordId !== record.id ? "outlined" : "contained"}
+          variant={
+            activeRecordId !== record.id && !record.comment
+              ? "outlined"
+              : "contained"
+          }
         >
           <EditIcon />
+        </Button>
+        <Button
+          color="secondary"
+          onClick={handleNotNeedActivateClick}
+          variant={record.notNeedActivated ? "contained" : "outlined"}
+        >
+          <NotInterestedIcon />
         </Button>
         <Button color="secondary" onClick={handleDeleteClick(record.id)}>
           <DeleteIcon />
