@@ -138,7 +138,23 @@ const Row = (props) => {
         <TableCell>{record.resourceId}</TableCell>
         <TableCell>{moment(record.date).format("DD.MM.YYYY kk:mm")}</TableCell>
         <TableCell align="right">
-          <TableControls record={record} />
+          <Box
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
+            }}
+          >
+            {!record.abonementId && !record.abonementNumber && (
+              <Typography
+                variant="caption"
+                style={{ marginRight: 10, fontSize: 12, color: "red" }}
+              >
+                КК не активирована
+              </Typography>
+            )}
+            <TableControls record={record} />
+          </Box>
         </TableCell>
       </TableRow>
       <TableRow>
