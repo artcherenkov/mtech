@@ -62,6 +62,7 @@ const TableControls = (props) => {
         <Button
           onClick={handleActivateClick(record.id)}
           variant={record.isActivated ? "contained" : "outlined"}
+          disabled={!record.abonementId && !record.abonementNumber}
         >
           <CreditCardIcon />
         </Button>

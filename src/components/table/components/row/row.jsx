@@ -150,7 +150,7 @@ const Row = (props) => {
                 variant="caption"
                 style={{ marginRight: 10, fontSize: 12, color: "red" }}
               >
-                КК не активирована
+                КК отсутствует
               </Typography>
             )}
             <TableControls record={record} />
