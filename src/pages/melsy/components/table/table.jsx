@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import classnames from "classnames";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
 import Box from "@material-ui/core/Box";
@@ -13,23 +15,46 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
 
-import LogoYc from "../../components/logo-yc";
+import LogoYc from "../../../../components/logo-yc";
 import NotInterestedIcon from "@material-ui/icons/NotInterested";
 import CheckIcon from "@material-ui/icons/Check";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 import useStyles from "./styles";
-import classnames from "classnames";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import {
   editRecord,
   fetchRecords,
   setActiveRecordId,
   setRecordToDeleteId,
-} from "../../store/reducers/melsytech/actions";
+} from "../../../../store/reducers/melsytech/actions";
 
-const useTable = (columns) => {
+const COLUMNS = [
+  {
+    id: "id",
+    shouldSort: true,
+    comparatorType: "numeric",
+    label: "ID",
+  },
+  {
+    id: "date",
+    shouldSort: true,
+    comparatorType: "numeric",
+    label: "Дата",
+  },
+  {
+    id: "clientName",
+    shouldSort: false,
+    label: "Имя сотрудника",
+  },
+  {
+    id: "controls",
+    shouldSort: false,
+    label: "",
+  },
+];
+
+const MelsyTable = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -78,7 +103,7 @@ const useTable = (columns) => {
           <Table>
             <TableHead>
               <TableRow>
-                {columns.map((column) => (
+                {COLUMNS.map((column) => (
                   <TableCell size={column.id === "id" ? "small" : "medium"}>
                     {column.label}
                   </TableCell>
@@ -157,4 +182,4 @@ const useTable = (columns) => {
   );
 };
 
-export default useTable;
+export default MelsyTable;

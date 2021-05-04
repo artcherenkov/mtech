@@ -10,10 +10,10 @@ import Typography from "@material-ui/core/Typography";
 import {
   deleteRecord,
   setRecordToDeleteId,
-} from "../../store/reducers/melsytech/actions";
+} from "../../../../store/reducers/melsytech/actions";
 import useStyles from "./styles";
 
-const useDeletePopup = () => {
+const DeletePopup = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const recordToDeleteId = useSelector(
@@ -52,4 +52,4 @@ const useDeletePopup = () => {
   );
 };
 
-export default useDeletePopup;
+export default DeletePopup;

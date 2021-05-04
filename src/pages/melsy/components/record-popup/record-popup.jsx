@@ -12,13 +12,12 @@ import CloseIcon from "@material-ui/icons/Close";
 
 import {
   editRecord,
-  loadRecord,
   setActiveRecordId,
-} from "../../store/reducers/melsytech/actions";
-import useRecordsByIdSelector from "./selectors/useRecordsByIdSelector";
+} from "../../../../store/reducers/melsytech/actions";
 import useStyles from "./styles";
+import useRecordsByIdSelector from "../../../../hooks/melsy/selectors/useRecordsByIdSelector";
 
-const useRecordPopup = () => {
+const RecordPopup = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const activeRecordId = useSelector(
@@ -166,4 +165,4 @@ const useRecordPopup = () => {
   );
 };
 
-export default useRecordPopup;
+export default RecordPopup;
