@@ -26,6 +26,19 @@ const melsytech = (state = initialState, action) => {
     case ActionType.SET_ACTIVE_RECORD_ID: {
       return { ...state, activeRecordId: action.payload };
     }
+    case ActionType.LOAD_RECORD: {
+      const records = state.records;
+      const recordToUpdateIndex = records.findIndex(
+        (r) => r.id === action.payload.id
+      );
+
+      if (recordToUpdateIndex === -1) {
+        return { ...state, records: [...records, action.payload] };
+      }
+
+      records[recordToUpdateIndex] = action.payload;
+      return { ...state, records };
+    }
 
     default:
       return state;

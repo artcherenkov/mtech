@@ -6,6 +6,7 @@ export const ActionType = {
   FETCH_RECORDS_ERROR: "melsy/fetch_records_error",
 
   SET_ACTIVE_RECORD_ID: "melsy/set_active_record_id",
+  LOAD_RECORD: "melsy/load_record",
 };
 
 export const fetchRecords = () => (dispatch, getState, api) => {
@@ -33,5 +34,9 @@ export const fetchRecordsError = (payload) => ({
 
 export const setActiveRecordId = (payload) => ({
   type: ActionType.SET_ACTIVE_RECORD_ID,
+  payload,
+});
+export const loadRecord = (payload) => ({
+  type: ActionType.LOAD_RECORD,
   payload,
 });

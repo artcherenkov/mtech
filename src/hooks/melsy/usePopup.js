@@ -10,7 +10,10 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 
-import { setActiveRecordId } from "../../store/reducers/melsytech/actions";
+import {
+  loadRecord,
+  setActiveRecordId,
+} from "../../store/reducers/melsytech/actions";
 import useRecordsByIdSelector from "./selectors/useRecordsByIdSelector";
 import useStyles from "./styles";
 
@@ -36,7 +39,14 @@ const usePopup = () => {
     setTimeout(() => dispatch(setActiveRecordId(-1)), 300);
   };
   const onCommentEditClick = () => setIsEditMode(true);
-  const onCommentSaveClick = () => setIsEditMode(false);
+  const onCommentSaveClick = () => {
+    if (activeRecord.comment !== commentRef.current.value) {
+      dispatch(
+        loadRecord({ ...activeRecord, comment: commentRef.current.value })
+      );
+    }
+    setIsEditMode(false);
+  };
 
   return (
     <Backdrop className={classes.popup} open={open}>
