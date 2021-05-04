@@ -24,6 +24,27 @@ const melsytech = (state = initialState, action) => {
     case ActionType.FETCH_RECORDS_ERROR: {
       return { ...state, isLoading: false, error: action.payload };
     }
+
+    case ActionType.EDIT_RECORD_START: {
+      return { ...state, isLoading: true, error: null };
+    }
+    case ActionType.EDIT_RECORD_SUCCESS: {
+      return { ...state, isLoading: false, error: null };
+    }
+    case ActionType.EDIT_RECORD_ERROR: {
+      return { ...state, isLoading: false, error: action.payload };
+    }
+
+    case ActionType.DELETE_RECORD_START: {
+      return { ...state, isLoading: true, error: null };
+    }
+    case ActionType.DELETE_RECORD_SUCCESS: {
+      return { ...state, isLoading: false, error: null };
+    }
+    case ActionType.DELETE_RECORD_ERROR: {
+      return { ...state, isLoading: false, error: action.payload };
+    }
+
     case ActionType.SET_ACTIVE_RECORD_ID: {
       return { ...state, activeRecordId: action.payload };
     }

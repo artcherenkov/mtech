@@ -23,6 +23,7 @@ import useStyles from "./styles";
 import classnames from "classnames";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import {
+  editRecord,
   fetchRecords,
   loadRecord,
   setActiveRecordId,
@@ -48,7 +49,7 @@ const useTable = (columns) => {
     const isProblem = row.isProblem ? !row.isProblem : row.isProblem;
 
     dispatch(
-      loadRecord({
+      editRecord(row.id, {
         ...row,
         isResolved,
         isProblem,
@@ -60,7 +61,7 @@ const useTable = (columns) => {
     const isResolved = row.isResolved ? !row.isResolved : row.isResolved;
 
     dispatch(
-      loadRecord({
+      editRecord(row.id, {
         ...row,
         isResolved,
         isProblem,

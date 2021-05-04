@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
 import {
-  removeRecord,
+  deleteRecord,
   setRecordToDeleteId,
 } from "../../store/reducers/melsytech/actions";
 import useStyles from "./styles";
@@ -27,7 +27,7 @@ const useDeletePopup = () => {
     setOpen(recordToDeleteId !== -1);
   }, [recordToDeleteId]);
 
-  const onDeleteClick = () => dispatch(removeRecord(recordToDeleteId));
+  const onDeleteClick = () => dispatch(deleteRecord(recordToDeleteId));
   const onCancelClick = () => {
     setOpen(false);
     setTimeout(() => dispatch(setRecordToDeleteId(-1)), 300);

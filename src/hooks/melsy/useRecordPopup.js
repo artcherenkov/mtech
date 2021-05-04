@@ -11,6 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 
 import {
+  editRecord,
   loadRecord,
   setActiveRecordId,
 } from "../../store/reducers/melsytech/actions";
@@ -28,11 +29,15 @@ const useRecordPopup = () => {
 
   const [open, setOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [comment, setComment] = useState("");
   const commentRef = useRef(null);
 
   useEffect(() => {
     setOpen(activeRecordId !== -1);
-  }, [activeRecordId]);
+    if (activeRecord) {
+      setComment(activeRecord.comment);
+    }
+  }, [activeRecordId, activeRecord]);
 
   const onCloseBtnClick = () => {
     setOpen(false);
@@ -42,10 +47,12 @@ const useRecordPopup = () => {
   const onCommentSaveClick = () => {
     if (activeRecord.comment !== commentRef.current.value) {
       dispatch(
-        loadRecord({ ...activeRecord, comment: commentRef.current.value })
-      );
+        editRecord(activeRecordId, {
+          ...activeRecord,
+          comment: commentRef.current.value,
+        })
+      ).then(() => setIsEditMode(false));
     }
-    setIsEditMode(false);
   };
 
   return (
@@ -141,7 +148,8 @@ const useRecordPopup = () => {
                   id="comment"
                   ref={commentRef}
                   rows={8}
-                  defaultValue={activeRecord.comment}
+                  value={comment}
+                  onChange={(evt) => setComment(evt.target.value)}
                 />
               ) : (
                 <Box p={1}>
