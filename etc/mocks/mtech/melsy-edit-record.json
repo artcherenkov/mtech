@@ -1,0 +1,52 @@
+{
+  "predicates": [
+    {
+      "matches": {
+        "path": "/api/v1/melsy/4"
+      }
+    }
+  ],
+  "responses": [
+    {
+      "is": {
+        "headers": {
+          "Access-Control-Allow-Headers": "authorization",
+          "Access-Control-Allow-Methods": "PUT",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Expose-Headers": "Location"
+        },
+        "body": {
+          "id": 4,
+          "company_title": "Тест 2",
+          "session_time": "19:30 - 20:30",
+          "ycl_link": "тут ссылка на ycl",
+          "impulses_count": "3500",
+          "impulses_standart": "3700",
+          "impulses_diff": "200",
+          "staff_name": "Восьмёркина Татьяна",
+          "ycl_services": [
+            "ЛЭ Magic/Viastar Все тело (ТОЛЬКО ДЛЯ КУПИВШИХ КК ДО 22.февраля.2021) (бедра полностью, голени с коленями, глубокое бикини, подмышечные впадины, малая зона) (Цена клуба)"
+          ],
+          "mtech_services": [
+            "Подмышка (женщина)",
+            "Бикини (женщина)",
+            "Нога полностью (женщина)",
+            "Подмышка (женщина)",
+            "Бикини (женщина)",
+            "Нога полностью (женщина)"
+          ],
+          "date": "2020.05.03",
+          "is_resolved": true,
+          "is_favorite": false,
+          "is_problem": false,
+          "comment": "It works."
+        }
+      },
+      "behaviors": [
+        {
+          "wait": 500
+        }
+      ]
+    }
+  ]
+}
