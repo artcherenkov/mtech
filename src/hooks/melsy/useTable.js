@@ -23,6 +23,7 @@ import classnames from "classnames";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import {
   fetchRecords,
+  loadRecord,
   setActiveRecordId,
 } from "../../store/reducers/melsytech/actions";
 
@@ -39,6 +40,32 @@ const useTable = (columns) => {
   if (!rows) {
     return <h2>Loading...</h2>;
   }
+
+  const onResolveClick = (row) => {
+    const isResolved = !row.isResolved;
+    const isProblem = row.isProblem ? !row.isProblem : row.isProblem;
+
+    dispatch(
+      loadRecord({
+        ...row,
+        isResolved,
+        isProblem,
+      })
+    );
+  };
+
+  const onProblemClick = (row) => {
+    const isProblem = !row.isProblem;
+    const isResolved = row.isResolved ? !row.isResolved : row.isResolved;
+
+    dispatch(
+      loadRecord({
+        ...row,
+        isResolved,
+        isProblem,
+      })
+    );
+  };
 
   return (
     <Box>
@@ -84,6 +111,7 @@ const useTable = (columns) => {
                         <Button
                           color="primary"
                           variant={row.isResolved ? "contained" : "outlined"}
+                          onClick={onResolveClick.bind(null, row)}
                         >
                           <CheckIcon />
                         </Button>
@@ -100,6 +128,7 @@ const useTable = (columns) => {
                         <Button
                           color="secondary"
                           variant={row.isProblem ? "contained" : "outlined"}
+                          onClick={onProblemClick.bind(null, row)}
                         >
                           <NotInterestedIcon />
                         </Button>

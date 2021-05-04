@@ -27,7 +27,7 @@ const melsytech = (state = initialState, action) => {
       return { ...state, activeRecordId: action.payload };
     }
     case ActionType.LOAD_RECORD: {
-      const records = state.records;
+      const records = state.records.slice();
       const recordToUpdateIndex = records.findIndex(
         (r) => r.id === action.payload.id
       );
