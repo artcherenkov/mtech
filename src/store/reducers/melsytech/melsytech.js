@@ -7,6 +7,7 @@ const initialState = {
   error: null,
 
   activeRecordId: -1,
+  recordToDeleteId: -1,
 };
 
 const melsytech = (state = initialState, action) => {
@@ -26,6 +27,9 @@ const melsytech = (state = initialState, action) => {
     case ActionType.SET_ACTIVE_RECORD_ID: {
       return { ...state, activeRecordId: action.payload };
     }
+    case ActionType.SET_RECORD_TO_DELETE_ID: {
+      return { ...state, recordToDeleteId: action.payload };
+    }
     case ActionType.LOAD_RECORD: {
       const records = state.records.slice();
       const recordToUpdateIndex = records.findIndex(
@@ -39,9 +43,17 @@ const melsytech = (state = initialState, action) => {
       records[recordToUpdateIndex] = action.payload;
       return { ...state, records };
     }
-
+    case ActionType.REMOVE_RECORD: {
+      const records = state.records.slice();
+      return {
+        ...state,
+        records: records.filter((r) => r.id !== action.payload),
+        recordToDeleteId: -1,
+      };
+    }
     default:
       return state;
   }
 };
+
 export { melsytech };

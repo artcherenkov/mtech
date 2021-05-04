@@ -17,7 +17,7 @@ import {
 import useRecordsByIdSelector from "./selectors/useRecordsByIdSelector";
 import useStyles from "./styles";
 
-const usePopup = () => {
+const useRecordPopup = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const activeRecordId = useSelector(
@@ -158,4 +158,4 @@ const usePopup = () => {
   );
 };
 
-export default usePopup;
+export default useRecordPopup;

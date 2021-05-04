@@ -17,6 +17,7 @@ import LogoYc from "../../components/logo-yc";
 import NotInterestedIcon from "@material-ui/icons/NotInterested";
 import CheckIcon from "@material-ui/icons/Check";
 import VisibilityIcon from "@material-ui/icons/Visibility";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 import useStyles from "./styles";
 import classnames from "classnames";
@@ -25,6 +26,7 @@ import {
   fetchRecords,
   loadRecord,
   setActiveRecordId,
+  setRecordToDeleteId,
 } from "../../store/reducers/melsytech/actions";
 
 const useTable = (columns) => {
@@ -53,7 +55,6 @@ const useTable = (columns) => {
       })
     );
   };
-
   const onProblemClick = (row) => {
     const isProblem = !row.isProblem;
     const isResolved = row.isResolved ? !row.isResolved : row.isResolved;
@@ -65,6 +66,9 @@ const useTable = (columns) => {
         isProblem,
       })
     );
+  };
+  const onDeleteClick = (row) => {
+    dispatch(setRecordToDeleteId(row.id));
   };
 
   return (
@@ -131,6 +135,14 @@ const useTable = (columns) => {
                           onClick={onProblemClick.bind(null, row)}
                         >
                           <NotInterestedIcon />
+                        </Button>
+                      </Tooltip>
+                      <Tooltip title="Удалить задачу">
+                        <Button
+                          color="secondary"
+                          onClick={onDeleteClick.bind(null, row)}
+                        >
+                          <DeleteIcon />
                         </Button>
                       </Tooltip>
                     </ButtonGroup>

@@ -3,7 +3,8 @@ import React from "react";
 import Header from "../../components/header/header";
 import Lock from "../../components/lock/lock";
 import useTable from "../../hooks/melsy/useTable";
-import usePopup from "../../hooks/melsy/usePopup";
+import useRecordPopup from "../../hooks/melsy/useRecordPopup";
+import useDeletePopup from "../../hooks/melsy/useDeletePopup";
 
 const COLUMNS = [
   {
@@ -34,7 +35,8 @@ const MelsyPage = () => {
   const isAuth = true;
 
   const table = useTable(COLUMNS);
-  const popup = usePopup();
+  const recordPopup = useRecordPopup();
+  const deletePopup = useDeletePopup();
 
   return (
     <>
@@ -47,7 +49,8 @@ const MelsyPage = () => {
       ) : (
         <Lock />
       )}
-      {popup}
+      {recordPopup}
+      {deletePopup}
     </>
   );
 };

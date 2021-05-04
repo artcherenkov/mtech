@@ -39,6 +39,13 @@ const useStyles = makeStyles({
     resize: "none",
     padding: 7,
   },
+  deletePopup__controls: {
+    margin: 40,
+    marginBottom: 0,
+    "& > *:not(:last-child)": {
+      marginRight: 20,
+    },
+  },
 });
 
 export default useStyles;

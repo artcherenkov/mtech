@@ -6,7 +6,9 @@ export const ActionType = {
   FETCH_RECORDS_ERROR: "melsy/fetch_records_error",
 
   SET_ACTIVE_RECORD_ID: "melsy/set_active_record_id",
+  SET_RECORD_TO_DELETE_ID: "melsy/set_record_to_delete_id",
   LOAD_RECORD: "melsy/load_record",
+  REMOVE_RECORD: "melsy/remove_record",
 };
 
 export const fetchRecords = () => (dispatch, getState, api) => {
@@ -36,7 +38,15 @@ export const setActiveRecordId = (payload) => ({
   type: ActionType.SET_ACTIVE_RECORD_ID,
   payload,
 });
+export const setRecordToDeleteId = (payload) => ({
+  type: ActionType.SET_RECORD_TO_DELETE_ID,
+  payload,
+});
 export const loadRecord = (payload) => ({
   type: ActionType.LOAD_RECORD,
+  payload,
+});
+export const removeRecord = (payload) => ({
+  type: ActionType.REMOVE_RECORD,
   payload,
 });
