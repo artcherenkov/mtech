@@ -1,5 +1,6 @@
 import { ActionType } from "./actions";
 import { adaptRecordToClient } from "../../../core/adapter/record";
+import { Filter } from "../../../pages/melsy/components/filter-controls/filter-controls";
 
 const initialState = {
   records: null,
@@ -8,6 +9,7 @@ const initialState = {
 
   activeRecordId: -1,
   recordToDeleteId: -1,
+  filters: [Filter.NOT_RESOLVED.id],
 };
 
 const melsytech = (state = initialState, action) => {
@@ -70,6 +72,16 @@ const melsytech = (state = initialState, action) => {
         ...state,
         records: records.filter((r) => r.id !== action.payload),
         recordToDeleteId: -1,
+      };
+    }
+
+    case ActionType.ADD_FILTER: {
+      return { ...state, filters: [...state.filters, action.payload] };
+    }
+    case ActionType.REMOVE_FILTER: {
+      return {
+        ...state,
+        filters: state.filters.filter((f) => f !== action.payload),
       };
     }
     default:

@@ -17,6 +17,9 @@ export const ActionType = {
   SET_RECORD_TO_DELETE_ID: "melsy/set_record_to_delete_id",
   LOAD_RECORD: "melsy/load_record",
   REMOVE_RECORD: "melsy/remove_record",
+
+  ADD_FILTER: "melsy/add_filter",
+  REMOVE_FILTER: "melsy/remove_filter",
 };
 
 export const fetchRecords = () => (dispatch, getState, api) => {
@@ -110,5 +113,15 @@ export const loadRecord = (payload) => ({
 });
 export const removeRecord = (payload) => ({
   type: ActionType.REMOVE_RECORD,
+  payload,
+});
+
+export const addFilter = (payload) => ({
+  type: ActionType.ADD_FILTER,
+  payload,
+});
+
+export const removeFilter = (payload) => ({
+  type: ActionType.REMOVE_FILTER,
   payload,
 });

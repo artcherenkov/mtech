@@ -28,6 +28,7 @@ import {
   setActiveRecordId,
   setRecordToDeleteId,
 } from "../../../../store/reducers/melsytech/actions";
+import { Filter } from "../filter-controls/filter-controls";
 
 const COLUMNS = [
   {
@@ -76,6 +77,7 @@ const MelsyTable = () => {
   }, [dispatch]);
 
   const rows = useSelector((state) => state.melsytech.records, shallowEqual);
+  const filters = useSelector((state) => state.melsytech.filters, shallowEqual);
 
   if (!rows) {
     return <h2>Loading...</h2>;
@@ -109,6 +111,11 @@ const MelsyTable = () => {
     dispatch(setRecordToDeleteId(row.id));
   };
 
+  const filterCallback = (row) =>
+    filters.every((filter) => {
+      return Filter[filter].func(row);
+    });
+
   return (
     <Box>
       <Paper>
@@ -124,7 +131,7 @@ const MelsyTable = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {rows.filter(filterCallback).map((row) => (
                 <TableRow
                   className={classnames({
                     [classes.row__isResolved]: row.isResolved,
