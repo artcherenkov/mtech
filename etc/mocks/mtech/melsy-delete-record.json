@@ -1,0 +1,29 @@
+{
+  "predicates": [
+    {
+      "matches": {
+        "path": "/api/v1/melsy/1"
+      }
+    }
+  ],
+  "responses": [
+    {
+      "is": {
+        "headers": {
+          "Access-Control-Allow-Headers": "authorization",
+          "Access-Control-Allow-Methods": "DELETE",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Expose-Headers": "Location"
+        },
+        "body": {
+          "id": 1
+        }
+      },
+      "behaviors": [
+        {
+          "wait": 500
+        }
+      ]
+    }
+  ]
+}
