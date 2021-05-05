@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import classnames from "classnames";
+import moment from "moment";
 
 import Backdrop from "@material-ui/core/Backdrop";
 import Box from "@material-ui/core/Box";
@@ -14,8 +15,9 @@ import {
   editRecord,
   setActiveRecordId,
 } from "../../../../store/reducers/melsytech/actions";
-import useStyles from "./styles";
 import useRecordsByIdSelector from "../../../../hooks/melsy/selectors/useRecordsByIdSelector";
+import RecordField from "./components/record-field/record-field";
+import useStyles from "./styles";
 
 const RecordPopup = () => {
   const dispatch = useDispatch();
@@ -51,6 +53,8 @@ const RecordPopup = () => {
           comment: commentRef.current.value,
         })
       ).then(() => setIsEditMode(false));
+    } else {
+      setIsEditMode(false);
     }
   };
 
@@ -69,23 +73,27 @@ const RecordPopup = () => {
           <Box
             className={classnames(classes.popup__recordData, classes.record)}
           >
-            <Box p={1}>
-              <Typography variant="subtitle2">Имя сотрудника:</Typography>
-              <Box p={1}>
-                <Typography variant="body1">
-                  {activeRecord.staffName}
-                </Typography>
-              </Box>
-            </Box>
-            <Box p={1}>
-              <Typography variant="subtitle2">Дата:</Typography>
-              <Box p={1}>
-                <Typography variant="body1">{activeRecord.date}</Typography>
-              </Box>
-            </Box>
-            <Box p={1}>
-              <Typography variant="subtitle2">Услуги Melsytech:</Typography>
-              <Box p={1}>
+            <RecordField title="Название филиала">
+              <Typography variant="body1">
+                {activeRecord.companyTitle}
+              </Typography>
+            </RecordField>
+            <RecordField title="Имя сотрудника">
+              <Typography variant="body1">{activeRecord.staffName}</Typography>
+            </RecordField>
+            <RecordField title="Дата">
+              <Typography variant="body1">
+                {moment(activeRecord.date).format("DD.MM.YYYY")}{" "}
+                {activeRecord.sessionTime.slice(0, 5)}
+              </Typography>
+            </RecordField>
+            <RecordField title="Время работы лазера">
+              <Typography variant="body1">
+                {activeRecord.sessionTime}
+              </Typography>
+            </RecordField>
+            <RecordField title="Услуги Melsytech">
+              {activeRecord.mtechServices ? (
                 <ol className={classes.record__fieldList}>
                   {activeRecord.mtechServices.map((item) => (
                     <li>
@@ -93,11 +101,12 @@ const RecordPopup = () => {
                     </li>
                   ))}
                 </ol>
-              </Box>
-            </Box>
-            <Box p={1}>
-              <Typography variant="subtitle2">Услуги YClients: </Typography>
-              <Box p={1}>
+              ) : (
+                "–"
+              )}
+            </RecordField>
+            <RecordField title="Услуги YClients">
+              {activeRecord.yclServices ? (
                 <ol className={classes.record__fieldList}>
                   {activeRecord.yclServices.map((item) => (
                     <li>
@@ -105,22 +114,32 @@ const RecordPopup = () => {
                     </li>
                   ))}
                 </ol>
-              </Box>
-            </Box>
+              ) : (
+                "–"
+              )}
+            </RecordField>
             <Box p={1}>
-              <Typography variant="subtitle2">
-                Вспышек по регламенту:
-              </Typography>
+              <Typography variant="subtitle2">Норма вспышек:</Typography>
               <Box p={1}>
-                <Typography>{activeRecord.impulsesStandart}</Typography>
+                <Typography>
+                  {activeRecord.impulsesStandart === -1
+                    ? "–"
+                    : activeRecord.impulsesStandart}
+                </Typography>
               </Box>
-              <Typography variant="subtitle2">Вспышек произведено:</Typography>
+              <Typography variant="subtitle2">Вспышек сделано:</Typography>
               <Box p={1}>
                 <Typography>{activeRecord.impulsesCount}</Typography>
               </Box>
-              <Typography variant="subtitle2">Разница: </Typography>
+              <Typography variant="subtitle2">Разница:</Typography>
               <Box p={1}>
-                <Typography>{activeRecord.impulsesDiff}</Typography>
+                <Typography>
+                  {activeRecord.impulsesStandart === -1
+                    ? "–"
+                    : activeRecord.impulsesPercentDiff +
+                      "% – " +
+                      activeRecord.impulsesAbsDiff}
+                </Typography>
               </Box>
             </Box>
             <Box p={1}>

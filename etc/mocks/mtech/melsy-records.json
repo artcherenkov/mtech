@@ -18,13 +18,15 @@
         "body": [
           {
             "id": 1,
-            "company_title": "Тест",
-            "session_time": "19:30 - 20:30",
-            "ycl_link": "тут ссылка на ycl",
-            "impulses_count": "3500",
-            "impulses_standart": "3700",
-            "impulses_diff": "200",
-            "staff_name": "Девяткина Татьяна",
+            "company_title": "Подружки КЛ Архангельск ул. Розы Люксембург, 3",
+            "session_time": "19:15 - 19:59",
+            "datetime": null,
+            "ycl_link": null,
+            "impulses_count": 3500,
+            "impulses_standart": 3700,
+            "impulses_abs_diff": 200,
+            "impulses_percent_diff": 5,
+            "staff_name": "Единичкина Татьяна",
             "ycl_services": [
               "ЛЭ Magic/Viastar Все тело (ТОЛЬКО ДЛЯ КУПИВШИХ КК ДО 22.февраля.2021) (бедра полностью, голени с коленями, глубокое бикини, подмышечные впадины, малая зона) (Цена клуба)"
             ],
@@ -36,33 +38,51 @@
               "Бикини (женщина)",
               "Нога полностью (женщина)"
             ],
-            "date": "2020.05.03",
+            "is_resolved": false,
+            "is_favorite": false,
+            "is_problem": true,
+            "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices elementum justo. Proin euismod, arcu non lobortis tristique, nisl odio."
+          },
+          {
+            "id": 4,
+            "company_title": "Подружки КЛ Архангельск ул. Розы Люксембург, 3",
+            "session_time": "19:15 - 19:59",
+            "datetime": null,
+            "ycl_link": null,
+            "impulses_count": 4000,
+            "impulses_standart": 3000,
+            "impulses_abs_diff": 1000,
+            "impulses_percent_diff": 33,
+            "staff_name": "Четвёркина Татьяна",
+            "ycl_services": [
+              "ЛЭ Magic/Viastar Все тело (ТОЛЬКО ДЛЯ КУПИВШИХ КК ДО 22.февраля.2021) (бедра полностью, голени с коленями, глубокое бикини, подмышечные впадины, малая зона) (Цена клуба)"
+            ],
+            "mtech_services": [
+              "Подмышка (женщина)",
+              "Бикини (женщина)",
+              "Нога полностью (женщина)",
+              "Подмышка (женщина)",
+              "Бикини (женщина)",
+              "Нога полностью (женщина)"
+            ],
             "is_resolved": false,
             "is_favorite": false,
             "is_problem": false,
             "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultrices elementum justo. Proin euismod, arcu non lobortis tristique, nisl odio."
           },
           {
-            "id": 4,
-            "company_title": "Тест 2",
-            "session_time": "19:30 - 20:30",
-            "ycl_link": "тут ссылка на ycl",
-            "impulses_count": "3500",
-            "impulses_standart": "3700",
-            "impulses_diff": "200",
-            "staff_name": "Восьмёркина Татьяна",
-            "ycl_services": [
-              "ЛЭ Magic/Viastar Все тело (ТОЛЬКО ДЛЯ КУПИВШИХ КК ДО 22.февраля.2021) (бедра полностью, голени с коленями, глубокое бикини, подмышечные впадины, малая зона) (Цена клуба)"
-            ],
-            "mtech_services": [
-              "Подмышка (женщина)",
-              "Бикини (женщина)",
-              "Нога полностью (женщина)",
-              "Подмышка (женщина)",
-              "Бикини (женщина)",
-              "Нога полностью (женщина)"
-            ],
-            "date": "2020.05.03",
+            "id": 5,
+            "company_title": "Подружки КЛ Архангельск ул. Розы Люксембург, 3",
+            "session_time": "19:15 - 19:59",
+            "datetime": null,
+            "ycl_link": null,
+            "impulses_count": 4700,
+            "impulses_standart": -1,
+            "impulses_abs_diff": null,
+            "impulses_percent_diff": null,
+            "staff_name": "Пятёркина Татьяна",
+            "ycl_services": null,
+            "mtech_services": null,
             "is_resolved": true,
             "is_favorite": false,
             "is_problem": false,

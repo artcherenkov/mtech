@@ -31,21 +31,34 @@ import {
 
 const COLUMNS = [
   {
-    id: "id",
-    shouldSort: true,
-    comparatorType: "numeric",
-    label: "ID",
-  },
-  {
     id: "date",
-    shouldSort: true,
-    comparatorType: "numeric",
+    shouldSort: false,
     label: "Дата",
   },
   {
-    id: "clientName",
+    id: "company",
+    shouldSort: false,
+    label: "Название филиала",
+  },
+  {
+    id: "staffName",
     shouldSort: false,
     label: "Имя сотрудника",
+  },
+  {
+    id: "impulses",
+    shouldSort: false,
+    label: "Вспышек сделано",
+  },
+  {
+    id: "impulsesNorm",
+    shouldSort: false,
+    label: "Норма вспышек",
+  },
+  {
+    id: "diff",
+    shouldSort: false,
+    label: "Процент расхождения",
   },
   {
     id: "controls",
@@ -113,18 +126,31 @@ const MelsyTable = () => {
             <TableBody>
               {rows.map((row) => (
                 <TableRow
-                  className={classnames(
-                    {
-                      [classes.row__isResolved]: row.isResolved,
-                    },
-                    {
-                      [classes.row__isProblem]: row.isProblem,
-                    }
-                  )}
+                  className={classnames({
+                    [classes.row__isResolved]: row.isResolved,
+                    [classes.row__isProblem]: row.isProblem,
+                  })}
                 >
-                  <TableCell>{row.id}</TableCell>
-                  <TableCell>{moment(row.date).format("DD.MM.YYYY")}</TableCell>
-                  <TableCell>{row.staffName}</TableCell>
+                  <TableCell>
+                    {moment(row.date).format("DD.MM.YYYY")}{" "}
+                    {row.sessionTime.slice(0, 5)}
+                  </TableCell>
+                  <TableCell>
+                    <Box style={{ width: 250 }}>{row.companyTitle}</Box>
+                  </TableCell>
+                  <TableCell>
+                    <Box style={{ width: 150 }}>{row.staffName}</Box>
+                  </TableCell>
+                  <TableCell>{row.impulsesCount}</TableCell>
+                  <TableCell>
+                    {" "}
+                    {row.impulsesStandart === -1 ? "–" : row.impulsesStandart}
+                  </TableCell>
+                  <TableCell>
+                    {row.impulsesStandart === -1
+                      ? "–"
+                      : row.impulsesPercentDiff + "%"}
+                  </TableCell>
                   <TableCell align="right">
                     <ButtonGroup>
                       <Tooltip title="Перейти к записи">
