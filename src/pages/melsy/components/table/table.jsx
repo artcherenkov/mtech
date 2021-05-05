@@ -182,24 +182,19 @@ const MelsyTable = () => {
                   </TableCell>
                   <TableCell align="right">
                     <ButtonGroup>
-                      {row.ycl_link ? (
+                      {row.yclLink ? (
                         <Tooltip title="Перейти к записи">
                           <Button
                             color="primary"
                             target="_blank"
-                            href={row.ycl_link}
-                            disabled={!row.ycl_link}
+                            href={row.yclLink}
+                            disabled={!row.yclLink}
                           >
                             <LogoYc />
                           </Button>
                         </Tooltip>
                       ) : (
-                        <Button
-                          color="primary"
-                          target="_blank"
-                          href={row.ycl_link}
-                          disabled={!row.ycl_link}
-                        >
+                        <Button color="primary" target="_blank" disabled>
                           <LogoYc />
                         </Button>
                       )}
