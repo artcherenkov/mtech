@@ -6,9 +6,10 @@ import DeletePopup from "./components/delete-popup/delete-popup";
 import RecordPopup from "./components/record-popup/record-popup";
 import MelsyTable from "./components/table/table";
 import FilterControls from "./components/filter-controls/filter-controls";
+import { useSelector } from "react-redux";
 
 const MelsyPage = () => {
-  const isAuth = true;
+  const isAuth = useSelector((state) => state.USER.isAuth);
 
   return (
     <>

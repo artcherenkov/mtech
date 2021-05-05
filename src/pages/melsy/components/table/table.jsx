@@ -29,6 +29,10 @@ import {
   setRecordToDeleteId,
 } from "../../../../store/reducers/melsytech/actions";
 import { Filter } from "../filter-controls/filter-controls";
+import { IconButton, Typography } from "@material-ui/core";
+import { debounce } from "../../../../utils/debounce";
+import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
+import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 
 const COLUMNS = [
   {
@@ -72,16 +76,28 @@ const MelsyTable = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  const countPerPage = 10;
+  const [page, setPage] = React.useState(0);
+
   useEffect(() => {
     dispatch(fetchRecords());
   }, [dispatch]);
 
+  const filterCallback = (row) =>
+    filters.every((filter) => {
+      return Filter[filter].func(row);
+    });
+
   const rows = useSelector((state) => state.melsytech.records, shallowEqual);
   const filters = useSelector((state) => state.melsytech.filters, shallowEqual);
+
+  useEffect(() => setPage(0), [filters]);
 
   if (!rows) {
     return <h2>Loading...</h2>;
   }
+
+  const filteredRows = rows.filter(filterCallback);
 
   const onResolveClick = (row) => {
     const isResolved = !row.isResolved;
@@ -111,28 +127,36 @@ const MelsyTable = () => {
     dispatch(setRecordToDeleteId(row.id));
   };
 
-  const filterCallback = (row) =>
-    filters.every((filter) => {
-      return Filter[filter].func(row);
-    });
+  const end =
+    page * countPerPage + countPerPage > filteredRows.length
+      ? filteredRows.length
+      : page * countPerPage + countPerPage;
+
+  const emptyRows =
+    countPerPage -
+    Math.min(countPerPage, filteredRows.length - page * countPerPage);
 
   return (
-    <Box>
+    <Box style={{ marginBottom: 50 }}>
       <Paper>
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
               <TableRow>
-                {COLUMNS.map((column) => (
-                  <TableCell size={column.id === "id" ? "small" : "medium"}>
+                {COLUMNS.map((column, idx) => (
+                  <TableCell
+                    key={`column-${idx}`}
+                    size={column.id === "id" ? "small" : "medium"}
+                  >
                     {column.label}
                   </TableCell>
                 ))}
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.filter(filterCallback).map((row) => (
+              {filteredRows.slice(page * countPerPage, end).map((row) => (
                 <TableRow
+                  key={`row-${row.id}`}
                   className={classnames({
                     [classes.row__isResolved]: row.isResolved,
                     [classes.row__isProblem]: row.isProblem,
@@ -154,21 +178,32 @@ const MelsyTable = () => {
                     {row.impulsesStandart === -1 ? "–" : row.impulsesStandart}
                   </TableCell>
                   <TableCell>
-                    {row.impulsesStandart === -1
-                      ? "–"
-                      : row.impulsesPercentDiff + "%"}
+                    {row.impulsesStandart === -1 ? "–" : row.impulsesDiff + "%"}
                   </TableCell>
                   <TableCell align="right">
                     <ButtonGroup>
-                      <Tooltip title="Перейти к записи">
+                      {row.ycl_link ? (
+                        <Tooltip title="Перейти к записи">
+                          <Button
+                            color="primary"
+                            target="_blank"
+                            href={row.ycl_link}
+                            disabled={!row.ycl_link}
+                          >
+                            <LogoYc />
+                          </Button>
+                        </Tooltip>
+                      ) : (
                         <Button
                           color="primary"
                           target="_blank"
-                          href="https://google.com"
+                          href={row.ycl_link}
+                          disabled={!row.ycl_link}
                         >
                           <LogoYc />
                         </Button>
-                      </Tooltip>
+                      )}
+
                       <Tooltip title="Отметить задачу как решенную">
                         <Button
                           color="primary"
@@ -207,8 +242,37 @@ const MelsyTable = () => {
                   </TableCell>
                 </TableRow>
               ))}
+              {emptyRows > 0 && (
+                <TableRow style={{ height: 72.8 * emptyRows }}>
+                  <TableCell colSpan={7} />
+                </TableRow>
+              )}
             </TableBody>
           </Table>
+          {filteredRows.length && (
+            <Box
+              p={1}
+              display="flex"
+              justifyContent="flex-end"
+              alignItems="center"
+            >
+              <Typography variant="overline">
+                {page * countPerPage + 1}-{end} из {filteredRows.length}
+              </Typography>
+              <IconButton
+                disabled={page === 0}
+                onClick={debounce(() => setPage((prevState) => prevState - 1))}
+              >
+                <NavigateBeforeIcon />
+              </IconButton>
+              <IconButton
+                disabled={end === filteredRows.length}
+                onClick={debounce(() => setPage((prevState) => prevState + 1))}
+              >
+                <NavigateNextIcon />
+              </IconButton>
+            </Box>
+          )}
         </TableContainer>
       </Paper>
     </Box>

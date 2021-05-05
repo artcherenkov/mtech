@@ -80,7 +80,7 @@ export const renameKeysSnakeToCamel = (obj) => {
 };
 export const renameKeysCamelToSnake = (obj) => {
   const processVal = (val) => {
-    if (typeof val !== `object`) {
+    if (typeof val !== `object` || !val) {
       return val;
     }
 

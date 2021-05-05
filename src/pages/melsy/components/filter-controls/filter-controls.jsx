@@ -16,7 +16,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export const Filter = {
   IS_BIG_PERCENT: {
     id: "IS_BIG_PERCENT",
-    func: (record) => record.impulsesPercentDiff > 4,
+    func: (record) => record.impulsesDiff >= 15,
   },
   ALL: { id: "ALL", func: (record) => record },
   RESOLVED: { id: "RESOLVED", func: (record) => record.isResolved },
@@ -43,6 +43,8 @@ const FilterControls = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  const filters = useSelector((state) => state.melsytech.filters, shallowEqual);
+
   const [show, setShow] = useState(Filter.NOT_RESOLVED.id);
 
   const onSelectChange = (evt) => {
@@ -51,6 +53,14 @@ const FilterControls = () => {
       dispatch(addFilter(evt.target.value));
       return evt.target.value;
     });
+  };
+
+  const onFilterChange = (evt) => {
+    if (evt.target.checked) {
+      dispatch(addFilter(evt.target.name));
+    } else {
+      dispatch(removeFilter(evt.target.name));
+    }
   };
 
   return (
@@ -71,6 +81,17 @@ const FilterControls = () => {
               <MenuItem value={Filter.PROBLEM.id}>Проблемные</MenuItem>
             </Select>
           </FormControl>
+          <FormControlLabel
+            control={
+              <Checkbox
+                name={Filter.IS_BIG_PERCENT.id}
+                color="primary"
+                checked={filters?.includes(Filter.IS_BIG_PERCENT.id)}
+                onChange={onFilterChange}
+              />
+            }
+            label="Расхождение от 15 процентов"
+          />
         </Box>
       </Paper>
     </Box>

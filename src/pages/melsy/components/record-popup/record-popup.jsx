@@ -136,7 +136,7 @@ const RecordPopup = () => {
                 <Typography>
                   {activeRecord.impulsesStandart === -1
                     ? "–"
-                    : activeRecord.impulsesPercentDiff +
+                    : activeRecord.impulsesDiff +
                       "% – " +
                       activeRecord.impulsesAbsDiff}
                 </Typography>

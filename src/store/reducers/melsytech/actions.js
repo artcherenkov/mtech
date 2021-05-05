@@ -26,7 +26,7 @@ export const fetchRecords = () => (dispatch, getState, api) => {
   dispatch(fetchRecordsStart());
   return api
     .get(`${APIRoute.MELSY_RECORDS}/`, {
-      headers: { Authorization: `Bearer ${getState().USER.token}` },
+      headers: { Authorization: `${getState().USER.token}` },
     })
     .then(({ data }) => dispatch(fetchRecordsSuccess(data)))
     .catch((err) => {
@@ -48,13 +48,9 @@ export const fetchRecordsError = (payload) => ({
 export const editRecord = (id, updatedRecord) => (dispatch, getState, api) => {
   dispatch(editRecordStart());
   return api
-    .put(
-      `${APIRoute.MELSY_RECORDS}/${id}`,
-      {
-        headers: { Authorization: `Bearer ${getState().USER.token}` },
-      },
-      adaptRecordToServer(updatedRecord)
-    )
+    .put(`${APIRoute.MELSY_RECORDS}/`, adaptRecordToServer(updatedRecord), {
+      headers: { Authorization: `${getState().USER.token}` },
+    })
     .then(({ data }) => {
       dispatch(editRecordSuccess());
       dispatch(loadRecord(adaptRecordToClient(data)));
@@ -78,7 +74,7 @@ export const deleteRecord = (id) => (dispatch, getState, api) => {
   dispatch(deleteRecordStart());
   return api
     .delete(`${APIRoute.MELSY_RECORDS}/${id}`, {
-      headers: { Authorization: `Bearer ${getState().USER.token}` },
+      headers: { Authorization: `${getState().USER.token}` },
     })
     .then(({ data }) => {
       dispatch(deleteRecordSuccess());

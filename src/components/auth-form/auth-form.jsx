@@ -41,8 +41,8 @@ const Form = styled.form`
   }
 `;
 
-const AuthForm = ({ handleCloseBtnClick, handleAuthBtnClick }) => {
-  const { register, handleSubmit, errors, setError, clearErrors } = useForm();
+const AuthForm = ({ handleAuthBtnClick }) => {
+  const { register, handleSubmit, errors, setError } = useForm();
   const error = useSelector(getError, shallowEqual);
   const isLoading = useSelector(getIsLoading, shallowEqual);
   const dispatch = useDispatch();
@@ -69,7 +69,7 @@ const AuthForm = ({ handleCloseBtnClick, handleAuthBtnClick }) => {
             <TextField
               id="name"
               label="Логин"
-              name="name"
+              name="username"
               variant="outlined"
               inputProps={{ ref: register(loginValidationConfig) }}
               error={!!errors.name}

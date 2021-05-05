@@ -1,6 +1,6 @@
 import { APIRoute } from "../../../utils/const";
 import { toggleAuthForm } from "../../action";
-import { fetchRecords } from "../cc-errors/actions";
+import { fetchRecords } from "../melsytech/actions";
 
 const Error = {
   OBJECT_DOESNT_EXIST: "Объект не найден.",
@@ -23,7 +23,7 @@ export const authenticate = (authData) => (dispatch, getState, api) => {
   return api
     .post(APIRoute.LOGIN, authData)
     .then(({ data }) => {
-      dispatch(authenticateSuccess({ ...data, name: authData.name }));
+      dispatch(authenticateSuccess({ ...data, username: authData.username }));
       dispatch(fetchRecords());
       dispatch(toggleAuthForm());
     })
