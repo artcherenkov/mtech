@@ -84,6 +84,11 @@ const melsytech = (state = initialState, action) => {
         filters: state.filters.filter((f) => f !== action.payload),
       };
     }
+
+    case ActionType.RESET_ERRORS: {
+      return { ...state, error: null };
+    }
+
     default:
       return state;
   }

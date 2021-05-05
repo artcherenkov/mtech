@@ -116,8 +116,11 @@ export const addFilter = (payload) => ({
   type: ActionType.ADD_FILTER,
   payload,
 });
-
 export const removeFilter = (payload) => ({
   type: ActionType.REMOVE_FILTER,
   payload,
+});
+
+export const resetErrors = () => ({
+  type: ActionType.RESET_ERRORS,
 });
