@@ -1,11 +1,11 @@
 import { ActionType } from "./actions";
 
-const { name, token } = JSON.parse(localStorage.getItem("auth")) || {};
+const { username, token } = JSON.parse(localStorage.getItem("auth")) || {};
 
 const initialState = {
-  name: name || null,
+  name: username || null,
   token: token || null,
-  isAuth: !!name || !!token,
+  isAuth: !!username || !!token,
   isLoading: false,
   error: null,
 };
@@ -17,8 +17,8 @@ const appUser = (state = initialState, action) => {
     }
     case ActionType.AUTHENTICATE_SUCCESS: {
       localStorage.setItem("auth", JSON.stringify(action.payload));
-      const { name, token } = action.payload;
-      return { ...state, name, token, isAuth: true, isLoading: false };
+      const { username, token } = action.payload;
+      return { ...state, username, token, isAuth: true, isLoading: false };
     }
     case ActionType.AUTHENTICATE_ERROR: {
       return { ...state, isLoading: false, error: action.payload };

@@ -2,8 +2,9 @@ import moment from "moment";
 
 export const APIRoute = {
   RECORDS: "/api/v1/cc_errors",
-  LOGIN: "/api/v1/users/login",
+  LOGIN: "/api/auth/signin",
   ACTIVATE: "/api/v1/cc_errors/activate_card",
+  MELSY_RECORDS: "/api/melsy",
 };
 
 export const Comparator = {

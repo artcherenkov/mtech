@@ -58,7 +58,7 @@ export const convertCamelToSnake = (str) => {
 
 export const renameKeysSnakeToCamel = (obj) => {
   const processVal = (val) => {
-    if (typeof val !== `object`) {
+    if (typeof val !== `object` || !val) {
       return val;
     }
 
@@ -80,7 +80,7 @@ export const renameKeysSnakeToCamel = (obj) => {
 };
 export const renameKeysCamelToSnake = (obj) => {
   const processVal = (val) => {
-    if (typeof val !== `object`) {
+    if (typeof val !== `object` || !val) {
       return val;
     }
 
