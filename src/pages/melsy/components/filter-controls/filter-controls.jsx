@@ -81,17 +81,17 @@ const FilterControls = () => {
               <MenuItem value={Filter.PROBLEM.id}>Проблемные</MenuItem>
             </Select>
           </FormControl>
-          <FormControlLabel
-            control={
-              <Checkbox
-                name={Filter.IS_BIG_PERCENT.id}
-                color="primary"
-                checked={filters?.includes(Filter.IS_BIG_PERCENT.id)}
-                onChange={onFilterChange}
-              />
-            }
-            label="Расхождение от 15 процентов"
-          />
+          {/*<FormControlLabel*/}
+          {/*  control={*/}
+          {/*    <Checkbox*/}
+          {/*      name={Filter.IS_BIG_PERCENT.id}*/}
+          {/*      color="primary"*/}
+          {/*      checked={filters?.includes(Filter.IS_BIG_PERCENT.id)}*/}
+          {/*      onChange={onFilterChange}*/}
+          {/*    />*/}
+          {/*  }*/}
+          {/*  label="Расхождение от 15 процентов"*/}
+          {/*/>*/}
         </Box>
       </Paper>
     </Box>

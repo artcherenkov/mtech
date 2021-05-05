@@ -9,6 +9,9 @@ import "./header.css";
 import AuthForm from "../auth-form/auth-form";
 import { getIsAuthFormShown } from "../../store/reducers/app-state/selectors";
 import useOutsideClick from "../../hooks/useOutsideClick";
+import { Button, Menu, MenuItem } from "@material-ui/core";
+import { useHistory } from "react-router";
+import Typography from "@material-ui/core/Typography";
 
 const Header = (props) => {
   const {
@@ -19,7 +22,18 @@ const Header = (props) => {
     handleLogoutBtnClick,
   } = props;
 
+  const history = useHistory();
+
   const [isMenuShown, setIsMenuShown] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const userMenuRef = useRef();
   useOutsideClick(userMenuRef, () => setIsMenuShown(false));
@@ -30,7 +44,40 @@ const Header = (props) => {
     <>
       <header className="header">
         <div className="header__inner">
-          <h1 className="header__title">CC</h1>
+          <Button
+            className="header__title"
+            onClick={handleClick}
+            variant="outlined"
+            color="primary"
+          >
+            <Typography variant="h4">
+              {history.location.pathname.slice(1) || "CC"}
+            </Typography>
+          </Button>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem
+              onClick={() => {
+                handleClose();
+                history.push("/");
+              }}
+            >
+              СС
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                handleClose();
+                history.push("/melsy");
+              }}
+            >
+              Melsy
+            </MenuItem>
+          </Menu>
           {isAuth ? (
             <div className="header__user-wrapper" ref={userMenuRef}>
               <p className="header__user-name">{name}</p>

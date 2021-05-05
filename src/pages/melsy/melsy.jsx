@@ -34,8 +34,7 @@ const MelsyPage = () => {
     <>
       <Header />
       {isAuth ? (
-        <section style={{ width: "100%", padding: "0 20px", margin: "0 auto" }}>
-          <h1>Melsy</h1>
+        <section style={{ width: "100%", padding: "20px", margin: "0 auto" }}>
           <FilterControls />
           <MelsyTable />
         </section>
